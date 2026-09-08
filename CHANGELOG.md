@@ -50,8 +50,17 @@
 ### 首次以 GitHub Pages 發布
 
 倉庫 `tw-ytp/vocabuddy`，網址 <https://tw-ytp.github.io/vocabuddy/>。
-新增 `README.md`、`LICENSE`（CC BY-NC-SA 4.0 ＋ MIT）、`CHANGELOG.md`、`docs/MAINTENANCE.md`，
+新增 `README.md`、`LICENSE`（CC BY-NC-SA 4.0 ＋ MIT）、`CHANGELOG.md`、
+`docs/MAINTENANCE.md`（部署／維運／改版手冊）、`tools/check.py`（結構自動檢查）、`.gitignore`，
 `glossary.md` 同步更新至 112 條。
+
+上線後補入（原保留至 Pages 實際存在才寫）：
+
+- **導讀新增「順帶一提」**：說明「你正在看的這個網頁，就是用第四篇會教你的方法上線的」，
+  並指向教材倉庫——讀完第一篇看得懂那裡的 commit 與 PR，讀完第四篇會用同一套方法上線。
+- **附錄 B 頁尾**：原本寫「公開版可直接在其 GitHub 倉庫開 issue」但倉庫並不存在，
+  現改為教材網址、原始檔位址、issue 連結與授權標示的真實連結。
+- **附錄 D**：自架說明改為指向正式部署位址，並指出維運手冊的位置。
 
 ---
 
