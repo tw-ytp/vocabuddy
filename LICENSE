@@ -1,0 +1,83 @@
+YTP VocaBuddy 開發者之路（YTP VocaBuddy Developer's Path）
+教材授權說明 / Licensing Notice
+================================================================
+
+本倉庫採雙授權。請依內容類型適用不同條款。
+This repository is dual-licensed. Different terms apply by content type.
+
+
+一、教材內容 —— CC BY-NC-SA 4.0
+----------------------------------------------------------------
+適用範圍：教材的文字、圖表、SVG 圖示、章節結構、測驗題目、
+          詞彙表，以及 index.html 中除程式碼片段以外的一切內容。
+
+授權條款：創用 CC 姓名標示－非商業性－相同方式分享 4.0 國際
+          (Creative Commons Attribution-NonCommercial-ShareAlike
+           4.0 International)
+
+條款全文：https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+中文摘要：https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hant
+
+您可以自由地：
+  • 分享 —— 以任何媒介或格式重製及散布本素材
+  • 改作 —— 重混、轉換本素材、及依本素材建立新素材
+
+惟需遵守下列條件：
+  • 姓名標示 (BY) —— 必須給予適當表彰、提供指向本授權條款的連結，
+    同時標明是否（對原始作品）作了修改。
+  • 非商業性 (NC) —— 不得將本素材用於商業目的。
+  • 相同方式分享 (SA) —— 若您重混、轉換或依本素材建立新素材，
+    必須依本素材的授權條款來散布您的貢獻物。
+
+建議的標示方式：
+  「本教材改作自《YTP VocaBuddy 開發者之路》
+   (https://github.com/tw-ytp/vocabuddy)，
+   原作以 CC BY-NC-SA 4.0 授權。」
+
+
+二、程式碼片段 —— MIT License
+----------------------------------------------------------------
+適用範圍：教材中所有可執行的程式碼範例，包含但不限於
+          index.html / words.js / srs.js / test_srs.js /
+          check_words.js / manifest.json / sw.js /
+          .github/workflows/ci.yml / tools/gen_example.py
+          等 Lab 產物的範例碼，以及本教材網頁本身的
+          HTML／CSS／JavaScript 實作。
+
+MIT License
+
+Copyright (c) 2026 YTP（tw-ytp）
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+三、第三方素材
+----------------------------------------------------------------
+• 字型：本教材以 Google Fonts 連結載入 LXGW WenKai TC、
+  Noto Sans TC、JetBrains Mono，各自依其原授權（SIL OFL 等）使用，
+  未隨本倉庫散布字型檔案。
+
+• 商標與產品名稱：教材中提及的產品名稱、服務名稱與商標
+  （包含但不限於 GitHub、Claude、Claude Code、OpenAI Codex、
+   Google Antigravity、Gemini CLI、Cursor、GitHub Copilot、
+   Ollama、Qwen、Anki）均屬各自所有人所有，本教材僅為教學說明
+   而引用，不表示任何贊助、背書或隸屬關係。
+
+• 外部連結：教材附錄 B 所列之官方文件網址僅供查證，
+  其內容由各該網站所有人負責。

@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+._*
+
+# 編輯器
+.vscode/
+.idea/
+*.swp
+
+# Python（tools/check.py 執行後）
+__pycache__/
+*.pyc
+
+# 暫存與草稿
+*.tmp
+*.bak
+draft/
+_scratch/
+
+# 千萬不要進版控：任何金鑰或憑證
+.env
+.env.*
+*.key
+*.pem
+secrets*
