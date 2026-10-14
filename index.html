@@ -390,7 +390,7 @@ img{max-width:100%}
 <aside class="sidebar" id="sidebar">
   <div class="side-brand">
     <div class="t">YTP VocaBuddy<br>開發者之路</div>
-    <div class="s">GitHub 與 AI 應用程式開發<br>線上自學教材・v2.0</div>
+    <div class="s">GitHub 與 AI 應用程式開發<br>線上自學教材・v2.1</div>
   </div>
   <nav class="nav" id="nav">
     <a href="#/home"><span class="no">◈</span>導讀：這份教材怎麼用</a>
@@ -1282,7 +1282,9 @@ img{max-width:100%}
       <div class="termwrap"><pre class="term"><span class="p">$</span> git --version
 <span class="o">git version 2.x.x</span>
 <span class="p">$</span> git config --global user.name "你的名字"
-<span class="p">$</span> git config --global user.email "GitHub 註冊用的 email"</pre></div>
+<span class="p">$</span> git config --global user.email "GitHub 註冊用的 email"
+<span class="p">$</span> git config --global core.autocrlf input   <span class="c"># 只有 Windows 使用者需要這一行</span></pre></div>
+      <p class="small" style="color:var(--ink-2)"><strong>最後那一行是給 Windows 使用者的</strong>：Windows 的換行字元是 CRLF，macOS／Linux 與 GitHub Actions 是 LF。<code>core.autocrlf input</code> 讓你 commit 進去的永遠是 LF，本機怎麼顯示不影響別人。少了它，之後你和隊友、CI 會互相看到「整個檔案都被改過」的假 diff——明明只改一行，review 卻無從下手。</p>
     </li>
     <li>
       <h4>建立專案與第一個檔案</h4>
@@ -1305,7 +1307,7 @@ img{max-width:100%}
 &lt;/head&gt;
 &lt;body&gt;
 &lt;h1&gt;YTP VocaBuddy 背單字夥伴&lt;/h1&gt;
-&lt;div id="card"&gt;algorithm&lt;/div&gt;
+&lt;div id="card"&gt;&lt;/div&gt;
 &lt;p id="hint"&gt;點卡片看中文，點「下一張」換單字&lt;/p&gt;
 &lt;button onclick="next()"&gt;下一張&lt;/button&gt;
 &lt;script&gt;
@@ -1319,9 +1321,11 @@ const card = document.getElementById("card");
 card.onclick = () =&gt; { flipped = !flipped; render(); };
 function next(){ i = (i + 1) % WORDS.length; flipped = false; render(); }
 function render(){ card.textContent = WORDS[i][flipped ? 1 : 0]; }
+render();   // 載入時先畫第一張，畫面永遠跟 WORDS 同步
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</span></pre></div>
+      <p>這裡有個刻意的細節：卡片的初始文字<strong>不寫死在 HTML 裡</strong>，而是載入後由 <code>render()</code> 從 <code>WORDS[0]</code> 畫出來。這樣之後改單字（Lab 2 以後、Sprint 4 換成 <code>words.js</code>）時，畫面不會出現「第一張還是舊字」的狀況——<strong>資料只有一份，畫面永遠照資料畫</strong>。</p>
     </li>
     <li>
       <h4>init → status → add → commit</h4>
@@ -1337,6 +1341,9 @@ function render(){ card.textContent = WORDS[i][flipped ? 1 : 0]; }
     <li>
       <h4>在 GitHub 建立遠端倉庫</h4>
       <p>登入 GitHub → 右上角「＋」→ <em>New repository</em>。名稱填 <code>ytp-vocabuddy</code>，選 <strong>Private</strong>（之後隨時可改公開）。<strong>三個附加選項（README、.gitignore、license）全部不要勾</strong>——遠端保持全空，才不會跟你本地的歷史分岔。</p>
+      <div class="warnbox"><span class="lab">先說一件 Lab 9 才會用到的事</span>
+        <p>GitHub Pages 的免費方案只能部署 <strong>Public</strong> 倉庫，所以到了 Lab 9，你會把這個倉庫改成公開。改公開等於把<strong>整個歷史</strong>攤在陽光下，連第一個 commit 都看得到。因此<strong>從現在起，任何金鑰、密碼都不要 commit 進去，一次都不要</strong>——事後刪掉也沒用，歷史裡還在。Lab 3 教你把金鑰放進環境變數，就是為了這一天。</p>
+      </div>
     </li>
     <li>
       <h4>連上遠端、第一次 push</h4>
@@ -1348,7 +1355,7 @@ function render(){ card.textContent = WORDS[i][flipped ? 1 : 0]; }
     </li>
     <li>
       <h4>補上門面：README 與 .gitignore</h4>
-      <p>新增 <code>README.md</code>（這是什麼、怎麼執行、技術、作者，四段即可）與 <code>.gitignore</code>（先放一行 <code>.DS_Store</code> 即可），再走一次循環：</p>
+      <p>新增 <code>README.md</code>（這是什麼、怎麼執行、技術、作者，四段即可）與 <code>.gitignore</code>（先放一行 <code>.DS_Store</code> 即可）。順手再加一個 <code>.gitattributes</code>，內容就一行 <code>* text=auto eol=lf</code>——這是把步驟 1 的換行約定寫進<strong>倉庫本身</strong>，往後誰 clone 都適用（<code>core.autocrlf</code> 保護你自己，這個檔保護整個倉庫）。然後再走一次循環：</p>
       <div class="termwrap"><pre class="term"><span class="p">$</span> git add .
 <span class="p">$</span> git commit -m "docs: README 與 gitignore"
 <span class="p">$</span> git push</pre></div>
@@ -1370,7 +1377,7 @@ function render(){ card.textContent = WORDS[i][flipped ? 1 : 0]; }
     <tr><td class="mono">git: command not found</td><td>Git 沒裝好或終端機沒重開。重開終端機再試；還是不行就重跑安裝程式。</td></tr>
     <tr><td class="mono">rejected: fetch first</td><td>建 repo 時手滑勾了 README，遠端已有你本地沒有的 commit。執行 <code>git pull origin main --allow-unrelated-histories</code> 合併後再 push。</td></tr>
     <tr><td>push 一直要密碼／失敗</td><td>GitHub 不接受帳號密碼推送，要走瀏覽器授權或個人存取權杖（作法隨版本更新，見附錄 B 時效資訊表）。</td></tr>
-    <tr><td>commit 作者頭像是灰色問號</td><td><code>user.email</code> 與 GitHub 帳號的 email 不一致。改設定後，之後的 commit 就會正確歸戶。</td></tr>
+    <tr><td>commit 作者頭像是灰色問號</td><td>Git 的 <code>user.email</code> 和 GitHub 帳號綁定的 email 不一致。先到 GitHub <em>Settings → Emails</em> 看：<strong>（1）</strong>若你勾了 <em>Keep my email addresses private</em>，GitHub 會給你一個 <code>數字+帳號@users.noreply.github.com</code> 的信箱，<code>user.email</code> 必須設成<strong>這個</strong>——設你真正的信箱反而不會歸戶；<strong>（2）</strong>沒勾的話，設成任一已驗證的信箱即可。改完 <code>git config --global user.email "..."</code>，之後的 commit 才會正確，已經推上去的不會回溯。</td></tr>
   </table></div>
 
   <div class="pgnav"><a href="#/1-7"><span class="dir">上一頁</span>1.7　團隊協作與 PR</a><a class="nx" href="#/lab2"><span class="dir">下一頁</span>Lab 2　分支、PR 與衝突</a></div>
@@ -1389,7 +1396,7 @@ function render(){ card.textContent = WORDS[i][flipped ? 1 : 0]; }
   <ol class="steps">
     <li>
       <h4>開一張 issue 當任務單</h4>
-      <p>到你的 repo → <em>Issues → New issue</em>，標題「新增『考我』按鈕」，內文一句話描述需求：「隨機抽一張卡考自己，且不要連續抽到同一張」。送出後記下編號（應該是 #1）。從此養成習慣：<strong>先有任務，才有分支</strong>。</p>
+      <p>到你的 repo → <em>Issues → New issue</em>，標題「新增『考我』按鈕」，內文一句話描述需求：「隨機抽一張卡考自己，且不要連續抽到同一張」。送出後記下 issue 的編號 <strong>N</strong>（網址最後那個數字）。<strong>它不一定是 #1</strong>——issue 和 PR 共用同一組編號，只要這個倉庫之前開過任何 issue 或 PR，編號就會往後排。從此養成習慣：<strong>先有任務，才有分支</strong>。</p>
     </li>
     <li>
       <h4>開分支、加功能</h4>
@@ -1398,14 +1405,17 @@ function render(){ card.textContent = WORDS[i][flipped ? 1 : 0]; }
       <div class="termwrap"><pre class="term"><span class="o">&lt;button onclick="quiz()"&gt;考我&lt;/button&gt;
 
 function quiz(){
+  if (WORDS.length &lt; 2) return;   // 只有一個字就沒得抽，直接結束，避免無窮迴圈
   let j;
   do { j = Math.floor(Math.random() * WORDS.length); } while (j === i);
   i = j; flipped = false; render();
 }</span></pre></div>
-      <p>存檔測試後提交、推上遠端：</p>
+      <p class="small" style="color:var(--ink-2)">第一行守衛不是多餘的：<code>do…while</code> 會一直抽到「跟目前不同」為止，如果 <code>WORDS</code> 只剩一個字，<strong>永遠抽不到不同的，頁面會卡死</strong>。教材給的 8 個字不會出事，但 Sprint 4 讓你自訂單字包之後就有可能——所以守衛加在這裡，Sprint 4 的 <code>check_words.js</code> 也會一併檢查「至少 2 個字」。</p>
+      <p>存檔測試後提交、推上遠端（<code>#N</code> 換成你剛才記下的編號）：</p>
       <div class="termwrap"><pre class="term"><span class="p">$</span> git add index.html
-<span class="p">$</span> git commit -m "feat: 考我按鈕隨機抽卡（不重複），closes #1"
+<span class="p">$</span> git commit -m "feat: 考我按鈕隨機抽卡（不重複），closes #N"
 <span class="p">$</span> git push -u origin feature/quiz-button</pre></div>
+      <p class="small" style="color:var(--ink-2)">編號寫錯會關到別人的 issue，或什麼都沒關——送出前核對一次網址。</p>
     </li>
     <li>
       <h4>開 Pull Request</h4>
@@ -1417,7 +1427,7 @@ function quiz(){
     </li>
     <li>
       <h4>合併、收工</h4>
-      <p>按 <em>Merge pull request</em>（預設 merge commit 即可）→ <em>Delete branch</em>。注意 issue #1 因為 commit 訊息裡的 <code>closes #1</code> 被自動關閉了。最後把本地同步、清掉舊分支：</p>
+      <p>按 <em>Merge pull request</em>（預設 merge commit 即可）→ <em>Delete branch</em>。注意你那張 issue 因為 commit 訊息裡的 <code>closes #N</code> 被自動關閉了。最後把本地同步、清掉舊分支：</p>
       <div class="termwrap"><pre class="term"><span class="p">$</span> git switch main
 <span class="p">$</span> git pull
 <span class="p">$</span> git branch -d feature/quiz-button</pre></div>
@@ -1441,7 +1451,7 @@ function quiz(){
   <h2>驗收清單</h2>
   <ul class="check">
     <li><label><input type="checkbox" data-ck="l2-1">repo 裡有一個「已合併」的 PR，含描述三段與至少一則行內評論</label></li>
-    <li><label><input type="checkbox" data-ck="l2-2">issue #1 顯示為 closed，且是被 PR 自動關閉的</label></li>
+    <li><label><input type="checkbox" data-ck="l2-2">你開的那張 issue 顯示為 closed，且是被 PR 自動關閉的</label></li>
     <li><label><input type="checkbox" data-ck="l2-3">「考我」按鈕正常運作，連按十次不會出現同一張卡連續兩次</label></li>
     <li><label><input type="checkbox" data-ck="l2-4">你親手解過一次衝突，最終檔案裡沒有殘留任何衝突記號</label></li>
     <li><label><input type="checkbox" data-ck="l2-5"><code>git log --oneline --graph</code> 看得到合併節點（兩個 parent 的 commit）</label></li>
@@ -2799,9 +2809,9 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>push 認證方式</td><td>HTTPS＋首次推送時瀏覽器授權（Git Credential Manager），或 <code>gh auth login</code></td><td>2026-08</td><td>GitHub Docs「Authentication」</td></tr>
     <tr><td>Git 指令世代</td><td>教材採 <code>switch</code>／<code>restore</code>（Git ≥ 2.23，2019 起）；舊教學常見的 <code>checkout</code> 是它們的前身，仍可用</td><td>2026-08</td><td><code>git --version</code></td></tr>
     <tr><td>預設分支名稱</td><td><code>main</code>（GitHub 2020 起預設；舊專案可能是 <code>master</code>）</td><td>2026-08</td><td>repo 首頁分支選單</td></tr>
-    <tr><td>Claude API 模型名稱</td><td>教材程式碼採 <code>claude-sonnet-4-5</code>（撰寫時可用的均衡型號）</td><td>2026-08</td><td>docs.claude.com 的 Models 頁</td></tr>
+    <tr><td>Claude API 模型名稱</td><td>教材所有 Lab 採 <code>claude-sonnet-5-5</code>（速度與能力的均衡型號）；要便宜、大量呼叫可用 <code>claude-haiku-5-5</code>，最強的是 <code>claude-opus-5-5</code>（教材用不到，知道有就好）。<strong>模型 ID 不要自己加日期後綴</strong>（例如 <code>-20260401</code>），照官方清單上的字串原樣用</td><td>2026-10-13</td><td>docs.claude.com 的 Models 頁</td></tr>
     <tr><td>API key 申請與免費額度</td><td>於 Anthropic Console（console.anthropic.com）註冊申請；免費額度與速率上限隨政策變動</td><td>2026-08</td><td>Console 的 Billing／Limits 頁</td></tr>
-    <tr><td>Python SDK</td><td><code>pip install anthropic</code>；requests 呼叫本地 API 用 <code>pip install requests</code></td><td>2026-08</td><td>PyPI</td></tr>
+    <tr><td>Python SDK</td><td><code>pip install anthropic</code>——<strong>官方 SDK 1.x 需要 Python 3.10 以上</strong>；在 3.9 上安裝不會報錯，但會靜默裝到 0.x 舊版。requests 呼叫本地 API 用 <code>pip install requests</code></td><td>2026-10-13</td><td>PyPI</td></tr>
     <tr><td>Ollama</td><td>於 ollama.com 下載安裝；本機 API 埠 11434</td><td>2026-08</td><td>ollama.com</td></tr>
     <tr><td>瀏覽器直呼 Claude API</td><td>需標頭 <code>anthropic-version: 2023-06-01</code> 與 <code>anthropic-dangerous-direct-browser-access: true</code>；僅適合「使用者自帶金鑰」的個人工具</td><td>2026-08</td><td>docs.claude.com 的 CORS／browser access 章節</td></tr>
     <tr><td>GitHub Pages 免費方案</td><td>public repo 才能用（private 需付費方案）；網址為 帳號.github.io/倉庫名；push main 後約 1 分鐘生效</td><td>2026-08</td><td>GitHub Docs「Pages」</td></tr>
@@ -2827,7 +2837,7 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>本教材授權</td><td>內容採 CC BY-NC-SA 4.0；教材中的程式碼片段採 MIT</td><td>2026-09</td><td>教材倉庫的 <code>LICENSE</code></td></tr>
   </table></div>
   <div class="footer-note">
-    YTP VocaBuddy 開發者之路・教材版本 v2.0（新增第五篇 AI-Native 開發；主線十三個 Lab。本地端 LLM 仍為附錄 E 特別篇・選修）・貫穿案例：VocaBuddy 背單字夥伴<br>
+    YTP VocaBuddy 開發者之路・教材版本 v2.1（Lab 1–3 實作勘誤修訂 E-001～E-011；主線十三個 Lab。本地端 LLM 仍為附錄 E 特別篇・選修）・貫穿案例：VocaBuddy 背單字夥伴<br>
     教材網址 <a href="https://tw-ytp.github.io/vocabuddy/">tw-ytp.github.io/vocabuddy</a>｜原始檔與改版歷史 <a href="https://github.com/tw-ytp/vocabuddy" target="_blank" rel="noopener">github.com/tw-ytp/vocabuddy</a><br>
     發現錯誤或有改善建議？歡迎直接<a href="https://github.com/tw-ytp/vocabuddy/issues" target="_blank" rel="noopener">開一個 issue</a>——這正是本教材教你的協作方式。內容採 CC BY-NC-SA 4.0 授權，程式碼片段採 MIT。<br>
     教學路線：主題分篇為骨、專案旅程為魂｜第一篇＝工作流程軸＋情境開場｜第二篇＝白盒優先｜第三篇＝功能衝刺（Sprint 1–4＝Lab 5–8）｜第四篇＝上線與發表（Lab 9–10）｜第五篇＝AI-Native 開發（工具中立＋Lab 11–14）｜適用對象：具競賽程式基礎的高中生
@@ -3270,17 +3280,26 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
   <p>用官方 Python SDK（software development kit，軟體開發套件），這整趟旅程是十行程式：</p>
   <div class="termwrap"><pre class="term"><span class="o">import anthropic
 
-MODEL = "claude-sonnet-4-5"   # 模型名稱會更新，最新值見附錄 B
+MODEL = "claude-sonnet-5-5"   # 模型名稱會更新，最新值見附錄 B
 
 client = anthropic.Anthropic()          # 自動讀取環境變數 ANTHROPIC_API_KEY
 msg = client.messages.create(
     model=MODEL,
-    max_tokens=300,
+    max_tokens=2000,                    # 這個額度也包含模型「想」的部分，見下方
     system="你是高中英語老師，例句使用 CEFR B1 難度。",
     messages=[{"role": "user",
                "content": "用單字 interval 造一個例句，附中文翻譯。"}],
 )
-print(msg.content[0].text)</span></pre></div>
+print("".join(b.text for b in msg.content if b.type == "text"))</span></pre></div>
+
+  <div class="keybox"><span class="lab">回應是一列「區塊」，不是一個字串</span>
+    <p><code>msg.content</code> 不是字串，是一個<strong>區塊列表</strong>。新一代模型預設會「先想再答」，所以第一個區塊常常是 <code>thinking</code>（內容對你隱藏），文字答案在後面的 <code>text</code> 區塊裡。直接拿 <code>content[0].text</code> 會噴 <code>AttributeError: 'ThinkingBlock' object has no attribute 'text'</code>。正確作法是依 <code>type</code> 把所有 <code>text</code> 區塊挑出來接起來——上面最後那一行就是。<br>
+    會不會出現 thinking 區塊<strong>取決於你的 prompt，同一支程式也不是每次都一樣</strong>（實測：自由文字的 prompt 三次都有，「只回 JSON」的 prompt 八次都沒有）。所以一律依 <code>type</code> 挑，不要賭 <code>content[0]</code>。</p>
+  </div>
+
+  <div class="keybox"><span class="lab"><code>max_tokens</code> 把「想」的 token 也算進去</span>
+    <p>模型思考用掉的 token 也算在 <code>max_tokens</code> 裡。像上面這種自由文字的請求，模型會先想一陣子，<code>max_tokens=300</code> 幾乎全被想掉，印出來是空白或半句話——<strong>而且不會報錯</strong>，這是最難查的那種 bug。判斷方法：看 <code>msg.stop_reason</code>，是 <code>"max_tokens"</code> 就代表額度不夠。自由文字給 2000；「只回 JSON」的請求 1024 夠用。想親眼觀察就把 <code>msg.stop_reason</code> 和 <code>msg.usage.output_tokens</code> 一起印出來。</p>
+  </div>
 
   <div class="warnbox"><span class="lab">金鑰三戒</span>
     <p>一、不寫進程式碼，只放環境變數（<code>ANTHROPIC_API_KEY</code>）；二、不 commit 進 Git——進了歷史就等於公開，第一篇教過；三、真的洩漏了，立刻到主控台撤銷（revoke）那把 key 再發新的。申請方式與免費額度見附錄 B 時效資訊表。</p>
@@ -3533,7 +3552,7 @@ print(msg.content[0].text)</span></pre></div>
   <div class="labmeta">
     <div class="m"><b>目標</b>用 Python 呼叫 Claude API，做出「單字 → 例句＋翻譯＋聯想」的命令列工具（CLI）</div>
     <div class="m"><b>時間</b>約 60–90 分鐘</div>
-    <div class="m"><b>前置</b>Python 3.9+、Lab 1 的 ytp-vocabuddy 倉庫（或任一空倉庫）、一把 API key（申請方式見附錄 B）</div>
+    <div class="m"><b>前置</b>Python <strong>3.10+</strong>、Lab 1 的 ytp-vocabuddy 倉庫（或任一空倉庫）、一把 API key（申請方式見附錄 B）</div>
   </div>
 
   <ol class="steps">
@@ -3543,33 +3562,45 @@ print(msg.content[0].text)</span></pre></div>
       <div class="termwrap"><pre class="term"><span class="p">$</span> pip install anthropic
 <span class="p">$</span> export ANTHROPIC_API_KEY="你的key"   <span class="c"># macOS / Linux；當前終端機有效</span>
 <span class="o"># Windows（PowerShell）：setx ANTHROPIC_API_KEY "你的key"，設定後重開終端機</span></pre></div>
+      <p><strong>先確認 Python 版本</strong>（<code>python --version</code>）：官方 <code>anthropic</code> SDK 1.x 需要 Python 3.10 以上。3.9 跑 <code>pip install anthropic</code> <strong>不會報錯，但會靜默裝到 0.x 舊版</strong>，之後對照官方文件會處處對不上。保險的裝法是把版本寫明：<code>python -m pip install "anthropic&gt;=1,&lt;2"</code>。</p>
       <p>永久設定的方法（寫進 <code>~/.zshrc</code> 等）與金鑰申請入口，見附錄 B 時效資訊表。</p>
     </li>
     <li>
       <h4>開任務、開分支</h4>
-      <p>老習慣：先在 GitHub 開 issue「AI 例句生成 CLI」（假設編號 #2），然後：</p>
+      <p>老習慣：先在 GitHub 開 issue「AI 例句生成 CLI」，<strong>記下它實際的編號 N</strong>（和 Lab 2 一樣，別假設是 #2），然後：</p>
       <div class="termwrap"><pre class="term"><span class="p">$</span> git switch -c feature/example-cli
 <span class="p">$</span> mkdir -p tools</pre></div>
     </li>
     <li>
       <h4>版本一：先讓它動起來</h4>
       <p>建立 <code>tools/gen_example.py</code>：</p>
-      <div class="termwrap"><pre class="term"><span class="o">import sys
+      <div class="termwrap"><pre class="term"><span class="o">import os
+import sys
 import anthropic
 
-MODEL = "claude-sonnet-4-5"   # 模型名稱會更新，最新值見附錄 B
+MODEL = "claude-sonnet-5-5"   # 模型名稱會更新，最新值見附錄 B
+
+
+def text_of(msg):
+    """回應的 content 是「區塊列表」，新模型常先回一個 thinking 區塊，
+    所以依 type 只挑文字區塊接起來；直接拿 content[0].text 會失敗（見 2.5）。"""
+    return "".join(b.text for b in msg.content if b.type == "text")
+
 
 def main():
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        sys.exit("還沒設定環境變數 ANTHROPIC_API_KEY，回到步驟 1。")
     word = sys.argv[1] if len(sys.argv) &gt; 1 else "interval"
     client = anthropic.Anthropic()   # 自動讀取環境變數的 key
     msg = client.messages.create(
         model=MODEL,
-        max_tokens=300,
+        max_tokens=2000,             # 含 thinking 的 token；300 會被「想」掉，印出空白
         system="你是高中英語老師，例句使用 CEFR B1 難度。",
         messages=[{"role": "user",
                    "content": f"用單字 {word} 造一個例句，附中文翻譯與一個好記的聯想。"}],
     )
-    print(msg.content[0].text)
+    print(text_of(msg))
+
 
 if __name__ == "__main__":
     main()</span></pre></div>
@@ -3583,42 +3614,49 @@ if __name__ == "__main__":
     <li>
       <h4>版本二：JSON 輸出＋驗證＋降階（對照 2.8）</h4>
       <p>自由文字沒辦法接進程式。改寫成「只回 JSON」並加上驗證與罐頭備援——把 2.8 的資料流完整實作：</p>
-      <div class="termwrap"><pre class="term"><span class="o">import sys, json
+      <div class="termwrap"><pre class="term"><span class="o">import os, sys, json
 import anthropic
 
-MODEL = "claude-sonnet-4-5"   # 最新名稱見附錄 B
-PROMPT = ("為英文單字「{word}」產生學習卡內容。只回傳 JSON，不要其他文字，"
+MODEL = "claude-sonnet-5-5"   # 最新名稱見附錄 B
+PROMPT = ("為英文單字「{word}」產生學習卡內容。只回傳 JSON，不要其他文字，不要 markdown 圍欄，"
           '格式：{{"word": "...", "sentence": "...", "zh": "...", "tip": "..."}}。'
           "sentence 用 CEFR B1 難度，且必須包含該單字。")
 FALLBACK = {"sentence": "Practice makes perfect.",
             "zh": "熟能生巧。", "tip": "（預設內容：AI 暫時不可用）"}
 
+def text_of(msg):                         # 依 type 只挑文字區塊，理由同 v1
+    return "".join(b.text for b in msg.content if b.type == "text")
+
 def ask(client, word):
     msg = client.messages.create(
-        model=MODEL, max_tokens=300,
+        model=MODEL, max_tokens=1024,     # JSON 約 150～200 token，留餘裕給可能出現的 thinking
         system="你是高中英語老師。只輸出 JSON。",
         messages=[{"role": "user", "content": PROMPT.format(word=word)}],
     )
-    return msg.content[0].text
+    return text_of(msg)
 
 def generate(word):
-    client = anthropic.Anthropic()
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        print("沒有 API key，改用預設內容。", file=sys.stderr)
+        return {"word": word, **FALLBACK}
+    client = anthropic.Anthropic()        # 建在檢查之後，沒 key 時才接得到降階
     for attempt in range(2):              # 失敗最多重試一次
         try:
             data = json.loads(ask(client, word))
             if word.lower() in data["sentence"].lower():
                 return data               # 驗證通過才放行
-        except (json.JSONDecodeError, KeyError, anthropic.APIError):
+        except (json.JSONDecodeError, KeyError, TypeError, anthropic.APIError):
             pass
     return {"word": word, **FALLBACK}     # 降階：永遠有東西可給
 
 if __name__ == "__main__":
     word = sys.argv[1] if len(sys.argv) &gt; 1 else "interval"
     print(json.dumps(generate(word), ensure_ascii=False, indent=2))</span></pre></div>
+      <p class="small" style="color:var(--ink-2)">兩個容易漏的細節：<strong>①</strong> 建立 <code>client</code> 的那一行放在「檢查環境變數」之後——沒設金鑰時 SDK 會丟 <code>TypeError</code>（不是 401），放在 <code>try</code> 外面就接不到，降階等於白寫。<strong>②</strong> <code>except</code> 多接了 <code>TypeError</code>：模型偶爾回一個 JSON 陣列而不是物件，這時 <code>data["sentence"]</code> 丟的是 <code>TypeError</code>。</p>
     </li>
     <li>
       <h4>走完 GitHub Flow</h4>
-      <p>commit（訊息記得 <code>closes #2</code>）→ push → 開 PR（三段式描述，「怎麼驗證」寫上你的兩個實驗）→ 自我 review → merge → 本地 <code>git switch main && git pull</code>。</p>
+      <p>commit（訊息記得 <code>closes #N</code>，N 就是你那張 issue 的編號）→ push → 開 PR（三段式描述，「怎麼驗證」寫上你的兩個實驗）→ 自我 review → merge → 本地 <code>git switch main && git pull</code>。</p>
     </li>
   </ol>
 
@@ -3627,8 +3665,9 @@ if __name__ == "__main__":
     <li><label><input type="checkbox" data-ck="l3-1">在 repo 裡搜尋不到你的 API key（試試 <code>git grep sk-</code>，應該一無所獲）</label></li>
     <li><label><input type="checkbox" data-ck="l3-2">v1 能對任意單字輸出例句；你能說出同字兩次結果不同的原因（用「取樣」二字）</label></li>
     <li><label><input type="checkbox" data-ck="l3-3">v2 對 5 個不同單字都回傳合法 JSON，且例句都真的含目標單字</label></li>
-    <li><label><input type="checkbox" data-ck="l3-4">關掉網路再跑 v2——程式不噴 traceback，而是輸出罐頭內容</label></li>
-    <li><label><input type="checkbox" data-ck="l3-5">PR 已合併、issue #2 自動關閉、本地 main 已同步</label></li>
+    <li><label><input type="checkbox" data-ck="l3-4"><strong>有 key 但連不上網</strong>（例如關掉 Wi-Fi）再跑 v2——不噴 traceback，幾秒內輸出罐頭 JSON</label></li>
+    <li><label><input type="checkbox" data-ck="l3-4b"><strong>完全沒設 key</strong> 的情況另外測一次：v2 先印「沒有 API key，改用預設內容。」再照樣給罐頭；v1 印一行提示就結束。兩者都不是 traceback</label></li>
+    <li><label><input type="checkbox" data-ck="l3-5">PR 已合併、你那張 issue 自動關閉、本地 main 已同步</label></li>
   </ul>
 
   <h2>常見錯誤急救</h2>
@@ -3639,6 +3678,10 @@ if __name__ == "__main__":
     <tr><td class="mono">429 rate_limit_error</td><td>呼叫太快或額度用盡——免費方案都有速率限制（rate limit，見附錄 B）。等幾十秒重試；批次任務在迴圈裡加 <code>time.sleep</code>。</td></tr>
     <tr><td>JSON 常常解析失敗</td><td>prompt 再強調「只輸出 JSON、不要 markdown 圍欄」；或把 temperature 調低。這是 AI 工程的日常，第三篇教更穩的 Structured Output。</td></tr>
     <tr><td>中文變成 \uXXXX</td><td>印出時用 <code>ensure_ascii=False</code>（v2 已含）。</td></tr>
+    <tr><td class="mono">pip 裝到 0.x，或說找不到 1.x</td><td>Python 低於 3.10。升級 Python 後 <code>python -m pip install "anthropic&gt;=1,&lt;2"</code>。</td></tr>
+    <tr><td class="mono">AttributeError: 'ThinkingBlock' object has no attribute 'text'</td><td>用了 <code>content[0].text</code>，而模型先回了 thinking 區塊。改用 <code>text_of()</code>（原理見 2.5）。</td></tr>
+    <tr><td class="mono">TypeError: Could not resolve authentication method</td><td>完全沒設 <code>ANTHROPIC_API_KEY</code>。這不是 401——SDK 在建立 client／第一次請求時就會丟。設好環境變數、重開終端機再跑。</td></tr>
+    <tr><td>v1 印出空白或半句話；v2 每次都是罐頭</td><td><code>max_tokens</code> 被 thinking 吃光，<code>msg.stop_reason</code> 會是 <code>"max_tokens"</code>。v1 調到 2000、v2 調到 1024（見 2.5）。</td></tr>
   </table></div>
 
   <div class="pgnav"><a href="#/2-8"><span class="dir">上一頁</span>2.8　案例導讀</a><a class="nx" href="#/quiz2"><span class="dir">下一頁</span>自我檢測</a></div>
@@ -4143,7 +4186,7 @@ next();
     </li>
     <li>
       <h4>核心函式</h4>
-      <div class="termwrap"><pre class="term"><span class="o">const MODEL = "claude-sonnet-4-5";   // 最新名稱見附錄 B
+      <div class="termwrap"><pre class="term"><span class="o">const MODEL = "claude-sonnet-5-5";   // 最新名稱見附錄 B
 const API_VERSION = "2023-06-01";    // anthropic-version 標頭值，見附錄 B
 
 function getKey(){
@@ -4172,14 +4215,16 @@ async function aiExample(){
         "anthropic-dangerous-direct-browser-access": "true"  // 瀏覽器直呼必加，見附錄 B
       },
       body: JSON.stringify({
-        model: MODEL, max_tokens: 300, temperature: 0.3,
+        model: MODEL, max_tokens: 1024, temperature: 0.3,   // 額度含 thinking，見 2.5
         system: '你是高中英語老師。只輸出 JSON：{"sentence":"...","zh":"...","tip":"..."}',
         messages: [{ role: "user",
                      content: "用單字 " + word + " 造一個 CEFR B1 例句、中譯與聯想" }]
       })
     });
     const data = await res.json();
-    const c = JSON.parse(data.content[0].text);
+    const text = data.content.filter(b =&gt; b.type === "text")   // 依 type 挑，理由見 2.5
+                             .map(b =&gt; b.text).join("");
+    const c = JSON.parse(text);
     if (!c.sentence.toLowerCase().includes(word.toLowerCase()))
       throw new Error("例句沒包含目標單字");
     cache[word] = c;
@@ -4480,6 +4525,7 @@ const WORDS = [
 if (typeof module !== "undefined") module.exports = WORDS;</span></pre></div>
       <p>再寫資料檢查腳本 <code>check_words.js</code>：</p>
       <div class="termwrap"><pre class="term"><span class="o">const words = require("./words.js");
+if (words.length &lt; 2) throw new Error("單字至少要 2 個——抽卡與出題都需要");
 const seen = new Set();
 for (const w of words){
   if (!w.en || !w.zh) throw new Error("欄位缺漏：" + JSON.stringify(w));
@@ -5034,6 +5080,7 @@ jobs:
     <li>
       <h4>安檢，然後轉公開</h4>
       <p>先做 4.4 的安檢（至少 <code>git grep sk-</code> 與翻閱 <code>git log</code>）。確認乾淨後：repo → <em>Settings → General → Danger Zone → Change visibility → Public</em>。</p>
+      <p class="small" style="color:var(--ink-2)">這一步 <a href="#/lab1">Lab 1 步驟 4</a> 就預告過了——Pages 免費方案只吃 Public 倉庫。如果你從第一個 commit 起就沒把金鑰寫進去，這裡只是驗收那個習慣；<strong>歷史一旦公開就收不回來</strong>，所以安檢不是形式。</p>
     </li>
     <li>
       <h4>開啟 GitHub Pages</h4>
@@ -5358,6 +5405,9 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");</sp
     <tr><td class="mono">hallucination</td><td>—</td><td>幻覺</td><td>模型輸出流暢但不真實的內容——機率模型的天性</td></tr>
     <tr><td class="mono">prompt</td><td>—</td><td>提示</td><td>你給模型的輸入文字；品質決定輸出品質</td></tr>
     <tr><td class="mono">system prompt</td><td>—</td><td>系統提示</td><td>對話的人設與規則，優先權高於一般訊息</td></tr>
+    <tr><td class="mono">content block</td><td>—</td><td>回應區塊</td><td>一次回應由數個區塊組成（thinking、text…）；依 <code>type</code> 取用，別賭第一個</td></tr>
+    <tr><td class="mono">thinking</td><td>—</td><td>思考區塊</td><td>模型「先想再答」的隱藏段落；也佔用 <code>max_tokens</code> 額度</td></tr>
+    <tr><td class="mono">max_tokens</td><td>—</td><td>輸出上限</td><td>單次回應可產生的 token 上限（含 thinking）；被截斷時 <code>stop_reason</code> 為 <code>max_tokens</code></td></tr>
     <tr><td class="mono">API</td><td>Application Programming Interface</td><td>應用程式介面</td><td>服務開給「程式」呼叫的窗口</td></tr>
     <tr><td class="mono">API key</td><td>—</td><td>金鑰</td><td>呼叫 API 的身分憑證＝你的錢包，永不進 Git</td></tr>
     <tr><td class="mono">SDK</td><td>Software Development Kit</td><td>軟體開發套件</td><td>官方包好的函式庫，把 HTTP 細節藏起來</td></tr>

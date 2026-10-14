@@ -55,6 +55,9 @@
 | hallucination | — | 幻覺 | 模型輸出流暢但不真實的內容——機率模型的天性 |
 | prompt | — | 提示 | 你給模型的輸入文字；品質決定輸出品質 |
 | system prompt | — | 系統提示 | 對話的人設與規則，優先權高於一般訊息 |
+| content block | — | 回應區塊 | 一次回應由數個區塊組成（thinking、text…）；依 `type` 取用，別賭第一個 |
+| thinking | — | 思考區塊 | 模型「先想再答」的隱藏段落；也佔用 `max_tokens` 額度 |
+| max_tokens | — | 輸出上限 | 單次回應可產生的 token 上限（含 thinking）；被截斷時 `stop_reason` 為 `max_tokens` |
 | API | Application Programming Interface | 應用程式介面 | 服務開給「程式」呼叫的窗口 |
 | API key | — | 金鑰 | 呼叫 API 的身分憑證＝你的錢包，永不進 Git |
 | SDK | Software Development Kit | 軟體開發套件 | 官方包好的函式庫，把 HTTP 細節藏起來 |

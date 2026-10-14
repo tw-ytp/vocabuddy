@@ -4,6 +4,58 @@
 
 ---
 
+## v2.1 — 2026-10-14
+
+**Lab 1–3 實作勘誤修訂（E-001～E-011）**
+
+勘誤來源不是紙上審閱，而是 2026-10-13 在 `ytp26h2/ytp26h2-labs` 照教材 v2.0 逐步實作 Lab 1–3 時的實際卡關；其中 E-009、E-011 有真實 API 呼叫實證。原始勘誤表見 [`ytp26h2/ytp26h2-labs` 的 `docs/ERRATA.md`](https://github.com/ytp26h2/ytp26h2-labs/blob/main/docs/ERRATA.md)。
+
+### 高嚴重度（學生照抄教材就會卡住）
+
+| # | 章節 | 修訂 |
+|---|---|---|
+| E-009 | 2.5、Lab 3 v1／v2 | 回應的 `content` 是**區塊列表**，新模型常先回 `thinking` 區塊；`content[0].text` 會噴 `AttributeError`。改為依 `type` 挑出所有 `text` 區塊（新增 `text_of()`），並在 2.5 新增說明框 |
+| E-011 | 2.5、Lab 3 v1／v2 | `max_tokens` **包含 thinking 的 token**，`300` 幾乎全被想掉、印出空白且不報錯。v1／2.5 改 `2000`、v2 改 `1024`，並在 2.5 說明如何用 `stop_reason` 判斷 |
+
+### 中嚴重度
+
+| # | 章節 | 修訂 |
+|---|---|---|
+| E-001 | Lab 1 步驟 4、Lab 9 步驟 1 | 建倉庫時即預告「Lab 9 的 Pages 需要 Public，所以金鑰一次都不要進歷史」；Lab 9 回指 Lab 1 |
+| E-004 | Lab 1 急救表 | 頭像灰色問號補上 **noreply 信箱**的情況（勾了 Keep my email private 時，`user.email` 必須設成 noreply 信箱才會歸戶） |
+| E-006 | Lab 2 步驟 1／2／5・驗收，Lab 3 步驟 2／6・驗收 | issue 與 PR **共用編號**，不一定是 `#1`／`#2`。改為「記下實際編號 N」寫法 |
+| E-007 | Lab 3 v1／v2、2.5、Sprint 2、附錄 B | 模型名稱 `claude-sonnet-4-5` → `claude-sonnet-5-5`；附錄 B 改列三個現行型號並註明「不要自己加日期後綴」 |
+
+### 低嚴重度
+
+| # | 章節 | 修訂 |
+|---|---|---|
+| E-002 | Lab 1 步驟 2 起始碼 | `#card` 初值不寫死，載入時呼叫 `render()`——資料只有一份，畫面永遠照資料畫 |
+| E-003 | Lab 1 步驟 1／6 | Windows 補 `core.autocrlf input`（保護個人）與 `.gitattributes`（保護倉庫），避免假 diff |
+| E-005 | Lab 2 步驟 2、Sprint 4 `check_words.js` | `quiz()` 加 `WORDS.length < 2` 守衛（否則 `do…while` 無窮迴圈）；資料檢查腳本同步加「至少 2 個字」 |
+| E-008 | Lab 3 前置與步驟 1、附錄 B | Python 3.9+ → **3.10+**；3.9 會靜默裝到 SDK 0.x |
+| E-010 | Lab 3 v2、驗收第 4 項 | 沒設 key 時 client 建立在 `try` 外、降階接不到；改為函式開頭先檢查環境變數。驗收拆成「有 key 但斷網」與「完全沒設 key」兩項 |
+
+### 一併處理（非勘誤表項目，為前後文一致）
+
+- **Sprint 2 的 JavaScript 版**有與 E-007／E-009／E-011 完全相同的三處問題（`claude-sonnet-4-5`、`data.content[0].text`、`max_tokens: 300`），一併修正——Sprint 4 的 `callClaude()` 沿用這段骨架，因此也一併受益。
+- Lab 3 急救表新增四列（SDK 裝到 0.x／`ThinkingBlock` AttributeError／`Could not resolve authentication method`／輸出空白）。
+- 附錄 C 與 `glossary.md` 新增三條：`content block`、`thinking`、`max_tokens`（共 115 條）。
+- `docs/MAINTENANCE.md` 版本字樣與「回報管道」一節同步（頁尾措辭已於 v2.0 上線後改過）。
+
+### 驗證紀錄
+
+- `tools/check.py` 全部通過（58 頁・28 幅步進圖・27 題・90 個驗收框・版本號三處一致）。
+- Lab 3 修訂後 v1／v2 由教材原始碼直接擷取後實測（`anthropic` 1.13.0／Python 3.13）：v1 無 key 印提示並以 exit 1 結束、v2 無 key 印罐頭 exit 0、v2 有 key 但連不上（base URL 指向 `127.0.0.1:9`）走罐頭 exit 0；`text_of()` 以含 `thinking` 區塊的回應單元測試通過。
+- Lab 1 起始碼與 Lab 2 `quiz()` 以無頭瀏覽器實測：首張卡顯示 `algorithm`、翻面與換字正常、「考我」連按十次無連續重複、`WORDS` 只剩一字時不卡死。
+
+### 未納入
+
+- Lab 4 及之後的章節未改（本次沒有實作證據）。
+- v2 回傳的 `zh` 欄位語意不穩（偶爾給單字解釋而非例句翻譯）留給第三篇 Sprint 2 的 Structured Output 處理，不列為勘誤。
+
+---
+
 ## v2.0 — 2026-09-08
 
 **新增第五篇「AI-Native 開發：讓 AI 進到你的工作流」**
