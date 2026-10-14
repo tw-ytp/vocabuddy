@@ -390,7 +390,7 @@ img{max-width:100%}
 <aside class="sidebar" id="sidebar">
   <div class="side-brand">
     <div class="t">YTP VocaBuddy<br>開發者之路</div>
-    <div class="s">GitHub 與 AI 應用程式開發<br>線上自學教材・v2.1</div>
+    <div class="s">GitHub 與 AI 應用程式開發<br>線上自學教材・v2.2</div>
   </div>
   <nav class="nav" id="nav">
     <a href="#/home"><span class="no">◈</span>導讀：這份教材怎麼用</a>
@@ -1777,8 +1777,14 @@ function quiz(){
       <p>不要一上來就叫它改東西。先用三個問題確認它<strong>真的讀得到你的專案</strong>——這三題你自己都知道答案，所以它答錯你立刻看得出來：</p>
       <div class="termwrap"><pre class="term"><span class="o">1. 這個專案是做什麼的？請只根據倉庫裡的檔案回答。</span>
 <span class="o">2. 列出所有檔案，並說明每個檔案負責什麼。</span>
-<span class="o">3. index.html 裡的單字資料放在哪個變數？目前有幾個單字？</span></pre></div>
-      <p>第 3 題是關鍵：答案是 <code>WORDS</code> 陣列、8 個單字（Lab 1 的起始碼）。它如果答得出來，代表它真的<strong>讀了檔案</strong>而不是在猜。答不出來或答錯，回步驟 2 檢查第 ③ 步。</p>
+<span class="o">3. 單字資料放在哪個檔案的哪個變數？目前有幾個單字？</span></pre></div>
+      <p>第 3 題是關鍵，但<strong>正確答案取決於你的倉庫做到哪裡</strong>——先自己確認一次再去問它：</p>
+      <div class="tblwrap"><table>
+        <tr><th>你的倉庫狀態</th><th>正確答案</th></tr>
+        <tr><td>只做過 Lab 1（或從 <code>lab1-done</code> 切入）</td><td><code>index.html</code> 裡的 <code>WORDS</code> 陣列，8 個單字</td></tr>
+        <tr><td>照順序讀到這裡（已做完 Sprint 4）</td><td><code>words.js</code> 裡的 <code>WORDS</code>，18 個以上（看你自己加了幾個）</td></tr>
+      </table></div>
+      <p>它答得出來，代表它真的<strong>讀了檔案</strong>而不是在猜。答不出來或答錯，回步驟 2 檢查第 ③ 步。</p>
     </li>
     <li>
       <h4>認識三種操作模式，然後刻意選最慢的那個</h4>
@@ -1797,7 +1803,7 @@ function quiz(){
       <p>它做完之後，<strong>不要相信它說「已完成」</strong>，你自己做這三件事（這是 5.7 的預習）：</p>
       <ul>
         <li><code>git diff</code>——親眼看它改了哪幾行；</li>
-        <li>用瀏覽器打開 <code>index.html</code>，按「下一張」按到新單字出現；</li>
+        <li>用瀏覽器打開 <code>index.html</code>，複習到新單字出現（Lab 1 狀態的 App 是按「下一張」；Sprint 1 之後是「顯示答案 → 記得／忘了」）；</li>
         <li>確認它<strong>只</strong>改了該改的地方，沒有順手動別的。</li>
       </ul>
       <p>驗過沒問題，照第一篇的規矩提交：</p>
@@ -1820,7 +1826,7 @@ function quiz(){
   <ul class="check">
     <li><label><input type="checkbox" data-ck="l11-1">工具裝好了，終端機回得出版本號</label></li>
     <li><label><input type="checkbox" data-ck="l11-2">已登入或已設好金鑰，不再跳未認證</label></li>
-    <li><label><input type="checkbox" data-ck="l11-3">在專案資料夾裡啟動，第 3 題答對了（<code>WORDS</code>、8 個單字）</label></li>
+    <li><label><input type="checkbox" data-ck="l11-3">在專案資料夾裡啟動，第 3 題答對了（答案依你的倉庫狀態，見步驟 3 的對照表）</label></li>
     <li><label><input type="checkbox" data-ck="l11-4">知道自己現在在哪一種操作模式，而且選的是逐步確認</label></li>
     <li><label><input type="checkbox" data-ck="l11-5">完成一次小改動，且是<strong>你自己</strong>用 <code>git diff</code> 與瀏覽器驗過才提交</label></li>
   </ul>
@@ -2029,7 +2035,7 @@ function quiz(){
   <div class="tblwrap"><table>
     <tr><th>段落</th><th>寫什麼</th><th>VocaBuddy 的例子</th></tr>
     <tr><td><strong>這是什麼專案</strong></td><td>兩三句話講清楚做什麼、給誰用</td><td>「背單字網頁，純前端，資料存 localStorage，無後端」</td></tr>
-    <tr><td><strong>怎麼跑起來</strong></td><td>怎麼開、怎麼測</td><td>「用瀏覽器直接開 index.html；SRS 測試跑 <code>node test_srs.js</code>」</td></tr>
+    <tr><td><strong>怎麼跑起來</strong></td><td>怎麼開、怎麼測</td><td>「本地起一個 http 伺服器再開（例如 <code>python3 -m http.server</code>，瀏覽 <code>localhost:8000</code>）；SRS 測試跑 <code>node test_srs.js</code>」<span class="small dim">　←　Lab 9 之後 App 是 PWA，<code>file://</code> 開會讓 service worker 註冊失敗；指示檔寫錯一次，AI 之後會一直叫你用 <code>file://</code></span></td></tr>
     <tr><td><strong>程式碼慣例</strong></td><td>縮排、命名、用不用框架</td><td>「2 空格縮排；不引入任何框架與套件；函式用小駝峰」</td></tr>
     <tr><td><strong>協作規矩</strong></td><td>commit 訊息格式、分支命名、PR 規矩</td><td>「commit 用 <code>類型: 說明</code>；分支 <code>feature/…</code>；不直接推 main」</td></tr>
     <tr><td><strong>不要做的事</strong></td><td>紅線與雷區</td><td>「不要動 <code>words.js</code> 的資料格式；不要把金鑰寫進程式碼；不要自動推遠端」</td></tr>
@@ -2086,7 +2092,8 @@ function quiz(){
       <h4>驗證它真的生效——這是本 Lab 的重點</h4>
       <p>寫完不代表有用。用一個<strong>對照實驗</strong>來驗：</p>
       <ul>
-        <li>在指示檔裡寫一條容易辨識的規矩，例如「所有新函式都要加一行繁體中文註解說明用途」；</li>
+        <li>在指示檔裡寫一條容易辨識的規矩。<strong>這條規矩要挑「模型照抄現狀也不會自然做到」的事</strong>——「新函式加一行繁體中文註解」就不合格：你的倉庫本來就全是中文註解，它會模仿既有風格照做，你得到的是<strong>假陽性</strong>。改成有固定記號的寫法，例如「<strong>每個新函式上方加一行 <code>// 用途：…</code></strong>」；</li>
+        <li>更保險的做法是<strong>先跑對照組</strong>：在還沒放指示檔時，用同樣的話請它加一個函式，看它會不會自己做到那條規矩。會做到的，換一條；</li>
         <li><strong>清空</strong>目前的工作階段（5.2 學的），讓它重新讀一次指示檔；</li>
         <li>請它加一個小函式，例如「在 <code>index.html</code> 加一個 <code>shuffleWords()</code> 把單字順序打亂」；</li>
         <li>看它有沒有自動加上那行中文註解——<strong>你完全沒提，它卻做了，那就是指示檔生效了。</strong></li>
@@ -2335,7 +2342,7 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
   <div class="labmeta">
     <div class="m"><b>目標</b>做一個唯讀的 code review 子代理，對真實 PR 跑一次，並比較它與人審各自抓到什麼</div>
     <div class="m"><b>時間</b>約 35 分鐘</div>
-    <div class="m"><b>前置</b>Lab 13 完成；手上有一個還沒合併的 PR（沒有的話，用 Lab 13 那個）</div>
+    <div class="m"><b>前置</b>Lab 13 完成；一份要審的 diff——照順序做的話 Lab 13 的 PR 這時已經合併了，直接用 <code>git diff lab12-done lab13-done</code> 取出同一份改動即可（也可以在 Lab 13 先不按 merge，留到這裡審完再合）</div>
   </div>
 
   <ol class="steps">
@@ -2366,7 +2373,13 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     </li>
     <li>
       <h4>對真實的 diff 跑一次</h4>
-      <div class="termwrap"><pre class="term"><span class="o">請 code-reviewer 子代理審查 feature/skill-add-words 相對 main 的 diff。</span></pre></div>
+      <p><strong>先在主對話把 diff 取出來</strong>——步驟 2 剛把子代理限制成唯讀（不能跑指令），所以它自己<strong>執行不了 <code>git diff</code></strong>，也讀不到已經合併或還沒 checkout 的版本。diff 要由你提供：</p>
+      <div class="termwrap"><pre class="term"><span class="p">$</span> git diff main...feature/skill-add-words   <span class="c"># 還沒合併時</span>
+<span class="p">$</span> git diff lab12-done lab13-done            <span class="c"># 已經合併時，用兩個檢查點</span></pre></div>
+      <div class="termwrap"><pre class="term"><span class="o">請 code-reviewer 子代理審查以下 diff（全文貼在下方）：
+
+&lt;把上面指令的輸出整段貼進來&gt;</span></pre></div>
+      <p class="small" style="color:var(--ink-2)">另一種作法是把 <code>git diff</code> 這類<strong>唯讀指令</strong>加進子代理的允許清單。兩種都對，但先用「主對話取 diff、子代理只讀文字」這條，因為它不必放寬權限——<strong>能不放寬就不放寬</strong>，這正是 5.3 的原則。</p>
       <p>注意觀察兩件事：它回報的<strong>只有結論</strong>（不是把整個 diff 貼回你的對話——這就是圖 31 在講的事）；以及它有沒有照你規定的格式輸出。</p>
     </li>
     <li>
@@ -2391,7 +2404,7 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <p><strong>① 它把整個 diff 複述一遍</strong>——輸出格式沒被遵守。在子代理指示裡把格式要求再寫嚴一點，並加一句「不要複述程式碼內容」。<br>
     <strong>② 它挑了一堆雞毛蒜皮</strong>——加一句「只回報你認為值得修改的問題；沒有就說沒有」。模型有討好傾向，會為了「有交代」而硬找問題（第二篇講過的機率性副作用）。<br>
     <strong>③ 它想幫你直接改</strong>——步驟 2 的工具限制沒生效，回去確認設定。<br>
-    <strong>④ 它看不到 diff</strong>——確認你在正確的分支上，且該分支已 commit。子代理讀的是實際檔案，不是你腦中的想像。<br>
+    <strong>④ 它看不到 diff</strong>——八成是你請它「自己去 diff」。唯讀的子代理<strong>沒有執行指令的權限</strong>，跑不了 <code>git diff</code>；diff 必須由你在主對話取出來、整段貼進提示裡（步驟 3）。如果你改用「審查工作樹」的方式，也要確認你在正確的分支上、該分支已 commit。<br>
     <strong>⑤ 報告很空泛，沒有行號</strong>——把「每則發現一行：檔名:行號 — 問題 — 建議」這條規定留著，並要求它「若無法指出具體行號，就不要回報這一則」。<strong>指得出行號，你才驗得動。</strong><br>
     <strong>⑥ 你的工具沒有子代理功能</strong>——用「開一個乾淨的新工作階段、只交代 review 這件事」代替。效果差一點（沒有自動的上下文隔離），但觀念與流程完全相同。</p>
   </div>
@@ -2618,7 +2631,7 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
   <h3>二、AI 應用（第二、三篇）</h3>
   <ul class="check">
     <li><label><input type="checkbox" data-ck="v-5">程式裡有呼叫模型的功能，且<strong>有驗證、有降階</strong>　<span class="small dim">→ 看 <code>tools/</code> 或 <code>index.html</code> 的 try/catch 與 fallback</span></label></li>
-    <li><label><input type="checkbox" data-ck="v-6">全部歷史裡沒有任何金鑰　<span class="small dim">→ <code>git grep sk-</code> 一無所獲</span></label></li>
+    <li><label><input type="checkbox" data-ck="v-6">全部歷史裡沒有任何金鑰　<span class="small dim">→ <code>git grep sk-ant-api</code> 一無所獲，再加 <code>git log -p -S'sk-ant-api' --all</code> 查歷史</span></label></li>
     <li><label><input type="checkbox" data-ck="v-7">有一個純函式＋對應的單元測試　<span class="small dim">→ <code>srs.js</code> 與 <code>test_srs.js</code></span></label></li>
     <li><label><input type="checkbox" data-ck="v-8">有資料檢查腳本，且真的擋得住壞資料　<span class="small dim">→ <code>check_words.js</code></span></label></li>
   </ul>
@@ -2810,6 +2823,7 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>Git 指令世代</td><td>教材採 <code>switch</code>／<code>restore</code>（Git ≥ 2.23，2019 起）；舊教學常見的 <code>checkout</code> 是它們的前身，仍可用</td><td>2026-08</td><td><code>git --version</code></td></tr>
     <tr><td>預設分支名稱</td><td><code>main</code>（GitHub 2020 起預設；舊專案可能是 <code>master</code>）</td><td>2026-08</td><td>repo 首頁分支選單</td></tr>
     <tr><td>Claude API 模型名稱</td><td>教材所有 Lab 採 <code>claude-sonnet-5-5</code>（速度與能力的均衡型號）；要便宜、大量呼叫可用 <code>claude-haiku-5-5</code>，最強的是 <code>claude-opus-5-5</code>（教材用不到，知道有就好）。<strong>模型 ID 不要自己加日期後綴</strong>（例如 <code>-20260401</code>），照官方清單上的字串原樣用</td><td>2026-10-13</td><td>docs.claude.com 的 Models 頁</td></tr>
+    <tr><td>採樣參數（<code>temperature</code>、<code>top_p</code>）</td><td><strong>新一代模型已不接受</strong>——送出會收到 400（實測 <code>claude-sonnet-5-5</code>）。2.4 講的取樣原理不變，只是這個旋鈕不再開放。穩定輸出改靠 prompt 與程式端驗證（Sprint 2）</td><td>2026-10-14</td><td>docs.claude.com 的 Messages API 參數頁</td></tr>
     <tr><td>API key 申請與免費額度</td><td>於 Anthropic Console（console.anthropic.com）註冊申請；免費額度與速率上限隨政策變動</td><td>2026-08</td><td>Console 的 Billing／Limits 頁</td></tr>
     <tr><td>Python SDK</td><td><code>pip install anthropic</code>——<strong>官方 SDK 1.x 需要 Python 3.10 以上</strong>；在 3.9 上安裝不會報錯，但會靜默裝到 0.x 舊版。requests 呼叫本地 API 用 <code>pip install requests</code></td><td>2026-10-13</td><td>PyPI</td></tr>
     <tr><td>Ollama</td><td>於 ollama.com 下載安裝；本機 API 埠 11434</td><td>2026-08</td><td>ollama.com</td></tr>
@@ -2837,7 +2851,7 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>本教材授權</td><td>內容採 CC BY-NC-SA 4.0；教材中的程式碼片段採 MIT</td><td>2026-09</td><td>教材倉庫的 <code>LICENSE</code></td></tr>
   </table></div>
   <div class="footer-note">
-    YTP VocaBuddy 開發者之路・教材版本 v2.1（Lab 1–3 實作勘誤修訂 E-001～E-011；主線十三個 Lab。本地端 LLM 仍為附錄 E 特別篇・選修）・貫穿案例：VocaBuddy 背單字夥伴<br>
+    YTP VocaBuddy 開發者之路・教材版本 v2.2（Lab 1–14 全線實作勘誤修訂 E-001～E-032；主線十三個 Lab。本地端 LLM 仍為附錄 E 特別篇・選修）・貫穿案例：VocaBuddy 背單字夥伴<br>
     教材網址 <a href="https://tw-ytp.github.io/vocabuddy/">tw-ytp.github.io/vocabuddy</a>｜原始檔與改版歷史 <a href="https://github.com/tw-ytp/vocabuddy" target="_blank" rel="noopener">github.com/tw-ytp/vocabuddy</a><br>
     發現錯誤或有改善建議？歡迎直接<a href="https://github.com/tw-ytp/vocabuddy/issues" target="_blank" rel="noopener">開一個 issue</a>——這正是本教材教你的協作方式。內容採 CC BY-NC-SA 4.0 授權，程式碼片段採 MIT。<br>
     教學路線：主題分篇為骨、專案旅程為魂｜第一篇＝工作流程軸＋情境開場｜第二篇＝白盒優先｜第三篇＝功能衝刺（Sprint 1–4＝Lab 5–8）｜第四篇＝上線與發表（Lab 9–10）｜第五篇＝AI-Native 開發（工具中立＋Lab 11–14）｜適用對象：具競賽程式基礎的高中生
@@ -3662,7 +3676,7 @@ if __name__ == "__main__":
 
   <h2>驗收清單</h2>
   <ul class="check">
-    <li><label><input type="checkbox" data-ck="l3-1">在 repo 裡搜尋不到你的 API key（試試 <code>git grep sk-</code>，應該一無所獲）</label></li>
+    <li><label><input type="checkbox" data-ck="l3-1">在 repo 裡搜尋不到你的 API key（<code>git grep sk-ant-api</code> 應該一無所獲）</label></li>
     <li><label><input type="checkbox" data-ck="l3-2">v1 能對任意單字輸出例句；你能說出同字兩次結果不同的原因（用「取樣」二字）</label></li>
     <li><label><input type="checkbox" data-ck="l3-3">v2 對 5 個不同單字都回傳合法 JSON，且例句都真的含目標單字</label></li>
     <li><label><input type="checkbox" data-ck="l3-4"><strong>有 key 但連不上網</strong>（例如關掉 Wi-Fi）再跑 v2——不噴 traceback，幾秒內輸出罐頭 JSON</label></li>
@@ -3755,7 +3769,7 @@ def generate(word, provider="auto"):
     </li>
     <li>
       <h4>收尾＋打檢查點</h4>
-      <div class="termwrap"><pre class="term"><span class="p">$</span> git add . && git commit -m "feat: provider 切換與降階容錯鏈，closes #3"
+      <div class="termwrap"><pre class="term"><span class="p">$</span> git add . && git commit -m "feat: provider 切換與降階容錯鏈，closes #N"
 <span class="p">$</span> git push -u origin feature/local-fallback
 <span class="o"># 開 PR → 自我 review → merge → 回 main pull，然後：</span>
 <span class="p">$</span> git tag lab4-done && git push --tags   <span class="c"># 立一個里程碑，日後可隨時回到這裡</span></pre></div>
@@ -4037,6 +4051,7 @@ let cur = null;
 const $ = id =&gt; document.getElementById(id);
 
 function next(){
+  stats();                      // 擺第一行：清空那條分支也要更新上方的計數
   if (queue.length === 0){
     $("card").textContent = "今日完成！";
     $("meaning").innerHTML = "&amp;nbsp;";
@@ -4048,7 +4063,6 @@ function next(){
   $("meaning").innerHTML = "&amp;nbsp;";
   $("reveal").hidden = false;
   $("ok").hidden = $("no").hidden = true;
-  stats();
 }
 
 function reveal(){
@@ -4082,7 +4096,7 @@ next();
     </li>
     <li>
       <h4>收工儀式</h4>
-      <div class="termwrap"><pre class="term"><span class="p">$</span> git add . && git commit -m "feat: 今日複習佇列 MVP，closes #4"
+      <div class="termwrap"><pre class="term"><span class="p">$</span> git add . && git commit -m "feat: 今日複習佇列 MVP，closes #N"   <span class="c"># N＝你那張 issue 的編號</span>
 <span class="p">$</span> git push -u origin feature/review-queue
 <span class="o"># 開 PR → review → merge → 回 main pull，然後：</span>
 <span class="p">$</span> git tag sprint1-done && git push --tags</pre></div>
@@ -4093,7 +4107,7 @@ next();
   <ul class="check">
     <li><label><input type="checkbox" data-ck="s1-1">打開頁面立即看到第一張卡與「剩 N 張」；答完全部出現「今日完成」</label></li>
     <li><label><input type="checkbox" data-ck="s1-2">「忘了」的卡稍後會再出現，直到你答「記得」</label></li>
-    <li><label><input type="checkbox" data-ck="s1-3">重新整理後，seen／wrong 統計仍在（可在開發者工具 Console 輸入 <code>log</code> 檢查）</label></li>
+    <li><label><input type="checkbox" data-ck="s1-3">重新整理後，seen／wrong 統計仍在（可在開發者工具 Console 輸入 <code>log</code> 檢查）。<strong>但今日佇列的進度不保留</strong>——重新整理會從 8 張重新開始，這是 Sprint 1 的刻意簡化；Sprint 3 的排程才會記住每張卡的狀態</label></li>
     <li><label><input type="checkbox" data-ck="s1-4">手機上按鈕大小、字級可正常操作</label></li>
     <li><label><input type="checkbox" data-ck="s1-5">PR 已合併、tag <code>sprint1-done</code> 已推上 GitHub</label></li>
   </ul>
@@ -4116,7 +4130,8 @@ next();
 
   <h2>本輪新知</h2>
   <p><strong>① fetch 與 async/await</strong>：JavaScript 版的「發 HTTP 請求」。<code>await fetch(url, {...})</code> 發出請求，<code>await res.json()</code> 解析回應——語意跟 Python 的 requests 一模一樣，只是多了 async 標記（因為瀏覽器不能停下來等）。</p>
-  <p><strong>② Structured Output（結構化輸出）</strong>：要把 AI 輸出接進 UI，就要讓它回<strong>固定形狀的 JSON</strong>。三板斧：system prompt 給出完整 JSON 骨架範例、temperature 調低、程式端 <code>JSON.parse</code>＋欄位驗證把關。</p>
+  <p><strong>② Structured Output（結構化輸出）</strong>：要把 AI 輸出接進 UI，就要讓它回<strong>固定形狀的 JSON</strong>。兩件事做好就夠：system prompt 給出<strong>完整的 JSON 骨架範例</strong>（並明說「不要 markdown 圍欄」）、程式端 <code>JSON.parse</code>＋<strong>欄位驗證</strong>把關。<br>
+  <span class="small" style="color:var(--ink-2)">註：舊教材這裡還有第三招「temperature 調低」。<strong>新一代模型已經不接受 <code>temperature</code> 這類採樣參數</strong>，送了會收到 400（2026-10 實測）——穩定輸出從此靠 prompt 與驗證，不靠旋鈕。2.4 講的取樣原理沒有過時，只是這個旋鈕不再開放給你轉。</span></p>
 
   <figure class="fig" data-fig="structured">
     <div class="fig-head"><span class="no">圖 19</span><span class="t">自由文字 vs 結構化輸出：接進 UI 的差別</span></div>
@@ -4138,7 +4153,7 @@ next();
         <text x="76" y="62" class="small" style="font-weight:700" fill="var(--accent)">system prompt</text>
         <text x="76" y="84" class="mono">只輸出 JSON：{"sentence":</text>
         <text x="76" y="102" class="mono">"…","zh":"…","tip":"…"}</text>
-        <text x="76" y="124" class="mono dim">temperature: 0.3</text>
+        <text x="76" y="124" class="mono dim">＋「不要 markdown 圍欄」</text>
       </g>
       <!-- s3 回應+parse -->
       <g data-s="3" class="pulse">
@@ -4194,6 +4209,7 @@ function getKey(){
   try { k = localStorage.getItem("vb-key"); } catch(e){}
   if (!k){
     k = prompt("貼上你的 API key（只存在你自己的瀏覽器）");
+    if (!k) return null;        // 按「取消」回的是 null，別把字串 "null" 存進去
     try { localStorage.setItem("vb-key", k); } catch(e){}
   }
   return k;
@@ -4215,12 +4231,17 @@ async function aiExample(){
         "anthropic-dangerous-direct-browser-access": "true"  // 瀏覽器直呼必加，見附錄 B
       },
       body: JSON.stringify({
-        model: MODEL, max_tokens: 1024, temperature: 0.3,   // 額度含 thinking，見 2.5
+        model: MODEL, max_tokens: 1024,        // 額度含 thinking，見 2.5
+        // 注意：不要加 temperature——新模型會回 400，而且錯誤會被下面的 catch 吞掉
         system: '你是高中英語老師。只輸出 JSON：{"sentence":"...","zh":"...","tip":"..."}',
         messages: [{ role: "user",
                      content: "用單字 " + word + " 造一個 CEFR B1 例句、中譯與聯想" }]
       })
     });
+    if (res.status === 401){                       // key 不對：清掉，下次自動重問
+      try { localStorage.removeItem("vb-key"); } catch(e){}
+      throw new Error("API key 不正確，已清除");
+    }
     const data = await res.json();
     const text = data.content.filter(b =&gt; b.type === "text")   // 依 type 挑，理由見 2.5
                              .map(b =&gt; b.text).join("");
@@ -4234,7 +4255,11 @@ async function aiExample(){
     box.textContent = "AI 暫時不可用——不影響複習，例句之後再補。";
   }
   function show(c){
-    box.innerHTML = "<em>" + c.sentence + "</em><br>" + c.zh + "<br>聯想：" + c.tip;
+    box.textContent = "";                        // 模型輸出一律當「文字」，不當 HTML
+    const em = document.createElement("em");
+    em.textContent = c.sentence;
+    box.append(em, document.createElement("br"),
+               c.zh, document.createElement("br"), "聯想：" + c.tip);
   }
 }</span></pre></div>
       <p>對照第二篇：這 40 行裡有 Structured Output（system＋低溫＋parse＋驗證）、降階（catch 後給人話而非 traceback）、快取。Lab 3 學的每一招都上場了。</p>
@@ -4245,7 +4270,7 @@ async function aiExample(){
     </li>
     <li>
       <h4>收工</h4>
-      <div class="termwrap"><pre class="term"><span class="p">$</span> git add . && git commit -m "feat: 卡片 AI 例句（快取＋降階），closes #5"
+      <div class="termwrap"><pre class="term"><span class="p">$</span> git add . && git commit -m "feat: 卡片 AI 例句（快取＋降階），closes #N"
 <span class="p">$</span> git push -u origin feature/ai-example
 <span class="o"># PR → review → merge → pull，然後 git tag sprint2-done && git push --tags</span></pre></div>
     </li>
@@ -4256,14 +4281,16 @@ async function aiExample(){
     <li><label><input type="checkbox" data-ck="s2-1">翻面後才看得到「AI 例句」按鈕；例句、翻譯、聯想三欄位正確顯示</label></li>
     <li><label><input type="checkbox" data-ck="s2-2">同一單字第二次點擊不再呼叫 API（Network 分頁確認，或看它秒回）</label></li>
     <li><label><input type="checkbox" data-ck="s2-3">斷網時顯示友善訊息，複習流程完全不受影響</label></li>
-    <li><label><input type="checkbox" data-ck="s2-4"><code>git grep sk-</code> 找不到任何金鑰；你能解釋為什麼公開網頁不能內建 key</label></li>
+    <li><label><input type="checkbox" data-ck="s2-4"><code>git grep sk-ant-api</code> 找不到任何金鑰；你能解釋為什麼公開網頁不能內建 key</label></li>
     <li><label><input type="checkbox" data-ck="s2-5">PR 已合併、tag <code>sprint2-done</code> 已推</label></li>
   </ul>
 
   <h2>常見錯誤急救</h2>
   <div class="tblwrap"><table>
     <tr><th>症狀</th><th>原因與解法</th></tr>
-    <tr><td class="mono">401 / invalid x-api-key</td><td>key 貼錯或多了空白。Console 執行 <code>localStorage.removeItem("vb-key")</code> 重新輸入。</td></tr>
+    <tr><td class="mono">401 / invalid x-api-key</td><td>key 貼錯或多了空白。上面的程式收到 401 會自動清掉存的 key，重新整理就會再問你一次；手動清是 Console 執行 <code>localStorage.removeItem("vb-key")</code>。</td></tr>
+    <tr><td>網路正常，卻一直顯示「AI 暫時不可用」</td><td>錯誤被 <code>catch</code> 吞掉了，要自己去看。F12 → <em>Network</em> 分頁點那個請求看回應：<strong>400 多半是送了模型不支援的參數</strong>（例如新模型已不接受 <code>temperature</code>），401 是金鑰，429 是速率限制。debug 的第一步永遠是「讓錯誤現形」。</td></tr>
+    <tr><td>按了取消，之後每次都 401</td><td>舊版程式把 <code>prompt()</code> 取消回的 <code>null</code> 存成字串 <code>"null"</code>，之後就不再問你。上面的 <code>if (!k) return null;</code> 擋掉了這件事。</td></tr>
     <tr><td>CORS 相關錯誤</td><td>少了 <code>anthropic-dangerous-direct-browser-access</code> 標頭（名稱就是在提醒你：直呼有風險，只適合自帶金鑰的個人工具）。</td></tr>
     <tr><td>JSON.parse 偶爾炸掉</td><td>模型多話了。已被 catch 接住是底線；要根治：system 再加一句「不要 markdown 圍欄」。</td></tr>
     <tr><td>按了沒反應</td><td>開 Console 看紅字——從今天起，F12 是你的第一反應。</td></tr>
@@ -4359,12 +4386,14 @@ if (typeof module !== "undefined") module.exports = { schedule, INTERVALS };</sp
 const { schedule } = require("./srs.js");
 
 assert.deepStrictEqual(schedule(1, true, 100),  { box: 2, due: 102 });  // 答對晉級
+assert.deepStrictEqual(schedule(2, true, 100),  { box: 3, due: 104 });  // 蓋到盒 3
 assert.deepStrictEqual(schedule(3, true, 100),  { box: 4, due: 108 });
 assert.deepStrictEqual(schedule(5, true, 100),  { box: 5, due: 116 });  // 頂級不再升
 assert.deepStrictEqual(schedule(4, false, 100), { box: 1, due: 101 });  // 答錯打回盒 1
-console.log("4 tests passed ✓");</span></pre></div>
+console.log("5 tests passed ✓");</span></pre></div>
       <div class="termwrap"><pre class="term"><span class="p">$</span> node test_srs.js
-<span class="o">4 tests passed ✓</span></pre></div>
+<span class="o">5 tests passed ✓</span></pre></div>
+      <p class="small" style="color:var(--ink-2)">第二條不是湊數的：少了它，<code>INTERVALS</code> 的第 3 格改壞也沒有任何測試會紅——<strong>五個間隔要五條測試各蓋一格</strong>，測試的覆蓋率就是這樣一格一格數出來的。</p>
       <p>注意 <code>today</code> 是<strong>參數</strong>而不是函式裡自己抓 <code>Date.now()</code>——這正是它可測試、可重現的原因（測試裡「今天」永遠是第 100 天）。</p>
     </li>
     <li>
@@ -4373,7 +4402,8 @@ console.log("4 tests passed ✓");</span></pre></div>
       <div class="termwrap"><pre class="term"><span class="o">// —— 日期：以「第幾天」為單位，附時間旅行測試器 ——
 let dayOffset = 0;
 try { dayOffset = +localStorage.getItem("vb-day") || 0; } catch(e){}
-const today = () =&gt; Math.floor(Date.now() / 864e5) + dayOffset;
+// 本地日：直接除 864e5 得到的是 UTC 日，台灣要等到早上 8 點才換日，時間旅行會看不懂
+const today = () =&gt; Math.floor((Date.now() - new Date().getTimezoneOffset() * 6e4) / 864e5) + dayOffset;
 window.vbTravel = n =&gt; {            // Console 輸入 vbTravel(1) 即快轉一天
   try { localStorage.setItem("vb-day", dayOffset + n); } catch(e){}
   location.reload();
@@ -4401,11 +4431,12 @@ function mark(ok){
     </li>
     <li>
       <h4>時間旅行驗證</h4>
-      <p>今天把 8 張卡都答「記得」→ 畫面顯示完成。Console 輸入 <code>vbTravel(1)</code>：8 張卡到期回來了（盒 2 間隔還短）。再全對、<code>vbTravel(2)</code>、再全對、<code>vbTravel(4)</code>……親眼看佇列隨間隔拉長而變稀疏。玩完 <code>vbTravel(-總天數)</code> 歸零。</p>
+      <p>今天把 8 張卡都答「記得」→ 畫面顯示完成。新卡從盒 1 出發，答對進<strong>盒 2</strong>，而盒 2 的間隔是 <code>INTERVALS[2] = 2</code> 天——所以 <code>vbTravel(1)</code> 會是空的，<strong><code>vbTravel(2)</code></strong> 那 8 張卡才回來。再全對、<code>vbTravel(4)</code>、再全對、<code>vbTravel(8)</code>、<code>vbTravel(16)</code>……親眼看佇列隨間隔拉長而變稀疏。玩完 <code>vbTravel(-總天數)</code> 歸零。</p>
+      <p class="small" style="color:var(--ink-2)">「間隔 1」只出現在<strong>答錯之後</strong>（打回盒 1）。而且答錯的卡會當天排到佇列尾巴重考，所以只有「答錯又關掉頁面沒重考」的卡，才真的隔天回來。</p>
     </li>
     <li>
       <h4>收工</h4>
-      <div class="termwrap"><pre class="term"><span class="p">$</span> git add . && git commit -m "feat: Leitner SRS 排程與單元測試，closes #6"
+      <div class="termwrap"><pre class="term"><span class="p">$</span> git add . && git commit -m "feat: Leitner SRS 排程與單元測試，closes #N"
 <span class="p">$</span> git push -u origin feature/srs
 <span class="o"># PR 描述的「怎麼驗證」寫：node test_srs.js ＋ 時間旅行步驟 → merge → tag sprint3-done</span></pre></div>
     </li>
@@ -4413,9 +4444,9 @@ function mark(ok){
 
   <h2>驗收清單</h2>
   <ul class="check">
-    <li><label><input type="checkbox" data-ck="s3-1"><code>node test_srs.js</code> 四條測試全過；故意把 INTERVALS 改壞一格，測試會抓到（改回來）</label></li>
+    <li><label><input type="checkbox" data-ck="s3-1"><code>node test_srs.js</code> 五條測試全過；<strong>每一格</strong> INTERVALS 分別改壞一次，五次都被抓到（改回來）</label></li>
     <li><label><input type="checkbox" data-ck="s3-2">新的一天只出現「到期」的卡；全答完顯示「明天見」</label></li>
-    <li><label><input type="checkbox" data-ck="s3-3">用 vbTravel 驗證：答對的卡間隔按 1→2→4→8→16 拉長；答錯的隔天就回來</label></li>
+    <li><label><input type="checkbox" data-ck="s3-3">用 vbTravel 驗證：答對的卡間隔按 2→4→8→16 拉長（新卡第一次答對就是 2 天）；答錯的打回盒 1，當天排隊尾重考，沒重考才隔天回來</label></li>
     <li><label><input type="checkbox" data-ck="s3-4">你能對隊友解釋：為什麼 schedule() 不自己呼叫 Date.now()</label></li>
     <li><label><input type="checkbox" data-ck="s3-5">PR 已合併、tag <code>sprint3-done</code> 已推</label></li>
   </ul>
@@ -4550,6 +4581,32 @@ console.log("words.js 檢查通過，共 " + words.length + " 字 ✓");</span><
       <p>介面加一顆常駐的「考我弱點」按鈕與一個測驗容器：</p>
       <div class="termwrap"><pre class="term"><span class="o">&lt;button onclick="smartQuiz()"&gt;考我弱點&lt;/button&gt;
 &lt;div id="quiz"&gt;&lt;/div&gt;</span></pre></div>
+      <p>先把 Sprint 2 那段 <code>fetch</code> 抽成共用函式——出題和例句都要用它：</p>
+      <div class="termwrap"><pre class="term"><span class="o">// 共用的 API 呼叫：給 system 與 user 兩段提示，回傳模型的文字
+async function callClaude(system, user){
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "x-api-key": getKey(),
+      "anthropic-version": API_VERSION,
+      "anthropic-dangerous-direct-browser-access": "true"
+    },
+    body: JSON.stringify({
+      model: MODEL, max_tokens: 1024,      // 不要加 temperature，見 Sprint 2
+      system: system,
+      messages: [{ role: "user", content: user }]
+    })
+  });
+  if (res.status === 401){
+    try { localStorage.removeItem("vb-key"); } catch(e){}
+    throw new Error("API key 不正確，已清除");
+  }
+  const data = await res.json();
+  return data.content.filter(b =&gt; b.type === "text")   // 依 type 挑，見 2.5
+                     .map(b =&gt; b.text).join("");
+}</span></pre></div>
+      <p>抽完記得<strong>回頭改 Sprint 2 的 <code>aiExample()</code></strong>：把它裡面那整段 <code>fetch</code> 換成一行 <code>const text = await callClaude(system, user);</code>，快取與降階的部分原封不動。這就是重構——行為不變，重複消失。</p>
       <p>核心邏輯：</p>
       <div class="termwrap"><pre class="term"><span class="o">async function smartQuiz(){
   const t = weakest(3);
@@ -4562,19 +4619,25 @@ console.log("words.js 檢查通過，共 " + words.length + " 字 ✓");</span><
       "使用者最常錯的單字：" + t.map(w =&gt; w.en + "（" + w.zh + "）").join("、") +
       "。從中挑一個出一題四選一，選項要包含正確答案與三個貼近的干擾項。");
     const q = JSON.parse(text);
+    // 把模型回的答案對回單字包裡的本尊：大小寫不同、或根本不是你的單字，都不出題
+    const hit = t.find(w =&gt; w.en.toLowerCase() === String(q.answer || "").toLowerCase());
     if (!Array.isArray(q.options) || q.options.length !== 4 ||
-        !q.options.includes(q.answer)) throw new Error("題目格式不合格");
-    box.innerHTML = "<p>" + q.question + "</p>";
+        !q.options.includes(q.answer) || !hit) throw new Error("題目格式不合格");
+    box.textContent = "";                                 // 模型輸出當文字，不當 HTML
+    const p = document.createElement("p");
+    p.textContent = q.question;
+    box.appendChild(p);
     q.options.forEach(op =&gt; {
       const b = document.createElement("button");
       b.textContent = op;
       b.onclick = () =&gt; {
         const ok = op === q.answer;
-        const s = log[q.answer] || (log[q.answer] = {seen:0, wrong:0});
+        const s = log[hit.en] || (log[hit.en] = {seen:0, wrong:0});   // 鍵用本尊，不用模型字串
         s.seen++; if (!ok) s.wrong++;                     // 答題結果寫回紀錄：閉環
         save();
-        box.innerHTML += ok ? "<p>答對！" + q.why + "</p>"
-                            : "<p>正解：" + q.answer + "。" + q.why + "</p>";
+        const r = document.createElement("p");
+        r.textContent = ok ? "答對！" + q.why : "正解：" + q.answer + "。" + q.why;
+        box.appendChild(r);
       };
       box.appendChild(b);
     });
@@ -4582,7 +4645,7 @@ console.log("words.js 檢查通過，共 " + words.length + " 字 ✓");</span><
     box.textContent = "AI 暫時不可用，先用單字卡複習吧。";
   }
 }</span></pre></div>
-      <p>驗證那一行是本輪靈魂：<strong>選項不是四個、或答案不在選項裡，寧可不出題</strong>——教育產品給錯答案比沒答案更糟。</p>
+      <p>驗證那幾行是本輪靈魂：<strong>選項不是四個、答案不在選項裡、或答案根本不是你單字包裡的字，寧可不出題</strong>——教育產品給錯答案比沒答案更糟。另外注意寫回紀錄時用的是 <code>hit.en</code> 而不是 <code>q.answer</code>：模型回 <code>"Algorithm"</code> 而你的單字是 <code>"algorithm"</code>，用模型的字串當鍵會在 <code>log</code> 裡長出一個分身，本尊的錯誤率永遠不動，弱點分析就廢了。<strong>外部來的字串，進你的資料結構前先對回自己的資料。</strong></p>
     </li>
     <li>
       <h4>多人共編演練</h4>
@@ -4590,7 +4653,7 @@ console.log("words.js 檢查通過，共 " + words.length + " 字 ✓");</span><
     </li>
     <li>
       <h4>收工</h4>
-      <div class="termwrap"><pre class="term"><span class="p">$</span> git add . && git commit -m "feat: 弱點出題與單字包共編，closes #7"
+      <div class="termwrap"><pre class="term"><span class="p">$</span> git add . && git commit -m "feat: 弱點出題與單字包共編，closes #N"
 <span class="p">$</span> git push -u origin feature/smart-quiz
 <span class="o"># PR → review → merge → tag sprint4-done。第三篇完賽！</span></pre></div>
     </li>
@@ -4757,7 +4820,7 @@ console.log("words.js 檢查通過，共 " + words.length + " 字 ✓");</span><
   </figure>
 
   <div class="warnbox"><span class="lab">上線前的一道安檢</span>
-    <p>免費方案的 Pages 需要 repo 轉為 <strong>public（公開）</strong>——公開的是<strong>整個倉庫，包含全部歷史</strong>。轉公開前必做：<code>git grep sk-</code>、翻一遍 <code>git log</code>，確認任何 commit 都沒帶過金鑰或個資。萬一真有：撤銷那把 key（historical 的內容洗不乾淨，換鑰匙最快），再公開。</p>
+    <p>免費方案的 Pages 需要 repo 轉為 <strong>public（公開）</strong>——公開的是<strong>整個倉庫，包含全部歷史</strong>。轉公開前必做：<code>git grep sk-ant-api</code>（真金鑰長成 <code>sk-ant-api03-</code> 開頭的長字串；只搜 <code>sk-</code> 會把說明文字和示範用的假 key 一起撈出來，嚇自己一跳）、再用 <code>git log -p -S'sk-ant-api' --all</code> 掃過<strong>整個歷史</strong>，確認任何 commit 都沒帶過金鑰或個資。萬一真有：撤銷那把 key（historical 的內容洗不乾淨，換鑰匙最快），再公開。</p>
   </div>
 
   <div class="keybox"><span class="lab">核心觀念</span>
@@ -4849,7 +4912,7 @@ console.log("words.js 檢查通過，共 " + words.length + " 字 ✓");</span><
 }</span></pre></div>
   <p><strong>② sw.js——離線的小管家。</strong>service worker 是一支常駐在瀏覽器背景的腳本，能攔截這個網站的所有網路請求。最簡策略「快取優先」十行寫完：</p>
   <div class="termwrap"><pre class="term"><span class="o">const CACHE = "ytp-vocabuddy-v1";     // 改版時把 v1 改成 v2，舊快取才會換新
-const SHELL = ["./", "index.html", "words.js", "srs.js", "manifest.json"];
+const SHELL = ["./", "index.html", "words.js", "srs.js", "manifest.json", "icon.png"];
 
 self.addEventListener("install", e =&gt; {
   e.waitUntil(caches.open(CACHE).then(c =&gt; c.addAll(SHELL)));   // 安裝時先存一份
@@ -4880,7 +4943,10 @@ self.addEventListener("fetch", e =&gt; {
   <p><strong>GitHub Actions</strong> 是 GitHub 內建的自動化服務：你在 repo 裡放一個「劇本」（workflow），指定<strong>什麼事件發生時、在什麼機器上、跑哪些指令</strong>。劇本用 YAML 格式寫在 <code>.github/workflows/</code> 資料夾：</p>
   <div class="termwrap"><pre class="term"><span class="o"># .github/workflows/ci.yml
 name: CI
-on: [push, pull_request]        # 什麼時候跑：每次 push 與每個 PR
+on:                             # 什麼時候跑
+  push:
+    branches: [main]            # 只在 main 有新 commit 時跑一次
+  pull_request:                 # 以及每個 PR 跑一次
 
 jobs:
   test:
@@ -4990,7 +5056,7 @@ jobs:
   <h2>上線安檢清單</h2>
   <div class="tblwrap"><table>
     <tr><th>檢查</th><th>怎麼做</th><th>對應章節</th></tr>
-    <tr><td>歷史裡沒有金鑰</td><td class="mono">git grep sk-（＋人工翻 git log）</td><td>2.5／Lab 3</td></tr>
+    <tr><td>歷史裡沒有金鑰</td><td class="mono">git grep sk-ant-api<br>git log -p -S'sk-ant-api' --all</td><td>2.5／Lab 3</td></tr>
     <tr><td>.gitignore 擋住危險檔</td><td>金鑰檔、.DS_Store、編譯產物都列入</td><td>1.6</td></tr>
     <tr><td>前端程式碼裡沒有任何祕密</td><td>右鍵檢視原始碼，自己當一次攻擊者</td><td>Sprint 2</td></tr>
     <tr><td>使用者資料留在使用者手上</td><td>學習紀錄只存 localStorage，不回傳任何伺服器——這是隱私設計，README 值得寫一句</td><td>Sprint 1</td></tr>
@@ -5079,7 +5145,7 @@ jobs:
   <ol class="steps">
     <li>
       <h4>安檢，然後轉公開</h4>
-      <p>先做 4.4 的安檢（至少 <code>git grep sk-</code> 與翻閱 <code>git log</code>）。確認乾淨後：repo → <em>Settings → General → Danger Zone → Change visibility → Public</em>。</p>
+      <p>先做 4.4 的安檢（至少 <code>git grep sk-ant-api</code> 與 <code>git log -p -S'sk-ant-api' --all</code>）。確認乾淨後：repo → <em>Settings → General → Danger Zone → Change visibility → Public</em>。</p>
       <p class="small" style="color:var(--ink-2)">這一步 <a href="#/lab1">Lab 1 步驟 4</a> 就預告過了——Pages 免費方案只吃 Public 倉庫。如果你從第一個 commit 起就沒把金鑰寫進去，這裡只是驗收那個習慣；<strong>歷史一旦公開就收不回來</strong>，所以安檢不是形式。</p>
     </li>
     <li>
@@ -5093,7 +5159,9 @@ jobs:
 &lt;meta name="theme-color" content="#0f766e"&gt;
 
 // script 最末尾：註冊 service worker
-if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");</span></pre></div>
+if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http"))
+  navigator.serviceWorker.register("sw.js").catch(() =&gt; {});   // file:// 開啟時不註冊也不噴錯</span></pre></div>
+      <p class="small" style="color:var(--ink-2)">那兩個保險不是多餘的：前八個 Lab 你都是<strong>直接按兩下開 <code>index.html</code></strong>（<code>file://</code>），而 service worker 在 <code>file://</code> 下一定註冊失敗，Console 會跳一行紅字 <code>The URL protocol of the current origin ('null') is not supported</code>。功能沒壞，但紅字會讓你以為自己做錯了。<code>location.protocol</code> 的判斷讓它安靜，<code>.catch()</code> 則擋住其他環境的意外。</p>
     </li>
     <li>
       <h4>加上 CI</h4>
@@ -5101,7 +5169,7 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");</sp
     </li>
     <li>
       <h4>PR、觀察機器人上工</h4>
-      <div class="termwrap"><pre class="term"><span class="p">$</span> git add . && git commit -m "feat: PWA 與 CI，closes #8"
+      <div class="termwrap"><pre class="term"><span class="p">$</span> git add . && git commit -m "feat: PWA 與 CI，closes #N"
 <span class="p">$</span> git push -u origin feature/ship-it</pre></div>
       <p>開 PR——這次頁面下方多了新東西：<strong>CI 正在跑</strong>。看它轉綠勾再 merge。想看它工作得多認真：<em>Actions 分頁</em>點進去，每一步的輸出都在。merge 後等一分鐘，正式站自動更新。</p>
     </li>
@@ -5118,7 +5186,7 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");</sp
     <li><label><input type="checkbox" data-ck="l9-2">手機已安裝到主畫面，開啟為全螢幕獨立視窗</label></li>
     <li><label><input type="checkbox" data-ck="l9-3">飛航模式下 App 照常開啟與複習（AI 例句顯示快取或友善訊息）</label></li>
     <li><label><input type="checkbox" data-ck="l9-4">PR 頁面看得到 CI 綠勾；故意推一個會掛測試的 commit，親眼看它變紅（然後修好）</label></li>
-    <li><label><input type="checkbox" data-ck="l9-5">tag <code>v1.0</code> 已推上，README 掛上 CI 徽章</label></li>
+    <li><label><input type="checkbox" data-ck="l9-5">tag <code>v1.0</code> 已推上（此時的 <code>v1.0</code> ＝ Pages＋PWA＋CI；作品級 README 是 Lab 10 的事，到時候打 <code>v1.1</code>），README 掛上 CI 徽章</label></li>
   </ul>
 
   <h2>常見錯誤急救</h2>
@@ -5129,6 +5197,7 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");</sp
     <tr><td>CI 沒有跑</td><td>路徑錯了。必須是 <code>.github/workflows/ci.yml</code>（注意開頭的點與複數 workflows）。</td></tr>
     <tr><td>CI 紅在 setup 步驟</td><td>YAML 縮排錯位——YAML 對空格極度敏感，貼的時候別混到 Tab。</td></tr>
     <tr><td>安裝選項沒出現</td><td>manifest 沒被讀到（Console 看錯誤）、icon.png 缺檔，或不在 HTTPS——Pages 天生是 HTTPS，本地 file:// 則不會出現安裝選項。</td></tr>
+    <tr><td class="mono">Failed to register a ServiceWorker: … origin ('null') is not supported</td><td>你用 <code>file://</code> 直接開啟網頁。PWA 的功能本來就要 http(s)；上面的註冊程式已加 <code>location.protocol</code> 判斷與 <code>.catch()</code>，不會再有紅字。要在本地看 PWA，起一個本地伺服器：<code>python3 -m http.server</code> 後開 <code>localhost:8000</code>。</td></tr>
   </table></div>
 
   <div class="pgnav"><a href="#/4-5"><span class="dir">上一頁</span>4.5　發表與畢業挑戰</a><a class="nx" href="#/lab10"><span class="dir">下一頁</span>Lab 10　發表與畢業</a></div>
@@ -5169,6 +5238,7 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");</sp
     <li><label><input type="checkbox" data-ck="l10-2">3 分鐘 Demo 排練三次以上，有 90 秒備援影片在手機裡</label></li>
     <li><label><input type="checkbox" data-ck="l10-3">Demo 用的單字已快取預熱，斷網也能完整演示</label></li>
     <li><label><input type="checkbox" data-ck="l10-4">畢業挑戰的 PR 已合併、已上線、自評尺規四個面向都誠實打過分</label></li>
+    <li><label><input type="checkbox" data-ck="l10-6">tag <code>v1.1</code> 已推上（<code>git tag v1.1 && git push --tags</code>）——作品級 README 與畢業挑戰都在裡面</label></li>
     <li><label><input type="checkbox" data-ck="l10-5">回頭看 Lab 1 的第一個 commit——你能說出這一路每個 tag 各代表什麼</label></li>
   </ul>
 
@@ -5252,7 +5322,8 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");</sp
     <tr><td class="mono">sprint2-done</td><td>＋卡片 AI 例句（BYOK＋快取）</td><td>Sprint 2</td></tr>
     <tr><td class="mono">sprint3-done</td><td>＋srs.js／test_srs.js／時間旅行</td><td>Sprint 3</td></tr>
     <tr><td class="mono">sprint4-done</td><td>＋words.js／check_words.js／弱點出題</td><td>Sprint 4</td></tr>
-    <tr><td class="mono">v1.0</td><td>＋Pages 上線＋PWA＋CI＋作品級 README</td><td>Lab 9–10</td></tr>
+    <tr><td class="mono">v1.0</td><td>＋Pages 上線＋PWA＋CI</td><td>Lab 9</td></tr>
+    <tr><td class="mono">v1.1</td><td>＋作品級 README＋畢業挑戰已上線</td><td>Lab 10</td></tr>
     <tr><td class="mono">lab11-done</td><td>＋工具裝好、第一次小改動（無新增檔案，以 commit 為證）</td><td>Lab 11</td></tr>
     <tr><td class="mono">lab12-done</td><td>＋專案指示檔（CLAUDE.md／AGENTS.md 等）</td><td>Lab 12</td></tr>
     <tr><td class="mono">lab13-done</td><td>＋add-words 技能（SKILL.md）</td><td>Lab 13</td></tr>
@@ -5308,7 +5379,7 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");</sp
   <div class="tblwrap"><table>
     <tr><th>驗收面向</th><th>對應 5.8 項次</th><th>打開哪裡看</th></tr>
     <tr><td>版本控制與協作</td><td>1–4</td><td><code>git log</code>、Pull requests（含 Closed）、Issues、合併節點</td></tr>
-    <tr><td>AI 應用</td><td>5–8</td><td>程式裡的 try/catch 與 fallback、<code>git grep sk-</code>、測試檔、資料檢查腳本</td></tr>
+    <tr><td>AI 應用</td><td>5–8</td><td>程式裡的 try/catch 與 fallback、<code>git grep sk-ant-api</code>、測試檔、資料檢查腳本</td></tr>
     <tr><td>上線</td><td>9–12</td><td>公開網址、Actions 分頁、Tags 頁、README 首屏</td></tr>
     <tr><td>AI-Native 開發</td><td>13–17</td><td>專案指示檔、技能資料夾、子代理設定、Lab 14 的比較留言</td></tr>
   </table></div>
