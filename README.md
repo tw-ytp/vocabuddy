@@ -79,4 +79,4 @@ python3 -m http.server 8000
 
 ---
 
-*教材版本 v2.2（2026-10-14）・貫穿案例：VocaBuddy 背單字夥伴・版本沿革見 [`CHANGELOG.md`](CHANGELOG.md)*
+*教材版本 v2.2.1（2026-10-14）・貫穿案例：VocaBuddy 背單字夥伴・版本沿革見 [`CHANGELOG.md`](CHANGELOG.md)*

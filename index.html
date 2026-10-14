@@ -390,7 +390,7 @@ img{max-width:100%}
 <aside class="sidebar" id="sidebar">
   <div class="side-brand">
     <div class="t">YTP VocaBuddy<br>開發者之路</div>
-    <div class="s">GitHub 與 AI 應用程式開發<br>線上自學教材・v2.2</div>
+    <div class="s">GitHub 與 AI 應用程式開發<br>線上自學教材・v2.2.1</div>
   </div>
   <nav class="nav" id="nav">
     <a href="#/home"><span class="no">◈</span>導讀：這份教材怎麼用</a>
@@ -2831,6 +2831,7 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>GitHub Pages 免費方案</td><td>public repo 才能用（private 需付費方案）；網址為 帳號.github.io/倉庫名；push main 後約 1 分鐘生效</td><td>2026-08</td><td>GitHub Docs「Pages」</td></tr>
     <tr><td>GitHub Actions 免費額度</td><td>public repo 免費；private repo 每月 2,000 分鐘（Free 方案）</td><td>2026-08</td><td>github.com/pricing</td></tr>
     <tr><td>Actions 積木版本</td><td>教材採 <code>actions/checkout@v4</code>、<code>actions/setup-node@v4</code>（撰寫時現行大版）</td><td>2026-08</td><td>各 action 的 GitHub 頁面</td></tr>
+    <tr><td>免費雲端 GPU（沒有顯卡時的第三條路）</td><td><strong>Kaggle Notebooks</strong> 提供免費 GPU：官方文件明載 <strong>NVIDIA Tesla P100</strong>，<strong>每週額度 30 小時</strong>（原文：「30 hours or sometimes higher depending on demand and resources」），互動工作階段閒置 <strong>60 分鐘</strong>自動結束。筆記本的加速器選單另有雙 T4（<code>T4 x2</code>）選項，2026-10-10 實測可用於跑開源模型，但<strong>官方那一頁未列出型號清單</strong>。<br><strong>刻意留白（本教材查不到，請自行確認）</strong>：開啟 GPU／網路是否需要手機驗證、未成年帳號規定、以及<strong>把 Notebook 當成對外 API 服務是否符合 Kaggle 使用條款</strong>——這一條在做任何對外服務前務必先讀條款</td><td>2026-10-14</td><td>kaggle.com/docs/efficient-gpu-usage；型號看筆記本右側 Settings → Accelerator</td></tr>
     <tr><td>本地基準模型</td><td>Qwen3.6-35B-A3B（int4 量化約 20 GB，建議 24 GB 以上記憶體）；記憶體不足改用同家族小型號（數 GB 級），Lab 流程不變</td><td>2026-08</td><td>ollama.com/library 搜尋 qwen</td></tr>
   </table></div>
 
@@ -2851,7 +2852,7 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>本教材授權</td><td>內容採 CC BY-NC-SA 4.0；教材中的程式碼片段採 MIT</td><td>2026-09</td><td>教材倉庫的 <code>LICENSE</code></td></tr>
   </table></div>
   <div class="footer-note">
-    YTP VocaBuddy 開發者之路・教材版本 v2.2（Lab 1–14 全線實作勘誤修訂 E-001～E-032；主線十三個 Lab。本地端 LLM 仍為附錄 E 特別篇・選修）・貫穿案例：VocaBuddy 背單字夥伴<br>
+    YTP VocaBuddy 開發者之路・教材版本 v2.2.1（Lab 1–14 全線實作勘誤修訂 E-001～E-032；附錄 B 新增免費雲端 GPU 一列；主線十三個 Lab。本地端 LLM 仍為附錄 E 特別篇・選修）・貫穿案例：VocaBuddy 背單字夥伴<br>
     教材網址 <a href="https://tw-ytp.github.io/vocabuddy/">tw-ytp.github.io/vocabuddy</a>｜原始檔與改版歷史 <a href="https://github.com/tw-ytp/vocabuddy" target="_blank" rel="noopener">github.com/tw-ytp/vocabuddy</a><br>
     發現錯誤或有改善建議？歡迎直接<a href="https://github.com/tw-ytp/vocabuddy/issues" target="_blank" rel="noopener">開一個 issue</a>——這正是本教材教你的協作方式。內容採 CC BY-NC-SA 4.0 授權，程式碼片段採 MIT。<br>
     教學路線：主題分篇為骨、專案旅程為魂｜第一篇＝工作流程軸＋情境開場｜第二篇＝白盒優先｜第三篇＝功能衝刺（Sprint 1–4＝Lab 5–8）｜第四篇＝上線與發表（Lab 9–10）｜第五篇＝AI-Native 開發（工具中立＋Lab 11–14）｜適用對象：具競賽程式基礎的高中生
