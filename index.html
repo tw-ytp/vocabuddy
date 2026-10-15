@@ -390,7 +390,7 @@ img{max-width:100%}
 <aside class="sidebar" id="sidebar">
   <div class="side-brand">
     <div class="t">YTP VocaBuddy<br>開發者之路</div>
-    <div class="s">GitHub 與 AI 應用程式開發<br>線上自學教材・v2.2.1</div>
+    <div class="s">GitHub 與 AI 應用程式開發<br>線上自學教材・v2.3</div>
   </div>
   <nav class="nav" id="nav">
     <a href="#/home"><span class="no">◈</span>導讀：這份教材怎麼用</a>
@@ -458,6 +458,11 @@ img{max-width:100%}
     <a href="#/2-6"><span class="no">2.6</span>本地 LLM：Qwen 與 Ollama</a>
     <a href="#/2-7"><span class="no">2.7</span>雲端 vs 本地</a>
     <a href="#/lab4"><span class="no">L4</span>Lab 4：本地模型與切換</a>
+    <div class="grp">附錄 F・特別篇（選修）</div>
+    <a href="#/chF"><span class="no">F.0</span>借一台雲端 GPU 導讀</a>
+    <a href="#/F-1"><span class="no">F.1</span>雲端 GPU 上的推理伺服器</a>
+    <a href="#/F-2"><span class="no">F.2</span>三條路怎麼選</a>
+    <a href="#/lab15"><span class="no">L15</span>Lab 15：架起自己的模型服務</a>
   </nav>
 </aside>
 <main class="main">
@@ -466,7 +471,7 @@ img{max-width:100%}
 <section class="page" id="p-home">
   <div class="eyebrow">線上自學教材</div>
   <h1>YTP VocaBuddy 開發者之路<br><span style="font-size:.72em; color:var(--ink-2)">GitHub 與 AI 應用程式開發</span></h1>
-  <p class="lede">你已經會用漂亮的演算法解掉一道道題目——這份教材帶你補上另外那塊拼圖：把程式碼變成一個<strong>真的有人在用的服務</strong>。五篇課程、十三個主線 Lab（外加一個選修特別篇），從第一個 commit 到部署上線，再到把 AI 請進你的工作流，全程動手做同一個作品。</p>
+  <p class="lede">你已經會用漂亮的演算法解掉一道道題目——這份教材帶你補上另外那塊拼圖：把程式碼變成一個<strong>真的有人在用的服務</strong>。五篇課程、十三個主線 Lab（外加兩個選修特別篇），從第一個 commit 到部署上線，再到把 AI 請進你的工作流，全程動手做同一個作品。</p>
 
   <h2>你將做出什麼</h2>
   <p><strong>YTP VocaBuddy 背單字夥伴</strong>（行文以下簡稱 VocaBuddy）——一個英語單字背誦輔助網站，手機、平板、電腦都能用。它會從一疊單字卡開始，逐步長出 AI 例句生成、智慧出題、間隔重複系統（Spaced Repetition System, SRS）排程——沒錯，排程演算法就是你的主場。</p>
@@ -1753,6 +1758,7 @@ function quiz(){
       </table></div>
       <div class="warnbox"><span class="lab">未滿 18 歲請先看這段</span>
         <p>部分 AI 服務的使用者條款要求年滿 18 歲，或需要付費訂閱。<strong>請先和家長一起確認帳號與付費事宜</strong>，不要自己填寫年齡或刷卡資料。各服務的規定不同、也會改，最新狀況見<a href="#/fresh">附錄 B</a>；若你的隊伍有主辦單位的補助方案，依主辦公告辦理。</p>
+        <p><strong>一時開不了帳號，也還是可以先練。</strong><a href="#/chF">附錄 F・特別篇</a>教你用免費的雲端 GPU 架一個自己的模型服務，再接到這些工具上——本篇的 Lab 一樣做得完。它有自己的限制（資料會外流、額度有限），F.0 寫得很清楚。</p>
       </div>
     </li>
     <li>
@@ -2831,8 +2837,21 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>GitHub Pages 免費方案</td><td>public repo 才能用（private 需付費方案）；網址為 帳號.github.io/倉庫名；push main 後約 1 分鐘生效</td><td>2026-08</td><td>GitHub Docs「Pages」</td></tr>
     <tr><td>GitHub Actions 免費額度</td><td>public repo 免費；private repo 每月 2,000 分鐘（Free 方案）</td><td>2026-08</td><td>github.com/pricing</td></tr>
     <tr><td>Actions 積木版本</td><td>教材採 <code>actions/checkout@v4</code>、<code>actions/setup-node@v4</code>（撰寫時現行大版）</td><td>2026-08</td><td>各 action 的 GitHub 頁面</td></tr>
-    <tr><td>免費雲端 GPU（沒有顯卡時的第三條路）</td><td><strong>Kaggle Notebooks</strong> 提供免費 GPU：官方文件明載 <strong>NVIDIA Tesla P100</strong>，<strong>每週額度 30 小時</strong>（原文：「30 hours or sometimes higher depending on demand and resources」），互動工作階段閒置 <strong>60 分鐘</strong>自動結束。筆記本的加速器選單另有雙 T4（<code>T4 x2</code>）選項，2026-10-10 實測可用於跑開源模型，但<strong>官方那一頁未列出型號清單</strong>。<br><strong>刻意留白（本教材查不到，請自行確認）</strong>：開啟 GPU／網路是否需要手機驗證、未成年帳號規定、以及<strong>把 Notebook 當成對外 API 服務是否符合 Kaggle 使用條款</strong>——這一條在做任何對外服務前務必先讀條款</td><td>2026-10-14</td><td>kaggle.com/docs/efficient-gpu-usage；型號看筆記本右側 Settings → Accelerator</td></tr>
+    <tr><td>免費雲端 GPU（沒有顯卡時的第三條路）</td><td><strong>Kaggle Notebooks</strong>：Settings → Accelerator 選 <code>GPU T4 x2</code>，得到兩張 Tesla T4、合計 30 GB 顯存，Internet 設為 On。<strong>每週 30 小時、單次工作階段上限 12 小時、閒置 40–60 分鐘自動結束</strong>；開著就計時，用完按 Stop Session。詳見<a href="#/chF">附錄 F</a></td><td>2026-10-14</td><td>kaggle.com/docs/efficient-gpu-usage；剩餘額度看帳號 Settings</td></tr>
     <tr><td>本地基準模型</td><td>Qwen3.6-35B-A3B（int4 量化約 20 GB，建議 24 GB 以上記憶體）；記憶體不足改用同家族小型號（數 GB 級），Lab 流程不變</td><td>2026-08</td><td>ollama.com/library 搜尋 qwen</td></tr>
+  </table></div>
+
+  <h2>附錄 F・借來的雲端 GPU</h2>
+  <p>以下是 Lab 15 實測採用的配置（2026-10-10）。版本與型號會更新，照做前先對一次這張表。</p>
+  <div class="tblwrap"><table>
+    <tr><th>項目</th><th>撰寫時的狀態</th><th>查證日期</th><th>重查方式</th></tr>
+    <tr><td>平台與加速器</td><td>Kaggle Notebooks，Settings → Accelerator 選 <code>GPU T4 x2</code>（兩張 Tesla T4，各 15 GB 顯存）、Internet 設為 On。這兩個開關要先完成手機簡訊驗證（Settings → Phone verification）才會開放</td><td>2026-10-14</td><td>kaggle.com 的 Settings 頁</td></tr>
+    <tr><td>免費額度</td><td>每週 30 小時；單次工作階段上限 12 小時；閒置 40–60 分鐘自動結束。<strong>開著就計時，關分頁不會停</strong>，用完按 Stop Session</td><td>2026-10-14</td><td>kaggle.com/docs/efficient-gpu-usage；帳號 Settings 顯示剩餘額度</td></tr>
+    <tr><td>推理引擎</td><td>llama.cpp 官方預編譯版 <code>b11435</code>（CUDA 12.8），不必自行編譯</td><td>2026-10-10</td><td>github.com/ggml-org/llama.cpp 的 Releases 頁</td></tr>
+    <tr><td>基準模型</td><td><code>ConwayResearch/Underdog-Saluki-27B-1.0</code>：主檔 <code>Underdog-Saluki-27B-1.0-IQ2-mix.gguf</code>（約 7.89 GB，<strong>2-bit 量化</strong>）＋視覺檔 <code>mmproj-…-F16.gguf</code>（約 928 MB）</td><td>2026-10-10</td><td>Hugging Face 模型卡</td></tr>
+    <tr><td>隧道</td><td>cloudflared 的 Quick Tunnel，免帳號、免設定。偶爾中斷時重跑 Cell 6 換新網址即可</td><td>2026-10-10</td><td>Cloudflare 文件的 TryCloudflare 頁</td></tr>
+    <tr><td>示範工具與欄位</td><td>Lab 15 以 <strong>Cline</strong>（VS Code 擴充）示範：API Provider 選 <strong>OpenAI Compatible</strong>；連線欄位 Base URL／API Key／Model ID；Context Window Size、Max Output Tokens、Supports Images 收在 Model Configuration 區。換別的工具，找到對應的這幾個欄位即可</td><td>2026-10-10</td><td>各工具的「OpenAI 相容」設定文件</td></tr>
+    <tr><td>配套筆記本</td><td>教材倉庫的 <code>notebooks/kaggle-dual-t4.ipynb</code>，七格可直接匯入執行；版本更新時只要改第一格與本表</td><td>2026-10-14</td><td>github.com/tw-ytp/vocabuddy</td></tr>
   </table></div>
 
   <h2>第五篇・AI-Native 開發</h2>
@@ -2847,15 +2866,15 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>子代理設定位置</td><td>Claude Code <code>.claude/agents/</code>、Codex <code>.codex/agents/</code>、Gemini CLI <code>.gemini/agents/</code>、Cursor <code>.cursor/agents/</code>；GitHub Copilot 稱「自訂代理」（<code>.github/agents/</code>），<strong>官方未使用 subagent 一詞</strong></td><td>2026-09</td><td>各家官方文件的 Subagents 頁</td></tr>
     <tr><td>官方安裝／入門頁（Lab 11）</td><td>Claude Code：code.claude.com/docs｜Codex CLI：developers.openai.com/codex/cli/｜Antigravity：antigravity.google/docs/getting-started｜Cursor：cursor.com/docs/get-started/installation｜Copilot CLI：docs.github.com「Install Copilot CLI」｜Gemini CLI：github.com/google-gemini/gemini-cli</td><td>2026-09</td><td>同左各頁</td></tr>
     <tr><td>帳號與費用</td><td>Claude Code 需 Claude 付費方案或 API 金鑰；Codex 需 ChatGPT 帳號登入；Antigravity 未訂閱亦有每週額度；Cursor 有 Hobby 免費方案；Copilot 有 Copilot Free；Gemini CLI 免費額度 60 次/分、1000 次/日。<strong>各家方案變動頻繁</strong></td><td>2026-09</td><td>各家官方定價頁</td></tr>
-    <tr><td>年齡與使用條款</td><td>部分 AI 服務要求使用者年滿 18 歲，或需家長／監護人協助開通；規定隨服務與地區而異。<strong>未成年請與家長一起確認後再申請</strong></td><td>2026-09</td><td>各服務的使用條款與說明中心</td></tr>
+    <tr><td>年齡與使用條款</td><td>部分 AI 服務要求使用者年滿 18 歲，或需家長／監護人協助開通；規定隨服務與地區而異。<strong>未成年請與家長一起確認後再申請</strong>。附錄 F 用到的 Kaggle 亦同，且需手機簡訊驗證才能開啟 GPU 與網路</td><td>2026-09</td><td>各服務的使用條款與說明中心</td></tr>
     <tr><td><strong>刻意留白：查不到的項目</strong></td><td>Antigravity 的 IDE（非命令列版）是否自動讀 <code>AGENTS.md</code>；Cursor 與 Codex 免費方案的官方口徑不一致；各家免費層能否完成一次完整的代理式任務（需實測）。<strong>教材寧可留白也不猜</strong></td><td>2026-09</td><td>各家官方文件；免費層需實測</td></tr>
     <tr><td>本教材授權</td><td>內容採 CC BY-NC-SA 4.0；教材中的程式碼片段採 MIT</td><td>2026-09</td><td>教材倉庫的 <code>LICENSE</code></td></tr>
   </table></div>
   <div class="footer-note">
-    YTP VocaBuddy 開發者之路・教材版本 v2.2.1（Lab 1–14 全線實作勘誤修訂 E-001～E-032；附錄 B 新增免費雲端 GPU 一列；主線十三個 Lab。本地端 LLM 仍為附錄 E 特別篇・選修）・貫穿案例：VocaBuddy 背單字夥伴<br>
+    YTP VocaBuddy 開發者之路・教材版本 v2.3（新增附錄 F 特別篇「借一台雲端 GPU」；主線十三個 Lab 不變，選修特別篇兩篇共兩個 Lab。本地端 LLM 為附錄 E、借來的 GPU 為附錄 F）・貫穿案例：VocaBuddy 背單字夥伴<br>
     教材網址 <a href="https://tw-ytp.github.io/vocabuddy/">tw-ytp.github.io/vocabuddy</a>｜原始檔與改版歷史 <a href="https://github.com/tw-ytp/vocabuddy" target="_blank" rel="noopener">github.com/tw-ytp/vocabuddy</a><br>
     發現錯誤或有改善建議？歡迎直接<a href="https://github.com/tw-ytp/vocabuddy/issues" target="_blank" rel="noopener">開一個 issue</a>——這正是本教材教你的協作方式。內容採 CC BY-NC-SA 4.0 授權，程式碼片段採 MIT。<br>
-    教學路線：主題分篇為骨、專案旅程為魂｜第一篇＝工作流程軸＋情境開場｜第二篇＝白盒優先｜第三篇＝功能衝刺（Sprint 1–4＝Lab 5–8）｜第四篇＝上線與發表（Lab 9–10）｜第五篇＝AI-Native 開發（工具中立＋Lab 11–14）｜適用對象：具競賽程式基礎的高中生
+    教學路線：主題分篇為骨、專案旅程為魂｜第一篇＝工作流程軸＋情境開場｜第二篇＝白盒優先｜第三篇＝功能衝刺（Sprint 1–4＝Lab 5–8）｜第四篇＝上線與發表（Lab 9–10）｜第五篇＝AI-Native 開發（工具中立＋Lab 11–14）｜特別篇＝附錄 E 本地端 LLM（Lab 4）、附錄 F 借來的雲端 GPU（Lab 15），皆為選修｜適用對象：具競賽程式基礎的高中生
   </div>
   <div class="pgnav"><a href="#/cheat"><span class="dir">上一頁</span>附錄 A　速查卡</a><a class="nx" href="#/gloss"><span class="dir">下一頁</span>附錄 C　詞彙表</a></div>
 </section>
@@ -3328,6 +3347,7 @@ print("".join(b.text for b in msg.content if b.type == "text"))</span></pre></di
 
   <div class="keybox"><span class="lab">選修支線</span>
     <p>想不靠網路、在自己的電腦跑開源模型？<strong>特別篇「本地端 LLM」（附錄 E）</strong>講 Qwen、Ollama、MoE 與量化，並把程式升級成「雲端優先、本地備援」。建議完成 Lab 3 後前往；直接跳過也完全不影響主線。</p>
+    <p><strong>電腦跑不動？</strong>還有第三條路：<strong>特別篇「借一台雲端 GPU」（<a href="#/chF">附錄 F</a>）</strong>——用免費的雲端顯示卡架一個自己的推理伺服器。兩篇都是選修。</p>
   </div>
 
   <div class="pgnav"><a href="#/2-4"><span class="dir">上一頁</span>2.4　取樣、temperature 與上下文</a><a class="nx" href="#/2-8"><span class="dir">下一頁</span>2.8　案例導讀：AI 例句生成器</a></div>
@@ -3468,6 +3488,7 @@ print("".join(b.text for b in msg.content if b.type == "text"))</span></pre></di
     <tr><td>處理私密資料</td><td>本地</td><td>資料不離開你的機器</td></tr>
     <tr><td>比賽 Demo 現場</td><td>雲端為主＋本地備援</td><td>網路是 Demo 最大的不可控因素——兩手準備</td></tr>
   </table></div>
+  <p class="small" style="color:var(--ink-2)">其實還有第三條路：<strong>跟雲端借一台 GPU</strong>。它不需要好硬體也不必付錢，但資料照樣出門、斷網照樣不能用。三欄版的決策表在<a href="#/F-2">附錄 F 的 F.2</a>。</p>
 
   <div class="keybox"><span class="lab">核心觀念</span>
     <p>成熟的做法不是二選一，而是<strong>架構上保留切換的自由</strong>：預設用雲端，斷線或限流時自動降級（fallback）到本地，本地也掛了就給罐頭內容。這條「降階容錯」鏈就是 Lab 4 的主菜——也是評審最欣賞的那種工程成熟度。</p>
@@ -3791,7 +3812,7 @@ def generate(word, provider="auto"):
     <tr><th>症狀</th><th>原因與解法</th></tr>
     <tr><td class="mono">connection refused :11434</td><td>Ollama 服務沒在跑。桌面版確認程式有開；純命令列版先跑 <code>ollama serve</code>。</td></tr>
     <tr><td>下載中斷</td><td>重跑 <code>ollama pull</code>，會從斷點續傳。</td></tr>
-    <tr><td>爆記憶體／慢到不能用</td><td>模型太大。換小一號的型號（附錄 B 有對照），Lab 流程不變。</td></tr>
+    <tr><td>爆記憶體／慢到不能用</td><td>模型太大。換小一號的型號（附錄 B 有對照），Lab 流程不變。<strong>小型號也還是跑不動</strong>的話，改走<a href="#/chF">附錄 F</a>——那裡用免費的雲端 GPU，對你的電腦沒有要求。</td></tr>
     <tr><td>本地模型不聽「只回 JSON」</td><td>小模型服從性較差。prompt 給一個完整 JSON 範例讓它照抄格式，成功率大增。</td></tr>
     <tr><td class="mono">ModuleNotFoundError: requests</td><td><code>pip install requests</code>。</td></tr>
   </table></div>
@@ -5329,6 +5350,7 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
     <tr><td class="mono">lab12-done</td><td>＋專案指示檔（CLAUDE.md／AGENTS.md 等）</td><td>Lab 12</td></tr>
     <tr><td class="mono">lab13-done</td><td>＋add-words 技能（SKILL.md）</td><td>Lab 13</td></tr>
     <tr><td class="mono">lab14-done</td><td>＋code-reviewer 子代理＋一則機器審 vs 人審的比較留言</td><td>Lab 14</td></tr>
+    <tr><td class="mono">lab15-done</td><td>＋雲端 GPU 推理服務的筆記本與 <code>notes/lab15.md</code> 驗收紀錄</td><td>Lab 15（特別篇・選修，<strong>不列入任何場次驗收</strong>）</td></tr>
   </table></div>
   <p class="small" style="color:var(--ink-2)">Lab 11–14 的檢查點與前面不同：<strong>它們的產物有一部分是工具設定，會因學生選用的工具而異</strong>（見 5.1 對照表）。建置範例 repo 時建議只放一套（例如 Claude Code 的 <code>CLAUDE.md</code> 與 <code>.claude/agents/</code>），並在 README 註明「其他工具請對照 5.1 調整路徑，內容照搬即可」。</p>
 
@@ -5375,6 +5397,15 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
     <p>用<strong>學生沒看過、但規模看得完的真實專案</strong>——理想是開課單位自己的某個小型 repo，或任一結構清楚的開源專案。不要用 VocaBuddy（他們太熟，失去「陌生」這個前提）。示範時把 5.6 的四個典範逐一問出來，並<strong>當場抽驗行號</strong>——這一段的教學重點其實是「怎麼驗證 AI 的解釋」，不是那個專案本身。</p>
   </div>
 
+  <h2>附錄 F（借來的雲端 GPU）怎麼處理</h2>
+  <p>附錄 F <strong>不屬於任何場次的正式進度</strong>，<code>lab15-done</code> 也不列入驗收。它存在的理由只有一個：<strong>讓硬體不夠、又還開不了付費帳號的學生，仍然練得到第五篇。</strong>開課者要知道三件事：</p>
+  <ul>
+    <li><strong>不要安排全班現場同時建置。</strong>多人同時下載 9 GB 模型、同時開隧道的情況<strong>沒有測試過</strong>；而且每人每次建置約十分鐘，課堂時間會被吃光。要用就請學生<strong>課前各自完成</strong>，現場只做排錯。</li>
+    <li><strong>額度要先規劃。</strong>免費額度每週約 30 小時、單次 12 小時且開著就計時。學生最常見的浪費是「關掉分頁以為就停了」——提醒他們按下停止工作階段。</li>
+    <li><strong>它是練習工具，不是競賽日的主力。</strong>單次工作階段上限與競賽時長幾乎相同，加上每次開機約十分鐘就不夠。學生若想在競賽日使用，請依競賽規則另行確認。</li>
+  </ul>
+  <p class="small" style="color:var(--ink-2)">附錄 F 的數字來自 2026-10-10 的實測。開課前若有時間，請一位助教用學生等級的筆電與全新帳號照 Lab 15 走一遍，確認流程與現況一致。</p>
+
   <h2>驗收與 Demo 帶法</h2>
   <p>5.8 的證據地圖（17 項）是寫給學生的自評表，也可以直接當作驗收依據——它的設計原則是<strong>每一項都指出「在 Repo 的哪裡看得到」</strong>，所以驗收者不必聽學生講，打開頁面就能看。</p>
   <div class="tblwrap"><table>
@@ -5408,7 +5439,7 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
   </table></div>
 
   <h2>內容與前置</h2>
-  <p><strong>前置</strong>：主線 2.1–2.5 與 Lab 3。<strong>時間</strong>：閱讀約 1 小時，Lab 4 約 60–90 分鐘（不含模型下載）。硬體需求見附錄 B 時效資訊表——記憶體有限就換小一號的模型，流程完全相同。</p>
+  <p><strong>前置</strong>：主線 2.1–2.5 與 Lab 3。<strong>時間</strong>：閱讀約 1 小時，Lab 4 約 60–90 分鐘（不含模型下載）。硬體需求見附錄 B 時效資訊表——記憶體有限就換小一號的模型，流程完全相同。<strong>若連小型號都跑不動</strong>，另有<a href="#/chF">附錄 F・特別篇</a>：跟雲端借兩張免費的 GPU，對你的電腦沒有硬體要求。</p>
   <div class="tblwrap"><table>
     <tr><th>單元</th><th>內容</th><th>備註</th></tr>
     <tr><td><a href="#/2-6">2.6　本地 LLM：Qwen 與 Ollama</a></td><td>開源權重、MoE 與「A3B」解碼、量化、Ollama 一行跑起來（圖 14）</td><td rowspan="3">節號沿用主線原編號（本篇內容原屬第二篇 2.6、2.7 與 Lab 4，v1.3 起移為選修），便於與舊版教材對照。</td></tr>
@@ -5422,6 +5453,462 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
 
   <div class="pgnav"><a href="#/guide"><span class="dir">上一頁</span>附錄 D　教師指引</a><a class="nx" href="#/2-6"><span class="dir">下一頁</span>2.6　本地 LLM：Qwen 與 Ollama</a></div>
 </section>
+
+<!-- ================= 附錄 F 導讀 ================= -->
+<section class="page" id="p-chF">
+  <div class="eyebrow">附錄 F・特別篇（選修）</div>
+  <h1>借一台雲端 GPU：用免費的雙 T4 跑開源模型</h1>
+  <p class="lede">附錄 E 教你把模型裝進自己的電腦——但它的基準模型要 24 GB 以上記憶體，多數高中生的筆電跑不動。這一篇是那道門檻的替代路徑：<strong>跟雲端借兩張免費的 GPU</strong>，在上面架一個自己的推理伺服器，再把它接回你電腦上的代理式編碼工具。<strong>本篇為選修</strong>：跳過不影響任何主線章節與 Lab。</p>
+
+  <div class="warnbox"><span class="lab">開始之前，兩件事</span>
+    <p><strong>一、程式碼會離開你的電腦</strong>，經過 Cloudflare 與 Kaggle。不要用在不能外流的專案，也不要貼含個資的截圖——這一點與附錄 E 相反，那裡的賣點正是「資料不出門」。<br>
+    <strong>二、需要帳號與手機簡訊驗證</strong>才能開啟 GPU 與網路。未滿 18 歲請和家長一起申請。</p>
+  </div>
+
+  <h2>誰該來、什麼時候來</h2>
+  <div class="tblwrap"><table>
+    <tr><th>你的處境</th><th>為什麼這一篇對你有用</th></tr>
+    <tr><td>筆電跑不動附錄 E 的基準模型</td><td>借來的 GPU 有 30 GB 顯存，跑得動你筆電裝不下的模型。流程與附錄 E 相同，只是模型不在你機器上</td></tr>
+    <tr><td>還沒有付費的 AI 工具帳號，但想練第五篇</td><td>第五篇的工具多半需要付費方案或 API 金鑰（見<a href="#/fresh">附錄 B</a>）。這條路讓你用免費額度先把代理式開發練起來</td></tr>
+    <tr><td>想看懂「一顆模型怎麼被架成服務」</td><td>第二篇你學會<strong>呼叫</strong>別人的 API；這一篇你<strong>自己架一個</strong>。架完再回頭看 2.5 的圖 13，那張圖的右半邊會從黑盒子變成你親手開過的機器</td></tr>
+  </table></div>
+
+  <h2>內容與前置</h2>
+  <p><strong>前置</strong>：主線 2.1–2.5 與 Lab 3（與附錄 E 相同）。做過 Lab 4 的人可以多做一個延伸步驟，但不是必要前置。<strong>時間</strong>：閱讀約 40 分鐘，Lab 15 約 60–90 分鐘。<strong>每次開機重建約十分鐘</strong>——這不是一次裝好就一勞永逸的東西，下面會說為什麼。</p>
+  <div class="tblwrap"><table>
+    <tr><th>單元</th><th>內容</th></tr>
+    <tr><td><a href="#/F-1">F.1　雲端 GPU 上的推理伺服器</a></td><td>一個請求的完整旅程（圖 34）、隧道是什麼、三個讓速度差好幾倍的設定</td></tr>
+    <tr><td><a href="#/F-2">F.2　三條路怎麼選</a></td><td>雲端 API／本地端／借來的 GPU 的取捨、額度的四個形狀、量化的代價</td></tr>
+    <tr><td><a href="#/lab15">Lab 15　在雲端架起自己的模型服務</a></td><td>七個步驟建起服務、五項驗收、接上代理式編碼工具，附特別篇自我檢測兩題</td></tr>
+  </table></div>
+
+  <div class="keybox"><span class="lab">這一篇不在任何工作坊的進度裡</span>
+    <p>附錄 F 是給你自己有空時探索的，<strong>不屬於任何課堂的正式內容</strong>，檢查點 <code>lab15-done</code> 也不列入驗收。競賽當天能不能用，依競賽規則而定——但<strong>本教材不建議把它當成競賽日的主力</strong>，理由在 F.2。</p>
+  </div>
+
+  <div class="pgnav"><a href="#/lab4"><span class="dir">上一頁</span>Lab 4　本地模型與切換</a><a class="nx" href="#/F-1"><span class="dir">下一頁</span>F.1　雲端 GPU 上的推理伺服器</a></div>
+</section>
+
+<!-- ================= F.1 ================= -->
+<section class="page" id="p-F-1">
+  <div class="eyebrow">附錄 F・特別篇／F.1</div>
+  <h1>雲端 GPU 上的推理伺服器</h1>
+
+  <div class="scene"><span class="lab">情境</span>
+    <p>你照附錄 E 把模型裝起來了，隊友也想試。他的筆電只有 8 GB 記憶體，模型載到一半就被系統砍掉。你說「那你用雲端 API 吧」，他說他還沒有金鑰。<span class="q">有沒有第三條路——不花錢、不靠他的硬體，但模型確實是「你們自己的」？</span></p>
+  </div>
+
+  <p>有。做法是：<strong>跟一個提供免費 GPU 的筆記本平台借兩張顯示卡，在上面跑一個推理伺服器，再開一條隧道讓你家的編輯器找得到它。</strong>整件事只有五個元件，而且你在第二篇與第五篇都見過其中三個。</p>
+
+  <figure class="fig" data-fig="kaggleflow">
+    <div class="fig-head"><span class="no">圖 34</span><span class="t">一個請求的旅程：從你的編輯器到兩張 GPU</span></div>
+    <div class="fig-stage">
+    <svg viewBox="0 0 700 300" role="img" aria-label="請求從編輯器經公網臨時網址與隧道進入雲端容器，由推理伺服器分派給兩張 T4 顯示卡以張量並行運算後原路回傳">
+      <defs><marker id="arwF" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+      <rect x="18" y="52" width="170" height="200" rx="10" fill="var(--surface-2)" stroke="var(--line)"/>
+      <rect x="320" y="52" width="362" height="200" rx="10" fill="var(--surface-2)" stroke="var(--line)"/>
+      <text x="103" y="40" text-anchor="middle" style="font-weight:700">你的電腦</text>
+      <text x="501" y="40" text-anchor="middle" style="font-weight:700">免費 GPU 平台的容器</text>
+      <g data-s="1" class="pulse">
+        <rect x="34" y="72" width="138" height="64" rx="6" fill="var(--surface)" stroke="var(--accent)"/>
+        <text x="46" y="94" class="small" style="font-weight:700" fill="var(--accent)">編輯器＋代理工具</text>
+        <text x="46" y="114" class="mono">POST /v1/chat/…</text>
+        <text x="46" y="130" class="small dim">OpenAI 相容的請求</text>
+      </g>
+      <g data-s="2" class="pulse">
+        <path d="M 192 104 L 268 104" stroke="var(--accent)" stroke-width="2.4" marker-end="url(#arwF)" style="color:var(--accent)"/>
+        <rect x="200" y="140" width="112" height="46" rx="6" fill="var(--surface)" stroke="var(--branch)"/>
+        <text x="256" y="159" text-anchor="middle" class="mono" fill="var(--branch)">臨時公網網址</text>
+        <text x="256" y="176" text-anchor="middle" class="small dim">每次開機都不同</text>
+      </g>
+      <g data-s="3" class="pulse">
+        <path d="M 276 104 L 334 104" stroke="var(--accent)" stroke-width="2.4" marker-end="url(#arwF)" style="color:var(--accent)"/>
+        <rect x="340" y="72" width="150" height="64" rx="6" fill="var(--surface)" stroke="var(--branch)"/>
+        <text x="352" y="94" class="small" style="font-weight:700" fill="var(--branch)">隧道（tunnel）</text>
+        <text x="352" y="114" class="mono">→ 127.0.0.1:8000</text>
+        <text x="352" y="130" class="small dim">伺服器只聽本機</text>
+      </g>
+      <g data-s="4" class="pulse">
+        <path d="M 494 104 L 528 104" stroke="var(--accent)" stroke-width="2.4" marker-end="url(#arwF)" style="color:var(--accent)"/>
+        <rect x="534" y="72" width="134" height="64" rx="6" fill="var(--surface)" stroke="var(--accent)"/>
+        <text x="546" y="94" class="small" style="font-weight:700" fill="var(--accent)">推理伺服器</text>
+        <text x="546" y="114" class="small">驗金鑰 → 排程</text>
+        <text x="546" y="130" class="small dim">模型已在顯存裡</text>
+      </g>
+      <g data-s="5" class="pulse">
+        <path d="M 601 140 L 601 166" stroke="var(--accent)" stroke-width="2" marker-end="url(#arwF)" style="color:var(--accent)"/>
+        <rect x="408" y="172" width="118" height="54" rx="6" fill="var(--surface)" stroke="var(--ok)"/>
+        <rect x="546" y="172" width="118" height="54" rx="6" fill="var(--surface)" stroke="var(--ok)"/>
+        <text x="467" y="194" text-anchor="middle" class="small" style="font-weight:700">GPU 0</text>
+        <text x="605" y="194" text-anchor="middle" class="small" style="font-weight:700">GPU 1</text>
+        <text x="467" y="214" text-anchor="middle" class="small dim">同一層的一半</text>
+        <text x="605" y="214" text-anchor="middle" class="small dim">同一層的另一半</text>
+        <path d="M 526 199 L 546 199" stroke="var(--ok)" stroke-width="1.6"/>
+        <path d="M 400 190 L 196 190" stroke="var(--branch)" stroke-width="2.2" marker-end="url(#arwF)" style="color:var(--branch)"/>
+        <text x="300" y="206" text-anchor="middle" class="small" fill="var(--branch)">token 原路回到你的編輯器</text>
+        <text x="501" y="244" text-anchor="middle" class="small" fill="var(--ok)">張量並行：兩張卡同時算，不是輪流算</text>
+      </g>
+    </svg>
+    </div>
+    <p class="fig-cap"></p><div class="fig-cmd"></div><div class="fig-controls"></div>
+  </figure>
+
+  <div class="keybox"><span class="lab">隧道（tunnel）是什麼</span>
+    <p>你家的筆電和雲端的容器都沒有對外公開的網址，外面的人連不進來。<strong>隧道的作法是反過來：由裡面主動對外連出去，建立一條通道，再把外面進來的流量沿著這條通道送進去。</strong>你拿到的那個臨時網址，就是這條通道的門牌。<br>
+    這也是為什麼伺服器可以只監聽 <code>127.0.0.1</code>（只聽本機）：所有外部流量都必須走隧道，<strong>沒有任何一個埠直接暴露在公網上</strong>。</p>
+  </div>
+
+  <h2>三個讓速度差好幾倍的設定</h2>
+
+  <p><strong>① 張量並行，不是分層接力。</strong>給了兩張卡，預設不會比較快——預設模式是把<strong>不同的層</strong>放到不同的卡上，token 依序流過，同一時間<strong>只有一張卡在算</strong>，另一張在等。這麼做只合併了顯存，沒有合併算力。要兩張卡<strong>同時</strong>算，必須明確要求「把每一層拆成兩半分給兩張卡」——這就是張量並行（tensor parallelism）。實測：單卡 8.6 tok/s，張量並行 15.0 tok/s。</p>
+
+  <p><strong>② n-gram 推測解碼。</strong>模型一次只生一個 token，慢。推測解碼（speculative decoding）的想法是：<strong>先用便宜的方法猜一串 token，再讓模型一次驗證整串</strong>，猜對就一次前進好幾步，猜錯就退回照常生成——<strong>輸出內容完全不變，只是變快</strong>。n-gram 版本的「便宜方法」就是直接從上下文裡找重複出現的片段。所以它只在<strong>輸出與輸入高度重疊</strong>時有效：請模型<strong>改寫一個既有檔案</strong>，大部分內容原封不動，猜得準，快四到五倍；請它<strong>從零寫新程式</strong>，沒東西好猜，完全沒差。</p>
+
+  <p><strong>③ 上下文視窗吃顯存。</strong>5.2 說過上下文視窗是預算；在這裡它還有另一個成本——<strong>開得越大，佔掉的顯存越多</strong>。顯存不夠載不起來時，把上下文調小一半通常就過了。</p>
+
+  <h2>實測數據</h2>
+  <div class="tblwrap"><table>
+    <tr><th>設定</th><th>從零寫新程式</th><th>修改既有檔案</th></tr>
+    <tr><td>單卡（預設的分層接力）</td><td>8.6 tok/s</td><td>—</td></tr>
+    <tr><td>張量並行</td><td>15.0 tok/s</td><td>15.4 tok/s</td></tr>
+    <tr><td><strong>張量並行＋n-gram 推測解碼</strong></td><td>15.1 tok/s</td><td><strong>72.3 tok/s</strong></td></tr>
+  </table></div>
+  <p class="small" style="color:var(--ink-2)">量測日期 2026-10-10，模型與引擎版本見<a href="#/fresh">附錄 B</a>。每組取 300–600 個輸出 token、溫度 0、關閉思考模式。完整的七組對照留在原始建置手冊裡。</p>
+
+  <div class="keybox"><span class="lab">核心觀念</span>
+    <p><strong>硬體一樣，設定不同，速度可以差好幾倍。</strong>上面三個設定沒有一個改動了模型本身，但合起來讓「改檔案」這件事快了八倍。拿到任何新硬體或新服務，先問一句「預設值是為誰調的」——預設值通常是為<strong>最不會出錯</strong>調的，不是為<strong>你的任務</strong>調的。<br>
+    還有一件更重要的事：<strong>測速要用接近實際用途的任務。</strong>第一次量這個設定時，用的是「同一個函式重複六百次」的提示，量到 45 tok/s，看起來很漂亮——換成真實檔案後，寫新程式是 15、改檔案是 72。<strong>那個 45 什麼也沒代表。</strong>benchmark 的第一個問題永遠是「它測的是不是我要做的事」。</p>
+  </div>
+
+  <div class="pgnav"><a href="#/chF"><span class="dir">上一頁</span>附錄 F　導讀</a><a class="nx" href="#/F-2"><span class="dir">下一頁</span>F.2　三條路怎麼選</a></div>
+</section>
+
+<!-- ================= F.2 ================= -->
+<section class="page" id="p-F-2">
+  <div class="eyebrow">附錄 F・特別篇／F.2</div>
+  <h1>三條路怎麼選</h1>
+
+  <div class="scene"><span class="lab">情境</span>
+    <p>現在你手上有三個選項：付錢用雲端 API、在自己電腦跑模型、跟雲端借 GPU。<span class="q">隊友問你「那我們到底該用哪一個」——你需要的不是「哪個最好」，是「什麼情況下哪個合適」。</span></p>
+  </div>
+
+  <p>2.7 比較過前兩條；把第三條加進來，決策表長這樣：</p>
+  <div class="tblwrap"><table>
+    <tr><th>面向</th><th>雲端 API（主線）</th><th>本地端（附錄 E）</th><th>借來的 GPU（本篇）</th></tr>
+    <tr><td>模型跑在哪</td><td>廠商的伺服器</td><td>你自己的電腦</td><td>平台免費提供的兩張卡</td></tr>
+    <tr><td>門檻</td><td>金鑰與費用</td><td>夠大的記憶體（基準模型要 24 GB 以上）</td><td>帳號＋手機驗證；<strong>每次開機約十分鐘</strong></td></tr>
+    <tr><td>資料離開你的電腦嗎</td><td>會</td><td><strong>不會</strong></td><td>會，而且多經過一層隧道服務</td></tr>
+    <tr><td>斷網還能用嗎</td><td>不能</td><td><strong>能</strong></td><td>不能</td></tr>
+    <tr><td>模型能力</td><td>最強</td><td>看你的硬體</td><td>中間；但這裡用的是 2-bit 量化版，見下</td></tr>
+    <tr><td>適合拿來做什麼</td><td>VocaBuddy 的 AI 層</td><td>AI 層的斷網備援</td><td><strong>練習用的程式助理</strong>；次要用途是 AI 層的第三個 provider</td></tr>
+  </table></div>
+  <p>注意第三欄<strong>沒有繼承附錄 E 的兩個賣點</strong>：資料照樣出門、斷網照樣不能用。它換來的只有一件事——<strong>不必有好硬體，也不必付錢</strong>。認清這點，你才不會在該用本地端的場合誤用它。</p>
+
+  <h2>免費額度的四個形狀</h2>
+  <p>「免費」不是一個數字，是四個互相牽制的限制。四個都要記，因為它們會在不同時候咬你一口：</p>
+  <div class="tblwrap"><table>
+    <tr><th>限制</th><th>它會怎麼咬你</th></tr>
+    <tr><td><strong>每週總時數</strong></td><td>用完要等重置。實際數值與重置時間見<a href="#/fresh">附錄 B</a>——這個數字平台會調整，別背</td></tr>
+    <tr><td><strong>單次工作階段上限</strong></td><td>時間到強制結束，不管你做到哪裡。<strong>這一條直接決定它不適合當競賽日主力</strong>：競賽從報到到收件的時間，跟單次上限幾乎一樣長，再加上每次開機要花的十分鐘，一定不夠</td></tr>
+    <tr><td><strong>閒置中斷</strong></td><td>一段時間沒有互動就被回收，你的伺服器與隧道一起消失。使用期間要固定回頁面點一下</td></tr>
+    <tr><td><strong>開著就計時</strong></td><td><strong>關掉瀏覽器分頁不會停止計時。</strong>不用了要明確按下停止，否則容器會空轉到被判定閒置為止，白白吃掉你的週額度</td></tr>
+  </table></div>
+  <p class="small" style="color:var(--ink-2)">還有一件事：臨時隧道偶爾會中斷，重跑一格換個新網址就好。它適合練習與開發，不適合架需要長期穩定的服務。</p>
+
+  <h2>量化的代價</h2>
+  <p>為了把 27B 的模型塞進兩張卡，這裡用的是 <strong>2-bit 量化</strong>版本（量化的原理見附錄 E 的 2.6）。壓到這個程度，代價是看得見的。模型卡自己揭露的數字：</p>
+  <div class="tblwrap"><table>
+    <tr><th>測試</th><th>量化版</th><th>原版</th></tr>
+    <tr><td>SWE-bench Verified（50 題程式修復）</td><td>修好 30 題</td><td>修好 33 題</td></tr>
+    <tr><td>競賽數學</td><td colspan="2">只保留原版的約 82–85%</td></tr>
+  </table></div>
+  <p>這不是「爛掉」，是<strong>「少了一成」</strong>。日常改個函式、讀個錯誤訊息，你幾乎感覺不到差別；但<strong>需要多步推理的題目，它出錯的機率明顯比原版高</strong>。</p>
+
+  <div class="keybox"><span class="lab">核心觀念</span>
+    <p><strong>模型越小，驗收越重要。</strong>5.7 說「AI 寫的，你負責」——那句話在這裡要再加重一次。用最強的雲端模型時，你驗收是因為它偶爾會錯；用 2-bit 量化的小模型時，你驗收是因為<strong>它一定會錯，只是不知道錯在哪一題</strong>。<br>
+    好消息是：驗收的方法你早就有了。第三篇寫的 <code>test_srs.js</code> 與 <code>check_words.js</code>、第一篇的 <code>git diff</code>、5.7 的三階驗收——模型換了，這套工具一個都不用改。<strong>這正是為什麼教材要你先學會驗收，再學會放手。</strong></p>
+  </div>
+
+  <div class="pgnav"><a href="#/F-1"><span class="dir">上一頁</span>F.1　雲端 GPU 上的推理伺服器</a><a class="nx" href="#/lab15"><span class="dir">下一頁</span>Lab 15　架起自己的模型服務</a></div>
+</section>
+
+<!-- ================= Lab 15 ================= -->
+<section class="page" id="p-lab15">
+  <div class="eyebrow">附錄 F・特別篇／LAB 15（選修）</div>
+  <h1>Lab 15：在雲端架起自己的模型服務</h1>
+  <div class="labmeta">
+    <div class="m"><b>目標</b>用免費的兩張 GPU 跑起一個推理伺服器，接上你的代理式編碼工具，並親手驗收它</div>
+    <div class="m"><b>時間</b>約 60–90 分鐘（之後每次開機重建約十分鐘）</div>
+    <div class="m"><b>前置</b>主線 2.1–2.5 與 Lab 3；平台帳號＋<strong>手機簡訊驗證</strong>（未驗證就開不了 GPU 與網路，未滿 18 歲請與家長一起處理）</div>
+  </div>
+
+  <div class="warnbox"><span class="lab">再提醒一次</span>
+    <p>這條路會把你的程式碼與截圖送到別人的機器上。<strong>不要用在不能外流的專案，也不要貼含個資的截圖。</strong></p>
+  </div>
+
+  <ol class="steps">
+    <li>
+      <h4>事前準備</h4>
+      <p>註冊帳號（一個 email 一個帳號）→ 完成<strong>手機簡訊驗證</strong>（在帳號設定裡）→ 新建一個筆記本 → 在右側設定把<strong>加速器選成兩張 T4</strong>、<strong>網路打開</strong>。這兩個開關沒設好，後面每一步都會失敗。平台名稱與選單位置見<a href="#/fresh">附錄 B</a>。</p>
+      <p class="small" style="color:var(--ink-2)">倉庫裡附了一份現成的筆記本檔（路徑見<a href="#/fresh">附錄 B</a>），匯入就能跑，不必逐格複製。但<strong>第一次請自己打一遍</strong>——你要看懂的是每一格在做什麼，不是把它跑完。</p>
+    </li>
+    <li>
+      <h4>Cell 1–3：確認硬體、裝引擎、下載模型</h4>
+      <p>先確認平台真的給了你兩張卡：</p>
+      <div class="termwrap"><pre class="term"><span class="o">!nvidia-smi --query-gpu=index,name,memory.total --format=csv</span></pre></div>
+      <p>應該看到<strong>兩列</strong> <code>Tesla T4</code>，各 15360 MiB。只有一列或完全沒有，代表加速器沒選對，回上一步。</p>
+      <p>裝推理引擎（下載官方預編譯檔，不必自己編譯，約一分鐘）：</p>
+      <div class="termwrap"><pre class="term"><span class="o">%%bash
+set -e
+TAG=b11435                      # 引擎版本：最新值見附錄 B，本 Lab 的數字都是用它量的
+cd /kaggle/working &amp;&amp; mkdir -p llama
+for f in llama-$TAG-bin-ubuntu-cuda-12.8-x64.tar.gz cudart-llama-$TAG-bin-ubuntu-cuda-12.8-x64.tar.gz; do
+  wget -q https://github.com/ggml-org/llama.cpp/releases/download/$TAG/$f
+  tar -xzf $f -C llama &amp;&amp; rm $f
+done
+find llama -name llama-server</span></pre></div>
+      <p>最後一行印出 <code>llama-server</code> 的路徑就是成功。下載模型與視覺檔（約一到兩分鐘；出現「unauthenticated requests」的警告可以忽略，模型是公開的）：</p>
+      <div class="termwrap"><pre class="term"><span class="o">from huggingface_hub import hf_hub_download
+
+REPO   = &quot;ConwayResearch/Underdog-Saluki-27B-1.0&quot;          # 模型：最新值見附錄 B
+MAIN   = &quot;Underdog-Saluki-27B-1.0-IQ2-mix.gguf&quot;            # 主模型，約 7.89 GB
+VISION = &quot;mmproj-Underdog-Saluki-27B-1.0-F16.gguf&quot;         # 視覺檔，約 928 MB
+
+MODEL  = hf_hub_download(REPO, MAIN,   local_dir=&quot;/kaggle/working/models&quot;)
+MMPROJ = hf_hub_download(REPO, VISION, local_dir=&quot;/kaggle/working/models&quot;)
+print(MODEL, MMPROJ, sep=&quot;\n&quot;)</span></pre></div>
+    </li>
+    <li>
+      <h4>Cell 4：啟動伺服器——F.1 的三個設定都在這裡</h4>
+      <div class="termwrap"><pre class="term"><span class="o">import os, glob, secrets, subprocess, time, requests
+
+API_KEY = secrets.token_urlsafe(24)      # 服務要對外，所以一定要金鑰
+PORT = 8000
+LOG = &quot;/kaggle/working/server.log&quot;
+
+srv = glob.glob(&quot;/kaggle/working/llama/**/llama-server&quot;, recursive=True)[0]
+libdirs = sorted({os.path.dirname(p) for p in
+                  glob.glob(&quot;/kaggle/working/llama/**/*.so*&quot;, recursive=True)})
+env = dict(os.environ, LD_LIBRARY_PATH=&quot;:&quot;.join(
+    libdirs + [os.environ.get(&quot;LD_LIBRARY_PATH&quot;, &quot;&quot;)]))
+server = None
+
+def wait_ready(proc, timeout=900):
+    begin = time.time()
+    while time.time() - begin &lt; timeout:
+        if proc.poll() is not None:
+            raise RuntimeError(f&quot;伺服器已退出，請看 {LOG}&quot;)
+        try:
+            if requests.get(f&quot;http://127.0.0.1:{PORT}/health&quot;, timeout=3).status_code == 200:
+                print(&quot;服務就緒&quot;); return
+        except requests.RequestException:
+            pass
+        time.sleep(5)
+    raise TimeoutError(f&quot;逾時，請看 {LOG}&quot;)
+
+def start(ctx=131072):
+    global server
+    if server is not None and server.poll() is None:
+        server.terminate(); server.wait()
+    server = subprocess.Popen([
+        srv, &quot;-m&quot;, MODEL, &quot;--mmproj&quot;, MMPROJ,
+        &quot;--alias&quot;, &quot;saluki-27b&quot;,          # 對外的模型名稱，等一下工具要填這個
+        &quot;--jinja&quot;, &quot;-ngl&quot;, &quot;99&quot;, &quot;-fa&quot;, &quot;on&quot;,
+        &quot;-sm&quot;, &quot;tensor&quot;, &quot;-ts&quot;, &quot;1,1&quot;,    # ← 張量並行（F.1 的第 ① 點）
+        &quot;--spec-type&quot;, &quot;ngram-mod&quot;,       # ← n-gram 推測解碼（第 ② 點）
+        &quot;-c&quot;, str(ctx), &quot;-np&quot;, &quot;1&quot;,       # ← 上下文大小（第 ③ 點）
+        &quot;--host&quot;, &quot;127.0.0.1&quot;,            # 只聽本機，對外一律走隧道
+        &quot;--port&quot;, str(PORT), &quot;--api-key&quot;, API_KEY,
+    ], stdout=open(LOG, &quot;w&quot;), stderr=subprocess.STDOUT, env=env,
+       start_new_session=True)           # 關鍵：讓伺服器獨立於這個 Cell 之外
+    wait_ready(server)
+
+start()
+!nvidia-smi --query-gpu=index,memory.used,memory.total --format=csv</span></pre></div>
+      <p>成功時印出「服務就緒」，兩張卡各佔約 8 到 9.5 GB。之後要重啟只要再呼叫一次 <code>start()</code>，<strong>金鑰不會變</strong>；顯存不足就改成 <code>start(ctx=65536)</code>，把上下文砍一半。</p>
+      <div class="keybox"><span class="lab">注意 <code>start_new_session=True</code></span>
+        <p>它<strong>不是</strong>伺服器的參數，而是告訴作業系統「這個行程獨立於啟動它的 Cell」。少了它，你在筆記本按下任何一個 Cell 的「中斷」，中斷訊號會送給所有子行程，<strong>伺服器與隧道會一起安靜地死掉</strong>——而且是正常結束，log 裡看不出異狀，你只會在編輯器那端看到連線莫名其妙斷掉。這個坑在原始手冊裡潛伏了一整天才被發現。</p>
+      </div>
+    </li>
+    <li>
+      <h4>Cell 5：驗收——這一步是本 Lab 的重點</h4>
+      <p>一次檢查五件事：會不會回話、看不看得懂圖、兩種速度、兩張卡是不是都真的在用。約兩分鐘。</p>
+      <div class="termwrap"><pre class="term"><span class="o">import base64, io, inspect, textwrap
+from PIL import Image, ImageDraw, ImageFont
+
+def chat(content, n=400):
+    r = requests.post(
+        f&quot;http://127.0.0.1:{PORT}/v1/chat/completions&quot;,
+        headers={&quot;Authorization&quot;: f&quot;Bearer {API_KEY}&quot;},
+        json={&quot;model&quot;: &quot;saluki-27b&quot;, &quot;max_tokens&quot;: n, &quot;temperature&quot;: 0,
+              &quot;chat_template_kwargs&quot;: {&quot;enable_thinking&quot;: False},
+              &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: content}]},
+        timeout=900).json()
+    return r[&quot;choices&quot;][0][&quot;message&quot;][&quot;content&quot;], r[&quot;timings&quot;][&quot;predicted_per_second&quot;]
+
+# ① 文字
+text, _ = chat(&quot;用一句話自我介紹&quot;, 200)
+
+# ② 視覺：現場畫一張含錯誤訊息的圖，請它讀
+img = Image.new(&quot;RGB&quot;, (1000, 240), &quot;white&quot;)
+ImageDraw.Draw(img).text((20, 20),
+    &#x27;Traceback (most recent call last):\n  File &quot;app.py&quot;, line 12, in &lt;module&gt;\n&#x27;
+    &#x27;    total = price * qty\nTypeError: can\&#x27;t multiply sequence by non-int of type \&#x27;str\&#x27;&#x27;,
+    fill=&quot;black&quot;, font=ImageFont.load_default(size=24))
+buf = io.BytesIO(); img.save(buf, format=&quot;PNG&quot;)
+url = &quot;data:image/png;base64,&quot; + base64.b64encode(buf.getvalue()).decode()
+seen, _ = chat([{&quot;type&quot;: &quot;image_url&quot;, &quot;image_url&quot;: {&quot;url&quot;: url}},
+                {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;這張截圖的錯誤是什麼？發生在哪個檔案的第幾行？怎麼修？&quot;}], 800)
+
+# ③ 從零寫新程式的速度
+_, new_tps = chat(&quot;用 Python 寫一個完整的 LRU cache 類別並附上測試&quot;, 600)
+
+# ④ 修改既有檔案的速度
+SRC = inspect.getsource(textwrap)
+_, edit_tps = chat(f&quot;```python\n{SRC}\n```\n把 TextWrapper.wrap 方法開頭加上一行 &quot;
+                   &quot;logging.debug 記錄輸入長度，然後輸出修改後的完整檔案，不要省略任何部分。&quot;, 600)
+
+# ⑤ 兩張卡的顯存
+mem = [int(x) for x in subprocess.run(
+    [&quot;nvidia-smi&quot;, &quot;--query-gpu=memory.used&quot;, &quot;--format=csv,noheader,nounits&quot;],
+    capture_output=True, text=True).stdout.split()]
+
+found = [k for k in (&quot;TypeError&quot;, &quot;app.py&quot;, &quot;12&quot;) if k in seen]
+checks = [
+    (&quot;文字回應&quot;,                 bool(text.strip()),         f&quot;{len(text)} 字&quot;),
+    (&quot;看圖讀出錯誤、檔名與行號&quot;, len(found) == 3,            f&quot;找到 {found}&quot;),
+    (&quot;寫新程式 &gt;= 12 tok/s&quot;,     new_tps &gt;= 12,              f&quot;{new_tps:.1f}&quot;),
+    (&quot;改既有檔案 &gt;= 40 tok/s&quot;,   edit_tps &gt;= 40,             f&quot;{edit_tps:.1f}&quot;),
+    (&quot;兩張卡都載入 &gt; 6 GB&quot;,      all(m &gt; 6000 for m in mem), f&quot;{mem} MiB&quot;),
+]
+for name, ok, detail in checks:
+    print(&quot;通過&quot; if ok else &quot;失敗&quot;, &quot;|&quot;, name, &quot;|&quot;, detail)
+
+print(&quot;\n===== 第 ② 題的完整回答 =====\n&quot; + seen)</span></pre></div>
+      <p><strong>五項都印「通過」才往下做。</strong>另外請<strong>親自讀一遍第 ② 題的完整回答</strong>，確認它真的說出了錯誤類型、<code>app.py</code> 第 12 行與修法——<span class="q">自動檢查只看關鍵字有沒有出現，看得懂與否只有你能判斷。</span>這正是 5.7 說的事。</p>
+      <p>參考值（2026-10-10 實測）：寫新程式 15.0–16.2 tok/s、改既有檔案 71.2–72.3 tok/s、兩張卡各約 8.2–9.6 GB。程式裡的門檻（12 與 40）是刻意抓寬的下限。</p>
+    </li>
+    <li>
+      <h4>Cell 6：開隧道，拿到網址與金鑰</h4>
+      <div class="termwrap"><pre class="term"><span class="o">!wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O /kaggle/working/cloudflared
+!chmod +x /kaggle/working/cloudflared &amp;&amp; /kaggle/working/cloudflared --version</span></pre></div>
+      <div class="termwrap"><pre class="term"><span class="o">import re
+
+CF_LOG = &quot;/kaggle/working/cloudflared.log&quot;
+tunnel = subprocess.Popen(
+    [&quot;/kaggle/working/cloudflared&quot;, &quot;tunnel&quot;, &quot;--no-autoupdate&quot;,
+     &quot;--url&quot;, f&quot;http://127.0.0.1:{PORT}&quot;],
+    stdout=open(CF_LOG, &quot;w&quot;), stderr=subprocess.STDOUT,
+    start_new_session=True)          # 同樣要獨立，理由見 Cell 4
+
+url = None
+for _ in range(30):
+    m = re.search(r&quot;https://[-a-z0-9]+\.trycloudflare\.com&quot;, open(CF_LOG).read())
+    if m:
+        url = m.group(0); break
+    time.sleep(2)
+
+print(&quot;Base URL:&quot;, url + &quot;/v1&quot; if url else f&quot;尚未取得，請看 {CF_LOG}&quot;)
+print(&quot;API Key :&quot;, API_KEY)</span></pre></div>
+      <p>把印出來的 <strong>Base URL</strong> 與 <strong>API Key</strong> 複製下來，下一步要用。<strong>這兩個值每次開機都不一樣。</strong></p>
+    </li>
+    <li>
+      <h4>Cell 7：保活（最後才執行）</h4>
+      <div class="termwrap"><pre class="term"><span class="o">while True:
+    print(time.strftime(&quot;%H:%M&quot;), &quot;server&quot;, server.poll(), &quot;tunnel&quot;, tunnel.poll(), flush=True)
+    time.sleep(300)</span></pre></div>
+      <p>每五分鐘印一行，兩個值都是 <code>None</code> 代表伺服器與隧道都還活著。要在筆記本做別的事就先中斷它，做完再重新執行——因為 Cell 4 與 Cell 6 加了 <code>start_new_session=True</code>，中斷這一格<strong>不會</strong>影響伺服器與隧道。</p>
+    </li>
+    <li>
+      <h4>接上你的代理式編碼工具</h4>
+      <p><strong>先用 <code>curl</code> 在自己電腦驗證一次，再去填設定。</strong>先驗證再填，出錯時才分得出是隧道的問題還是工具的問題：</p>
+      <div class="termwrap"><pre class="term"><span class="p">$</span> curl https://你拿到的網址.trycloudflare.com/v1/models -H &quot;Authorization: Bearer 你的金鑰&quot;</pre></div>
+      <p class="small" style="color:var(--ink-2)">Windows 的 PowerShell 請把 <code>curl</code> 寫成 <code>curl.exe</code>。</p>
+      <p>回應是一段 JSON，而且裡面找得到模型名稱 <code>saluki-27b</code>，才往下做。接著在工具的設定裡填<strong>三個連線欄位</strong>——各家工具欄位名稱略有不同，但都是這三件事：</p>
+      <div class="tblwrap"><table>
+        <tr><th>要填的</th><th>填什麼</th><th>最常見的錯</th></tr>
+        <tr><td>服務位址（Base URL）</td><td>Cell 6 印出的網址，<strong>結尾是 <code>/v1</code></strong></td><td>漏掉 <code>/v1</code>；多貼了 <code>/chat/completions</code>；結尾多一個斜線或空白</td></tr>
+        <tr><td>金鑰（API Key）</td><td>Cell 6 印出的那一串<strong>本身</strong></td><td>前面多打了 <code>Bearer</code>；複製時帶到換行；用到上一次開機的舊金鑰</td></tr>
+        <tr><td>模型名稱（Model ID）</td><td><code>saluki-27b</code></td><td>填成 GGUF 檔名或模型倉庫名稱</td></tr>
+      </table></div>
+      <p>另外三個要檢查的：<strong>供應商類型選「OpenAI 相容」</strong>（不要選 OpenAI，也不要選 Ollama）；<strong>上下文大小填成與 Cell 4 的 <code>-c</code> 相同</strong>；<strong>如果要貼截圖，把「支援圖片」打開</strong>。這些選項常被收在「進階」或「模型設定」區，容易漏掉。示範工具與各欄位的確切名稱見<a href="#/fresh">附錄 B</a>。</p>
+      <p>最後送一個測試任務：用編輯器開一個資料夾（工具需要工作區才能讀寫檔案），請它「建立 <code>hello.py</code>，內容是印出 Hello」。第一次回應前會停大約半分鐘，那是在讀工具自己的系統提示。<strong>它提出要建立檔案並請你核准，就代表整條路都通了。</strong></p>
+    </li>
+    <li>
+      <h4>延伸（做過 Lab 4 的人）：把它接成第三個 provider</h4>
+      <p>Lab 4 的降階鏈是<strong>雲端 → 本地 → 罐頭</strong>。你現在多了一個來源，把它插進去：</p>
+      <div class="termwrap"><pre class="term"><span class="o">def ask_kaggle(word, base_url, api_key):
+    &quot;&quot;&quot;第三個 provider：介面與 Lab 4 的 ask_local()／ask_cloud() 完全同形。&quot;&quot;&quot;
+    r = requests.post(base_url + &quot;/chat/completions&quot;,
+        headers={&quot;Authorization&quot;: &quot;Bearer &quot; + api_key},
+        json={&quot;model&quot;: &quot;saluki-27b&quot;, &quot;max_tokens&quot;: 1024,
+              &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: PROMPT.format(word=word)}]},
+        timeout=120)
+    r.raise_for_status()
+    data = r.json()
+    return &quot;&quot;.join(b.get(&quot;text&quot;, &quot;&quot;) for b in [data[&quot;choices&quot;][0][&quot;message&quot;]]
+                   if isinstance(b, dict)) or data[&quot;choices&quot;][0][&quot;message&quot;][&quot;content&quot;]</span></pre></div>
+      <p>注意它的<strong>介面與另外兩個完全同形</strong>——這就是 Lab 4 那句「介面同形，降階才接得起來」的意思。鏈子變成<strong>雲端 → 借來的 GPU → 本地 → 罐頭</strong>，而 <code>generate()</code> 一行都不用改。</p>
+    </li>
+    <li>
+      <h4>結束使用、收尾</h4>
+      <p>用完回到筆記本頁面，<strong>明確按下停止工作階段</strong>。<span class="q">只關掉瀏覽器分頁不會停止計時</span>——容器會空轉到被判定閒置為止，白白吃掉你的週額度。</p>
+      <p>最後把筆記本存進你自己的倉庫，並寫一份 <code>notes/lab15.md</code> 記下你量到的兩個速度與遇到的問題，然後打上檢查點：</p>
+      <div class="termwrap"><pre class="term"><span class="p">$</span> git add notebooks/ notes/lab15.md
+<span class="p">$</span> git commit -m &quot;feat: Lab 15 雲端 GPU 推理服務與驗收紀錄&quot;
+<span class="p">$</span> git tag lab15-done &amp;&amp; git push --follow-tags</pre></div>
+      <div class="warnbox"><span class="lab">不要提交跑過的筆記本輸出</span>
+        <p>執行過的筆記本會把 <strong>Cell 6 印出的網址與金鑰</strong>存進輸出區，commit 進去等於公開它們。<strong>提交前先清除所有輸出</strong>（筆記本選單裡的 Clear Outputs），或乾脆只提交 <code>notes/lab15.md</code>。這是第一篇「金鑰三戒」的直接應用——<span class="q">金鑰外洩最常見的原因不是寫進程式碼，是夾帶在你沒注意的檔案裡。</span></p>
+      </div>
+    </li>
+  </ol>
+
+  <h2>驗收清單</h2>
+  <ul class="check">
+    <li><label><input type="checkbox" data-ck="l15-1">Cell 5 的五項全部印「通過」，而且你<strong>親自讀過</strong>第 ② 題的回答，確認它真的看懂了那張圖</label></li>
+    <li><label><input type="checkbox" data-ck="l15-2"><code>curl</code> 的回應裡找得到模型名稱 <code>saluki-27b</code></label></li>
+    <li><label><input type="checkbox" data-ck="l15-3">代理式編碼工具完成了一次測試任務（提出要建立檔案並等你核准）</label></li>
+    <li><label><input type="checkbox" data-ck="l15-4">你記下了自己量到的<strong>兩種速度</strong>（寫新程式／改既有檔案），並說得出為什麼差這麼多</label></li>
+    <li><label><input type="checkbox" data-ck="l15-5">用完<strong>按了停止工作階段</strong>，不是只關分頁</label></li>
+    <li><label><input type="checkbox" data-ck="l15-6">你能不看圖 34，自己畫出從編輯器到兩張 GPU 的完整路徑</label></li>
+  </ul>
+
+  <h2>常見錯誤急救</h2>
+  <div class="tblwrap"><table>
+    <tr><th>症狀</th><th>原因與解法</th></tr>
+    <tr><td><code>nvidia-smi</code> 只印一列，或說找不到指令</td><td>加速器沒選成兩張 T4。回設定改好，然後<strong>重啟工作階段</strong>才會生效。</td></tr>
+    <tr><td>下載模型卡住或失敗</td><td>容器的網路沒打開（設定裡的 Internet）。手機驗證沒完成的話，這個開關會是鎖住的。</td></tr>
+    <tr><td class="mono">No space left on device</td><td>工作目錄放不下太多大檔——主模型加視覺檔已接近 9 GB。要再下載別的模型請放到 <code>/tmp</code>。</td></tr>
+    <tr><td>Cell 4 卡在等待，或說伺服器已退出</td><td>打開 <code>server.log</code> 看最後幾行。最常見是顯存不足，改用 <code>start(ctx=65536)</code>。</td></tr>
+    <tr><td class="mono">401 / Invalid API Key</td><td>金鑰不符。重新複製 Cell 6 印出的那一串，確認沒有多打 <code>Bearer</code>、沒有夾帶空白或換行。</td></tr>
+    <tr><td class="mono">404</td><td>位址路徑不對。結尾必須是 <code>/v1</code>，後面不要再接東西。</td></tr>
+    <tr><td class="mono">530 或 Error 1033</td><td>隧道已中斷，或你用的是上次開機的舊網址。回去重跑 Cell 6，換新的 Base URL。</td></tr>
+    <tr><td class="mono">502</td><td>隧道還在，但伺服器沒在跑。中斷 Cell 7 → 執行 <code>start()</code> → 重跑 Cell 7。</td></tr>
+    <tr><td class="mono">Model not found</td><td>模型名稱打錯，應該是 <code>saluki-27b</code>（就是 Cell 4 的 <code>--alias</code>）。</td></tr>
+    <tr><td>一直轉圈沒有輸出</td><td>正在讀長提示（讀完 13 萬 token 的視窗要五分多鐘），或工作階段已被閒置回收。先等一分鐘；仍無反應就回頁面確認工作階段還活著。</td></tr>
+    <tr><td><code>curl</code> 成功，但工具失敗</td><td>有些工具的設定分成「計畫」與「執行」兩個分頁，<strong>兩邊都要填</strong>。另外確認供應商類型選的是「OpenAI 相容」。</td></tr>
+    <tr><td>貼了截圖它說看不到</td><td>工具的「支援圖片」沒開啟，在模型設定區。</td></tr>
+  </table></div>
+
+  <h2>特別篇自我檢測</h2>
+  <div class="quiz" data-q="28" data-ans="b">
+    <div class="qt">1．給了兩張 GPU，為什麼預設設定不會讓生成速度變快？（對應 F.1）</div>
+    <label class="opt"><input type="radio" name="q28" value="a">因為兩張卡的型號必須完全相同才會加速</label>
+    <label class="opt"><input type="radio" name="q28" value="b">預設是把不同的層分到不同的卡上依序流過，同一時間只有一張在算——只合併了顯存，沒有合併算力</label>
+    <label class="opt"><input type="radio" name="q28" value="c">因為免費方案刻意限制了第二張卡的效能</label>
+    <div class="exp"><b>B。</b>預設的分層接力只是讓你「裝得下」更大的模型，不是「算得快」。要兩張卡同時算同一層，必須明確指定張量並行（<code>-sm tensor</code>）。實測 8.6 → 15.0 tok/s。<br>順帶一提：這也是為什麼拿到任何新硬體都要先問「預設值是為誰調的」——預設值通常是為最不會出錯調的。</div>
+  </div>
+  <div class="quiz" data-q="29" data-ans="c">
+    <div class="qt">2．n-gram 推測解碼讓「改既有檔案」快了四倍多，卻對「從零寫新程式」幾乎沒有幫助。為什麼？（對應 F.1）</div>
+    <label class="opt"><input type="radio" name="q29" value="a">因為新程式比較長，token 數多</label>
+    <label class="opt"><input type="radio" name="q29" value="b">因為它會跳過驗證，所以改檔案時輸出品質較低</label>
+    <label class="opt"><input type="radio" name="q29" value="c">因為它是從上下文裡找重複片段來猜下一串 token——改檔案時輸出與輸入高度重疊，猜得準；從零寫時沒有東西好猜</label>
+    <div class="exp"><b>C。</b>推測解碼是「先猜一串、再由模型一次驗證」，<strong>猜對就一次前進多步，猜錯就退回照常生成，輸出內容完全不變</strong>——所以 B 的「品質較低」是錯的。n-gram 的猜測來源就是上下文本身，因此效果完全取決於輸出與輸入重疊多少。<br>這也解釋了為什麼「先產生骨架，再逐步修改」會比「一次要求寫完整個大檔」快。</div>
+  </div>
+
+  <div class="pgnav"><a href="#/F-2"><span class="dir">上一頁</span>F.2　三條路怎麼選</a><a class="nx" href="#/5-8"><span class="dir">回主線</span>5.8　綜合驗收：讓 Repo 說話</a></div>
+</section>
+
 <!-- ================= 附錄 C 詞彙表 ================= -->
 <section class="page" id="p-gloss">
   <div class="eyebrow">附錄 C</div>
@@ -5573,6 +6060,19 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
     <tr><td class="mono">CI</td><td>Continuous Integration</td><td>持續整合</td><td>每次 push 自動執行測試／部署（第四篇）</td></tr>
   </table></div>
 
+  <h2>附錄 F・借來的雲端 GPU</h2>
+  <div class="tblwrap"><table>
+    <tr><th>術語</th><th>全名</th><th>中文</th><th>一句話解釋</th></tr>
+    <tr><td class="mono">GPU</td><td>Graphics Processing Unit</td><td>圖形處理器</td><td>擅長大量平行計算的晶片；模型推理的主力</td></tr>
+    <tr><td class="mono">VRAM</td><td>Video RAM</td><td>顯存</td><td>顯示卡上的記憶體；模型權重與上下文都要放得進去</td></tr>
+    <tr><td class="mono">tensor parallelism</td><td>—</td><td>張量並行</td><td>把同一層拆給多張卡<strong>同時</strong>算；對比「分層接力」只是合併顯存</td></tr>
+    <tr><td class="mono">speculative decoding</td><td>—</td><td>推測解碼</td><td>先猜一串 token 再由模型一次驗證；猜對就一次前進多步，<strong>輸出不變</strong></td></tr>
+    <tr><td class="mono">tunnel</td><td>—</td><td>隧道</td><td>由內部主動對外建立通道，讓沒有公開位址的機器也能被連到</td></tr>
+    <tr><td class="mono">llama.cpp</td><td>—</td><td>—</td><td>可在一般顯卡上跑開源模型的推理引擎，附帶 OpenAI 相容的伺服器</td></tr>
+    <tr><td class="mono">GGUF</td><td>—</td><td>—</td><td>llama.cpp 使用的模型檔格式，量化後的權重都包在裡面</td></tr>
+    <tr><td class="mono">OpenAI 相容 API</td><td>—</td><td>—</td><td>沿用同一套請求格式的介面約定；換後端不必改程式，只改位址與金鑰</td></tr>
+  </table></div>
+
   <div class="pgnav"><a href="#/fresh"><span class="dir">上一頁</span>附錄 B　時效資訊表</a><a class="nx" href="#/guide"><span class="dir">下一頁</span>附錄 D　教師指引</a></div>
 </section>
 </main>
@@ -5582,7 +6082,7 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
 "use strict";
 
 /* ---------- 路由 ---------- */
-var PAGES = ["home","ch1","1-1","1-2","1-3","1-4","1-5","1-6","1-7","lab1","lab2","quiz1","ch2","2-1","2-2","2-3","2-4","2-5","2-6","2-7","2-8","lab3","lab4","quiz2","ch3","3-1","3-2","3-3","3-4","quiz3","ch4","4-1","4-2","4-3","4-4","4-5","lab9","lab10","quiz4","ch5","5-1","lab11","5-2","5-3","5-4","lab12","5-5","lab13","lab14","5-6","5-7","5-8","quiz5","cheat","fresh","gloss","guide","chE"];
+var PAGES = ["home","ch1","1-1","1-2","1-3","1-4","1-5","1-6","1-7","lab1","lab2","quiz1","ch2","2-1","2-2","2-3","2-4","2-5","2-6","2-7","2-8","lab3","lab4","quiz2","ch3","3-1","3-2","3-3","3-4","quiz3","ch4","4-1","4-2","4-3","4-4","4-5","lab9","lab10","quiz4","ch5","5-1","lab11","5-2","5-3","5-4","lab12","5-5","lab13","lab14","5-6","5-7","5-8","quiz5","cheat","fresh","gloss","guide","chE","chF","F-1","F-2","lab15"];
 var sidebar = document.getElementById("sidebar");
 var scrim = document.getElementById("scrim");
 var menuBtn = document.getElementById("menuBtn");
@@ -5797,6 +6297,13 @@ var FIGS = {
     "你用計劃模式、大方向盯著但細節沒看——就要逐行讀完 diff，而且自己跑一次程式。",
     "你交代完就去吃飯，回來看到「已完成」——這一階要驗到底：逐行讀 diff、自己跑測試看到輸出、手動走一次使用者流程、確認它沒動到不該動的檔案。",
     "兩件事成反比。省下的監督時間會在驗證時還回來，而且通常還多還一點——所以「放手」不是省事，是把力氣換個地方花。"
+  ], cmds: [] },
+  kaggleflow: { caps: [
+    "你在自己的電腦按下送出。編輯器裡的代理式編碼工具把請求打包成一個 OpenAI 相容的 HTTPS 請求——跟第二篇 2.5 那趟旅程是同一個形狀，只是終點換了。",
+    "請求先到一個 trycloudflare.com 的臨時網址。這是隧道（tunnel）的入口：它讓一台沒有公開 IP 的機器，也能被外面找到。網址每次開機都不一樣。",
+    "隧道的另一端是跑在 Kaggle 容器裡的 cloudflared，它把請求轉給本機的 127.0.0.1:8000。推理伺服器只聽本機，對外一律經過隧道——這樣金鑰與埠都不會直接暴露在公網。",
+    "llama-server 收到請求，用你帶的 API 金鑰驗身，然後把這段對話餵給模型。模型與它的視覺檔都已經在開機時載進顯存。",
+    "最後一步才是重點：兩張 T4 用張量並行同時算同一層，而不是一張算完換另一張。算完的 token 原路回到你的編輯器。整條路上，你的程式碼經過了 Cloudflare 與 Kaggle——這是用免費算力換來的代價。"
   ], cmds: [] },
   ci: { caps: [
     "觸發：有人 push、或開了 PR。從這一刻起，一切自動發生。",
