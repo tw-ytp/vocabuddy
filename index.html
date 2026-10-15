@@ -459,7 +459,7 @@ img{max-width:100%}
     <a href="#/2-7"><span class="no">2.7</span>雲端 vs 本地</a>
     <a href="#/lab4"><span class="no">L4</span>Lab 4：本地模型與切換</a>
     <div class="grp">附錄 F・特別篇（選修）</div>
-    <a href="#/chF"><span class="no">F.0</span>借一台雲端 GPU 導讀</a>
+    <a href="#/chF"><span class="no">F.0</span>免費雲端伺服器 導讀</a>
     <a href="#/F-1"><span class="no">F.1</span>雲端 GPU 上的推理伺服器</a>
     <a href="#/F-2"><span class="no">F.2</span>三條路怎麼選</a>
     <a href="#/lab15"><span class="no">L15</span>Lab 15：架起自己的模型服務</a>
@@ -2837,15 +2837,15 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>GitHub Pages 免費方案</td><td>public repo 才能用（private 需付費方案）；網址為 帳號.github.io/倉庫名；push main 後約 1 分鐘生效</td><td>2026-08</td><td>GitHub Docs「Pages」</td></tr>
     <tr><td>GitHub Actions 免費額度</td><td>public repo 免費；private repo 每月 2,000 分鐘（Free 方案）</td><td>2026-08</td><td>github.com/pricing</td></tr>
     <tr><td>Actions 積木版本</td><td>教材採 <code>actions/checkout@v4</code>、<code>actions/setup-node@v4</code>（撰寫時現行大版）</td><td>2026-08</td><td>各 action 的 GitHub 頁面</td></tr>
-    <tr><td>免費雲端 GPU（沒有顯卡時的第三條路）</td><td><strong>Kaggle Notebooks</strong>：Settings → Accelerator 選 <code>GPU T4 x2</code>，得到兩張 Tesla T4、合計 30 GB 顯存，Internet 設為 On。<strong>每週 30 小時、單次工作階段上限 12 小時、閒置 40–60 分鐘自動結束</strong>；開著就計時，用完按 Stop Session。詳見<a href="#/chF">附錄 F</a></td><td>2026-10-14</td><td>kaggle.com/docs/efficient-gpu-usage；剩餘額度看帳號 Settings</td></tr>
+    <tr><td>免費雲端 GPU（沒有顯卡時的第三條路）</td><td><strong>Kaggle Notebooks</strong>：Settings → Accelerator 選 <code>GPU T4 x2</code>，得到兩張 Tesla T4、合計 32 GB 顯存，Internet 設為 On。<strong>每週 30 小時、單次工作階段上限 12 小時、閒置 40–60 分鐘自動結束</strong>；開著就計時，用完按 Stop Session。詳見<a href="#/chF">附錄 F</a></td><td>2026-10-14</td><td>kaggle.com/docs/efficient-gpu-usage；剩餘額度看帳號 Settings</td></tr>
     <tr><td>本地基準模型</td><td>Qwen3.6-35B-A3B（int4 量化約 20 GB，建議 24 GB 以上記憶體）；記憶體不足改用同家族小型號（數 GB 級），Lab 流程不變</td><td>2026-08</td><td>ollama.com/library 搜尋 qwen</td></tr>
   </table></div>
 
-  <h2>附錄 F・借來的雲端 GPU</h2>
+  <h2>附錄 F・免費雲端伺服器（T4x2 ＋ Saluki-27B）</h2>
   <p>以下是 Lab 15 實測採用的配置（2026-10-10）。版本與型號會更新，照做前先對一次這張表。</p>
   <div class="tblwrap"><table>
     <tr><th>項目</th><th>撰寫時的狀態</th><th>查證日期</th><th>重查方式</th></tr>
-    <tr><td>平台與加速器</td><td>Kaggle Notebooks，Settings → Accelerator 選 <code>GPU T4 x2</code>（兩張 Tesla T4，各 15 GB 顯存）、Internet 設為 On。這兩個開關要先完成手機簡訊驗證（Settings → Phone verification）才會開放</td><td>2026-10-14</td><td>kaggle.com 的 Settings 頁</td></tr>
+    <tr><td>平台與加速器</td><td>Kaggle Notebooks，Settings → Accelerator 選 <code>GPU T4 x2</code>（兩張 Tesla T4，各 16 GB、合計 32 GB 顯存；<code>nvidia-smi</code> 會顯示各 15360 MiB，那是扣掉保留區後的可用值）、Internet 設為 On。這兩個開關要先完成手機簡訊驗證（Settings → Phone verification）才會開放</td><td>2026-10-14</td><td>kaggle.com 的 Settings 頁</td></tr>
     <tr><td>免費額度</td><td>每週 30 小時；單次工作階段上限 12 小時；閒置 40–60 分鐘自動結束。<strong>開著就計時，關分頁不會停</strong>，用完按 Stop Session</td><td>2026-10-14</td><td>kaggle.com/docs/efficient-gpu-usage；帳號 Settings 顯示剩餘額度</td></tr>
     <tr><td>推理引擎</td><td>llama.cpp 官方預編譯版 <code>b11435</code>（CUDA 12.8），不必自行編譯</td><td>2026-10-10</td><td>github.com/ggml-org/llama.cpp 的 Releases 頁</td></tr>
     <tr><td>基準模型</td><td><code>ConwayResearch/Underdog-Saluki-27B-1.0</code>：主檔 <code>Underdog-Saluki-27B-1.0-IQ2-mix.gguf</code>（約 7.89 GB，<strong>2-bit 量化</strong>）＋視覺檔 <code>mmproj-…-F16.gguf</code>（約 928 MB）</td><td>2026-10-10</td><td>Hugging Face 模型卡</td></tr>
@@ -2871,10 +2871,10 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>本教材授權</td><td>內容採 CC BY-NC-SA 4.0；教材中的程式碼片段採 MIT</td><td>2026-09</td><td>教材倉庫的 <code>LICENSE</code></td></tr>
   </table></div>
   <div class="footer-note">
-    YTP VocaBuddy 開發者之路・教材版本 v2.3（新增附錄 F 特別篇「借一台雲端 GPU」；主線十三個 Lab 不變，選修特別篇兩篇共兩個 Lab。本地端 LLM 為附錄 E、借來的 GPU 為附錄 F）・貫穿案例：VocaBuddy 背單字夥伴<br>
+    YTP VocaBuddy 開發者之路・教材版本 v2.3（新增附錄 F 特別篇「免費雲端伺服器：T4x2 ＋ Saluki-27B」；主線十三個 Lab 不變，選修特別篇兩篇共兩個 Lab。本地端 LLM 為附錄 E、免費雲端伺服器為附錄 F）・貫穿案例：VocaBuddy 背單字夥伴<br>
     教材網址 <a href="https://tw-ytp.github.io/vocabuddy/">tw-ytp.github.io/vocabuddy</a>｜原始檔與改版歷史 <a href="https://github.com/tw-ytp/vocabuddy" target="_blank" rel="noopener">github.com/tw-ytp/vocabuddy</a><br>
     發現錯誤或有改善建議？歡迎直接<a href="https://github.com/tw-ytp/vocabuddy/issues" target="_blank" rel="noopener">開一個 issue</a>——這正是本教材教你的協作方式。內容採 CC BY-NC-SA 4.0 授權，程式碼片段採 MIT。<br>
-    教學路線：主題分篇為骨、專案旅程為魂｜第一篇＝工作流程軸＋情境開場｜第二篇＝白盒優先｜第三篇＝功能衝刺（Sprint 1–4＝Lab 5–8）｜第四篇＝上線與發表（Lab 9–10）｜第五篇＝AI-Native 開發（工具中立＋Lab 11–14）｜特別篇＝附錄 E 本地端 LLM（Lab 4）、附錄 F 借來的雲端 GPU（Lab 15），皆為選修｜適用對象：具競賽程式基礎的高中生
+    教學路線：主題分篇為骨、專案旅程為魂｜第一篇＝工作流程軸＋情境開場｜第二篇＝白盒優先｜第三篇＝功能衝刺（Sprint 1–4＝Lab 5–8）｜第四篇＝上線與發表（Lab 9–10）｜第五篇＝AI-Native 開發（工具中立＋Lab 11–14）｜特別篇＝附錄 E 本地端 LLM（Lab 4）、附錄 F 免費雲端伺服器（Lab 15），皆為選修｜適用對象：具競賽程式基礎的高中生
   </div>
   <div class="pgnav"><a href="#/cheat"><span class="dir">上一頁</span>附錄 A　速查卡</a><a class="nx" href="#/gloss"><span class="dir">下一頁</span>附錄 C　詞彙表</a></div>
 </section>
@@ -3347,7 +3347,7 @@ print("".join(b.text for b in msg.content if b.type == "text"))</span></pre></di
 
   <div class="keybox"><span class="lab">選修支線</span>
     <p>想不靠網路、在自己的電腦跑開源模型？<strong>特別篇「本地端 LLM」（附錄 E）</strong>講 Qwen、Ollama、MoE 與量化，並把程式升級成「雲端優先、本地備援」。建議完成 Lab 3 後前往；直接跳過也完全不影響主線。</p>
-    <p><strong>電腦跑不動？</strong>還有第三條路：<strong>特別篇「借一台雲端 GPU」（<a href="#/chF">附錄 F</a>）</strong>——用免費的雲端顯示卡架一個自己的推理伺服器。兩篇都是選修。</p>
+    <p><strong>電腦跑不動？</strong>還有第三條路：<strong>特別篇「免費雲端伺服器」（<a href="#/chF">附錄 F</a>）</strong>——用免費的雲端顯示卡架一個自己的推理伺服器。兩篇都是選修。</p>
   </div>
 
   <div class="pgnav"><a href="#/2-4"><span class="dir">上一頁</span>2.4　取樣、temperature 與上下文</a><a class="nx" href="#/2-8"><span class="dir">下一頁</span>2.8　案例導讀：AI 例句生成器</a></div>
@@ -5397,7 +5397,7 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
     <p>用<strong>學生沒看過、但規模看得完的真實專案</strong>——理想是開課單位自己的某個小型 repo，或任一結構清楚的開源專案。不要用 VocaBuddy（他們太熟，失去「陌生」這個前提）。示範時把 5.6 的四個典範逐一問出來，並<strong>當場抽驗行號</strong>——這一段的教學重點其實是「怎麼驗證 AI 的解釋」，不是那個專案本身。</p>
   </div>
 
-  <h2>附錄 F（借來的雲端 GPU）怎麼處理</h2>
+  <h2>附錄 F（免費雲端伺服器）怎麼處理</h2>
   <p>附錄 F <strong>不屬於任何場次的正式進度</strong>，<code>lab15-done</code> 也不列入驗收。它存在的理由只有一個：<strong>讓硬體不夠、又還開不了付費帳號的學生，仍然練得到第五篇。</strong>開課者要知道三件事：</p>
   <ul>
     <li><strong>不要安排全班現場同時建置。</strong>多人同時下載 9 GB 模型、同時開隧道的情況<strong>沒有測試過</strong>；而且每人每次建置約十分鐘，課堂時間會被吃光。要用就請學生<strong>課前各自完成</strong>，現場只做排錯。</li>
@@ -5457,7 +5457,7 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
 <!-- ================= 附錄 F 導讀 ================= -->
 <section class="page" id="p-chF">
   <div class="eyebrow">附錄 F・特別篇（選修）</div>
-  <h1>借一台雲端 GPU：用免費的雙 T4 跑開源模型</h1>
+  <h1>免費雲端伺服器：T4x2 ＋ Saluki-27B</h1>
   <p class="lede">附錄 E 教你把模型裝進自己的電腦——但它的基準模型要 24 GB 以上記憶體，多數高中生的筆電跑不動。這一篇是那道門檻的替代路徑：<strong>跟雲端借兩張免費的 GPU</strong>，在上面架一個自己的推理伺服器，再把它接回你電腦上的代理式編碼工具。<strong>本篇為選修</strong>：跳過不影響任何主線章節與 Lab。</p>
 
   <div class="warnbox"><span class="lab">開始之前，兩件事</span>
@@ -5468,7 +5468,7 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
   <h2>誰該來、什麼時候來</h2>
   <div class="tblwrap"><table>
     <tr><th>你的處境</th><th>為什麼這一篇對你有用</th></tr>
-    <tr><td>筆電跑不動附錄 E 的基準模型</td><td>借來的 GPU 有 30 GB 顯存，跑得動你筆電裝不下的模型。流程與附錄 E 相同，只是模型不在你機器上</td></tr>
+    <tr><td>筆電跑不動附錄 E 的基準模型</td><td>借來的兩張卡合計 32 GB 顯存，跑得動你筆電裝不下的模型。流程與附錄 E 相同，只是模型不在你機器上</td></tr>
     <tr><td>還沒有付費的 AI 工具帳號，但想練第五篇</td><td>第五篇的工具多半需要付費方案或 API 金鑰（見<a href="#/fresh">附錄 B</a>）。這條路讓你用免費額度先把代理式開發練起來</td></tr>
     <tr><td>想看懂「一顆模型怎麼被架成服務」</td><td>第二篇你學會<strong>呼叫</strong>別人的 API；這一篇你<strong>自己架一個</strong>。架完再回頭看 2.5 的圖 13，那張圖的右半邊會從黑盒子變成你親手開過的機器</td></tr>
   </table></div>
@@ -6060,7 +6060,7 @@ print(&quot;API Key :&quot;, API_KEY)</span></pre></div>
     <tr><td class="mono">CI</td><td>Continuous Integration</td><td>持續整合</td><td>每次 push 自動執行測試／部署（第四篇）</td></tr>
   </table></div>
 
-  <h2>附錄 F・借來的雲端 GPU</h2>
+  <h2>附錄 F・免費雲端伺服器</h2>
   <div class="tblwrap"><table>
     <tr><th>術語</th><th>全名</th><th>中文</th><th>一句話解釋</th></tr>
     <tr><td class="mono">GPU</td><td>Graphics Processing Unit</td><td>圖形處理器</td><td>擅長大量平行計算的晶片；模型推理的主力</td></tr>
