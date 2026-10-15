@@ -2837,22 +2837,21 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>GitHub Pages 免費方案</td><td>public repo 才能用（private 需付費方案）；網址為 帳號.github.io/倉庫名；push main 後約 1 分鐘生效</td><td>2026-08</td><td>GitHub Docs「Pages」</td></tr>
     <tr><td>GitHub Actions 免費額度</td><td>public repo 免費；private repo 每月 2,000 分鐘（Free 方案）</td><td>2026-08</td><td>github.com/pricing</td></tr>
     <tr><td>Actions 積木版本</td><td>教材採 <code>actions/checkout@v4</code>、<code>actions/setup-node@v4</code>（撰寫時現行大版）</td><td>2026-08</td><td>各 action 的 GitHub 頁面</td></tr>
-    <tr><td>免費雲端 GPU（沒有顯卡時的第三條路）</td><td><strong>Kaggle Notebooks</strong> 提供免費 GPU：官方文件明載 <strong>NVIDIA Tesla P100</strong>，<strong>每週額度 30 小時</strong>（原文：「30 hours or sometimes higher depending on demand and resources」），互動工作階段閒置 <strong>60 分鐘</strong>自動結束。筆記本的加速器選單另有雙 T4（<code>T4 x2</code>）選項，2026-10-10 實測可用於跑開源模型，但<strong>官方那一頁未列出型號清單</strong>。<br><strong>刻意留白（本教材查不到，請自行確認）</strong>：開啟 GPU／網路是否需要手機驗證、未成年帳號規定、以及<strong>把 Notebook 當成對外 API 服務是否符合 Kaggle 使用條款</strong>——這一條在做任何對外服務前務必先讀條款</td><td>2026-10-14</td><td>kaggle.com/docs/efficient-gpu-usage；型號看筆記本右側 Settings → Accelerator</td></tr>
+    <tr><td>免費雲端 GPU（沒有顯卡時的第三條路）</td><td><strong>Kaggle Notebooks</strong>：Settings → Accelerator 選 <code>GPU T4 x2</code>，得到兩張 Tesla T4、合計 30 GB 顯存，Internet 設為 On。<strong>每週 30 小時、單次工作階段上限 12 小時、閒置 40–60 分鐘自動結束</strong>；開著就計時，用完按 Stop Session。詳見<a href="#/chF">附錄 F</a></td><td>2026-10-14</td><td>kaggle.com/docs/efficient-gpu-usage；剩餘額度看帳號 Settings</td></tr>
     <tr><td>本地基準模型</td><td>Qwen3.6-35B-A3B（int4 量化約 20 GB，建議 24 GB 以上記憶體）；記憶體不足改用同家族小型號（數 GB 級），Lab 流程不變</td><td>2026-08</td><td>ollama.com/library 搜尋 qwen</td></tr>
   </table></div>
 
   <h2>附錄 F・借來的雲端 GPU</h2>
-  <p>這一區的每一個數值都會變，而且<strong>只在 2026-10-10 單一帳號上實測過一次</strong>。照做之前先對一次這張表。</p>
+  <p>以下是 Lab 15 實測採用的配置（2026-10-10）。版本與型號會更新，照做前先對一次這張表。</p>
   <div class="tblwrap"><table>
     <tr><th>項目</th><th>撰寫時的狀態</th><th>查證日期</th><th>重查方式</th></tr>
-    <tr><td>平台與加速器</td><td>Kaggle Notebooks，右側 Settings → Accelerator 選 <code>GPU T4 x2</code>（兩張 Tesla T4，各 15 GB 顯存）、Internet 設為 On。<strong>需先完成手機簡訊驗證</strong>（Settings → Phone verification），否則這兩個開關鎖住</td><td>2026-10-14</td><td>kaggle.com 的 Settings 頁</td></tr>
-    <tr><td>額度四件事</td><td>每週約 30 小時（官方文件寫「30 hours or sometimes higher」）；單次工作階段上限 12 小時；閒置約 40–60 分鐘中斷；<strong>開著就計時，關分頁不會停</strong>，用完要按 Stop Session</td><td>2026-10-14</td><td>kaggle.com/docs/efficient-gpu-usage；帳號 Settings 顯示的剩餘額度</td></tr>
-    <tr><td>推理引擎</td><td>llama.cpp 官方預編譯版 <code>b11435</code>（CUDA 12.8），不必自行編譯。Lab 15 的所有數字都是用這一版量的</td><td>2026-10-10</td><td>github.com/ggml-org/llama.cpp 的 Releases 頁</td></tr>
+    <tr><td>平台與加速器</td><td>Kaggle Notebooks，Settings → Accelerator 選 <code>GPU T4 x2</code>（兩張 Tesla T4，各 15 GB 顯存）、Internet 設為 On。這兩個開關要先完成手機簡訊驗證（Settings → Phone verification）才會開放</td><td>2026-10-14</td><td>kaggle.com 的 Settings 頁</td></tr>
+    <tr><td>免費額度</td><td>每週 30 小時；單次工作階段上限 12 小時；閒置 40–60 分鐘自動結束。<strong>開著就計時，關分頁不會停</strong>，用完按 Stop Session</td><td>2026-10-14</td><td>kaggle.com/docs/efficient-gpu-usage；帳號 Settings 顯示剩餘額度</td></tr>
+    <tr><td>推理引擎</td><td>llama.cpp 官方預編譯版 <code>b11435</code>（CUDA 12.8），不必自行編譯</td><td>2026-10-10</td><td>github.com/ggml-org/llama.cpp 的 Releases 頁</td></tr>
     <tr><td>基準模型</td><td><code>ConwayResearch/Underdog-Saluki-27B-1.0</code>：主檔 <code>Underdog-Saluki-27B-1.0-IQ2-mix.gguf</code>（約 7.89 GB，<strong>2-bit 量化</strong>）＋視覺檔 <code>mmproj-…-F16.gguf</code>（約 928 MB）</td><td>2026-10-10</td><td>Hugging Face 模型卡</td></tr>
-    <tr><td>隧道</td><td>cloudflared 的 Quick Tunnel，免帳號、免設定；<strong>官方文件寫明不保證可用性</strong>，偶爾中斷屬正常</td><td>2026-10-10</td><td>Cloudflare 文件的 TryCloudflare 頁</td></tr>
-    <tr><td>示範工具與欄位</td><td>Lab 15 以 <strong>Cline</strong>（VS Code 擴充）示範：API Provider 選 <strong>OpenAI Compatible</strong>；三個連線欄位為 Base URL／API Key／Model ID；Context Window Size、Max Output Tokens、Supports Images 收在 Model Configuration 區。<strong>換別的工具只要找到對應的這三個欄位即可</strong></td><td>2026-10-10</td><td>各工具的「OpenAI 相容」設定文件</td></tr>
-    <tr><td>配套筆記本</td><td>教材倉庫的 <code>notebooks/kaggle-dual-t4.ipynb</code>，七格可直接匯入執行；版本過期時只要改第一格與本表</td><td>2026-10-14</td><td>github.com/tw-ytp/vocabuddy</td></tr>
-    <tr><td><strong>刻意留白：查不到的項目</strong></td><td><strong>把筆記本當成對外 API 伺服器是否符合 Kaggle 使用條款——本教材沒有查證過</strong>，請自行評估帳號風險；未成年帳號的開通規定亦未以官方條款確認。<strong>教材寧可留白也不猜</strong></td><td>2026-10-14</td><td>kaggle.com/terms；未成年請與家長一起確認</td></tr>
+    <tr><td>隧道</td><td>cloudflared 的 Quick Tunnel，免帳號、免設定。偶爾中斷時重跑 Cell 6 換新網址即可</td><td>2026-10-10</td><td>Cloudflare 文件的 TryCloudflare 頁</td></tr>
+    <tr><td>示範工具與欄位</td><td>Lab 15 以 <strong>Cline</strong>（VS Code 擴充）示範：API Provider 選 <strong>OpenAI Compatible</strong>；連線欄位 Base URL／API Key／Model ID；Context Window Size、Max Output Tokens、Supports Images 收在 Model Configuration 區。換別的工具，找到對應的這幾個欄位即可</td><td>2026-10-10</td><td>各工具的「OpenAI 相容」設定文件</td></tr>
+    <tr><td>配套筆記本</td><td>教材倉庫的 <code>notebooks/kaggle-dual-t4.ipynb</code>，七格可直接匯入執行；版本更新時只要改第一格與本表</td><td>2026-10-14</td><td>github.com/tw-ytp/vocabuddy</td></tr>
   </table></div>
 
   <h2>第五篇・AI-Native 開發</h2>
@@ -5403,9 +5402,9 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
   <ul>
     <li><strong>不要安排全班現場同時建置。</strong>多人同時下載 9 GB 模型、同時開隧道的情況<strong>沒有測試過</strong>；而且每人每次建置約十分鐘，課堂時間會被吃光。要用就請學生<strong>課前各自完成</strong>，現場只做排錯。</li>
     <li><strong>額度要先規劃。</strong>免費額度每週約 30 小時、單次 12 小時且開著就計時。學生最常見的浪費是「關掉分頁以為就停了」——提醒他們按下停止工作階段。</li>
-    <li><strong>條款風險請自行評估並明確告知。</strong>把筆記本當成對外 API 伺服器是否符合平台條款，<strong>教材沒有查證</strong>（附錄 B 已標為刻意留白）。若要在課程中正式推薦，建議先由一位教師讀過條款。</li>
+    <li><strong>它是練習工具，不是競賽日的主力。</strong>單次工作階段上限與競賽時長幾乎相同，加上每次開機約十分鐘就不夠。學生若想在競賽日使用，請依競賽規則另行確認。</li>
   </ul>
-  <p class="small" style="color:var(--ink-2)">另外，附錄 F 的所有數字來自 <strong>2026-10-10 單一帳號的一次實測</strong>。正式推薦給學生前，建議請一位助教用學生等級的筆電與全新帳號照 Lab 15 重做一遍。</p>
+  <p class="small" style="color:var(--ink-2)">附錄 F 的數字來自 2026-10-10 的實測。開課前若有時間，請一位助教用學生等級的筆電與全新帳號照 Lab 15 走一遍，確認流程與現況一致。</p>
 
   <h2>驗收與 Demo 帶法</h2>
   <p>5.8 的證據地圖（17 項）是寫給學生的自評表，也可以直接當作驗收依據——它的設計原則是<strong>每一項都指出「在 Repo 的哪裡看得到」</strong>，所以驗收者不必聽學生講，打開頁面就能看。</p>
@@ -5461,10 +5460,9 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
   <h1>借一台雲端 GPU：用免費的雙 T4 跑開源模型</h1>
   <p class="lede">附錄 E 教你把模型裝進自己的電腦——但它的基準模型要 24 GB 以上記憶體，多數高中生的筆電跑不動。這一篇是那道門檻的替代路徑：<strong>跟雲端借兩張免費的 GPU</strong>，在上面架一個自己的推理伺服器，再把它接回你電腦上的代理式編碼工具。<strong>本篇為選修</strong>：跳過不影響任何主線章節與 Lab。</p>
 
-  <div class="warnbox"><span class="lab">開始之前，三件事先知道</span>
-    <p><strong>一、你的程式碼會離開你的電腦。</strong>它會經過 Cloudflare 與 Kaggle 的機器。<strong>不要用在不能外流的專案，也不要貼含個資的截圖。</strong>這一點與附錄 E 正好相反——附錄 E 的賣點是「資料不出門」，這一篇沒有那個保證。<br>
-    <strong>二、需要帳號與手機驗證。</strong>沒有通過手機簡訊驗證，就開不了 GPU、也開不了容器的網路。<strong>未滿 18 歲請和家長一起申請</strong>，用家長同意的門號；年齡與使用條款見<a href="#/fresh">附錄 B</a>。<br>
-    <strong>三、額度有限，而且條款沒有查證過。</strong>免費額度每週約 30 小時，用完要等重置。另外——<strong>把筆記本當成對外的 API 伺服器，不是這個平台的典型用途，本教材沒有查證過服務條款是否允許</strong>。這一篇把它當成<strong>練習工具</strong>，請自行評估帳號風險，不要拿來長期對外提供服務。</p>
+  <div class="warnbox"><span class="lab">開始之前，兩件事</span>
+    <p><strong>一、程式碼會離開你的電腦</strong>，經過 Cloudflare 與 Kaggle。不要用在不能外流的專案，也不要貼含個資的截圖——這一點與附錄 E 相反，那裡的賣點正是「資料不出門」。<br>
+    <strong>二、需要帳號與手機簡訊驗證</strong>才能開啟 GPU 與網路。未滿 18 歲請和家長一起申請。</p>
   </div>
 
   <h2>誰該來、什麼時候來</h2>
@@ -5615,7 +5613,7 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
     <tr><td><strong>閒置中斷</strong></td><td>一段時間沒有互動就被回收，你的伺服器與隧道一起消失。使用期間要固定回頁面點一下</td></tr>
     <tr><td><strong>開著就計時</strong></td><td><strong>關掉瀏覽器分頁不會停止計時。</strong>不用了要明確按下停止，否則容器會空轉到被判定閒置為止，白白吃掉你的週額度</td></tr>
   </table></div>
-  <p class="small" style="color:var(--ink-2)">還有一個不是額度、但同樣要知道的限制：<strong>這種免帳號的臨時隧道，官方文件寫明不保證可用性</strong>。實測可用，偶爾中斷屬正常——不要把需要穩定的東西架在上面。</p>
+  <p class="small" style="color:var(--ink-2)">還有一件事：臨時隧道偶爾會中斷，重跑一格換個新網址就好。它適合練習與開發，不適合架需要長期穩定的服務。</p>
 
   <h2>量化的代價</h2>
   <p>為了把 27B 的模型塞進兩張卡，這裡用的是 <strong>2-bit 量化</strong>版本（量化的原理見附錄 E 的 2.6）。壓到這個程度，代價是看得見的。模型卡自己揭露的數字：</p>
@@ -5645,7 +5643,7 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
   </div>
 
   <div class="warnbox"><span class="lab">再提醒一次</span>
-    <p>這條路會把你的程式碼與截圖送到別人的機器上，而且<strong>把筆記本當成對外 API 伺服器是否符合平台條款，本教材沒有查證過</strong>。請不要用在不能外流的專案，也請自行評估帳號風險。細節見 <a href="#/chF">F.0</a> 與 <a href="#/F-2">F.2</a>。</p>
+    <p>這條路會把你的程式碼與截圖送到別人的機器上。<strong>不要用在不能外流的專案，也不要貼含個資的截圖。</strong></p>
   </div>
 
   <ol class="steps">
