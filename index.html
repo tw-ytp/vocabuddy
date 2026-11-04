@@ -390,7 +390,7 @@ img{max-width:100%}
 <aside class="sidebar" id="sidebar">
   <div class="side-brand">
     <div class="t">YTP VocaBuddy<br>開發者之路</div>
-    <div class="s">GitHub 與 AI 應用程式開發<br>線上自學教材・v2.3</div>
+    <div class="s">GitHub 與 AI 應用程式開發<br>線上自學教材・v2.4</div>
   </div>
   <nav class="nav" id="nav">
     <a href="#/home"><span class="no">◈</span>導讀：這份教材怎麼用</a>
@@ -2583,7 +2583,7 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><th>順序</th><th>動作</th><th>在找什麼</th></tr>
     <tr><td>1</td><td><code>git diff</code> 逐行讀</td><td><strong>它改了哪些你沒要它改的地方。</strong>這比「改對了沒」更常出問題</td></tr>
     <tr><td>2</td><td>自己跑一次</td><td>真的能跑嗎？走一次完整的使用者流程，不是只看它有沒有噴錯</td></tr>
-    <tr><td>3</td><td>自己跑測試，<strong>看到輸出</strong></td><td><code>node test_srs.js</code> 印出「4 tests passed ✓」——你親眼看到那一行</td></tr>
+    <tr><td>3</td><td>自己跑測試，<strong>看到輸出</strong></td><td><code>node test_srs.js</code> 印出「5 tests passed ✓」——你親眼看到那一行</td></tr>
   </table></div>
   <p>第三篇你寫的 <code>test_srs.js</code> 與 <code>check_words.js</code>，在這一篇有了新意義：<strong>它們是你驗收 AI 產出的工具。</strong>測試寫得越好，你越敢放手——這不是巧合，是同一件事的兩面。</p>
 
@@ -2841,17 +2841,20 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>本地基準模型</td><td>Qwen3.6-35B-A3B（int4 量化約 20 GB，建議 24 GB 以上記憶體）；記憶體不足改用同家族小型號（數 GB 級），Lab 流程不變</td><td>2026-08</td><td>ollama.com/library 搜尋 qwen</td></tr>
   </table></div>
 
-  <h2>附錄 F・免費雲端伺服器（T4x2 ＋ Saluki-27B）</h2>
-  <p>以下是 Lab 15 實測採用的配置（2026-10-10）。版本與型號會更新，照做前先對一次這張表。</p>
+  <h2>附錄 F・免費雲端伺服器（T4x2 ＋ Qwen3.8-27B）</h2>
+  <p>以下是 Lab 15 實測採用的配置（2026-11-04）。版本與型號會更新，照做前先對一次這張表；改這張表時，配套筆記本的第一格、F.1 的數據表與 Lab 15 Cell 5 的參考值要一起改。</p>
   <div class="tblwrap"><table>
     <tr><th>項目</th><th>撰寫時的狀態</th><th>查證日期</th><th>重查方式</th></tr>
     <tr><td>平台與加速器</td><td>Kaggle Notebooks，Settings → Accelerator 選 <code>GPU T4 x2</code>（兩張 Tesla T4，各 16 GB、合計 32 GB 顯存；<code>nvidia-smi</code> 會顯示各 15360 MiB，那是扣掉保留區後的可用值）、Internet 設為 On。這兩個開關要先完成手機簡訊驗證（Settings → Phone verification）才會開放</td><td>2026-10-14</td><td>kaggle.com 的 Settings 頁</td></tr>
     <tr><td>免費額度</td><td>每週 30 小時；單次工作階段上限 12 小時；閒置 40–60 分鐘自動結束。<strong>開著就計時，關分頁不會停</strong>，用完按 Stop Session</td><td>2026-10-14</td><td>kaggle.com/docs/efficient-gpu-usage；帳號 Settings 顯示剩餘額度</td></tr>
-    <tr><td>推理引擎</td><td>llama.cpp 官方預編譯版 <code>b11435</code>（CUDA 12.8），不必自行編譯</td><td>2026-10-10</td><td>github.com/ggml-org/llama.cpp 的 Releases 頁</td></tr>
-    <tr><td>基準模型</td><td><code>ConwayResearch/Underdog-Saluki-27B-1.0</code>：主檔 <code>Underdog-Saluki-27B-1.0-IQ2-mix.gguf</code>（約 7.89 GB，<strong>2-bit 量化</strong>）＋視覺檔 <code>mmproj-…-F16.gguf</code>（約 928 MB）</td><td>2026-10-10</td><td>Hugging Face 模型卡</td></tr>
+    <tr><td>推理引擎</td><td>llama.cpp 官方預編譯版 <code>b12063</code>（CUDA 12.8），不必自行編譯</td><td>2026-11-04</td><td>github.com/ggml-org/llama.cpp 的 Releases 頁</td></tr>
+    <tr><td>基準模型</td><td>Qwen3.8-27B Coder390 EfficientThink 的 <strong>Q2 量化</strong>版（每個參數平均約 2 bit），<strong>內建 MTP 草稿頭</strong>；視覺檔 Q8_0；兩檔合計約 14 GB。社群成員上傳的微調合併版，沒有公開評測；Hugging Face 倉庫名稱見筆記本 Cell 3</td><td>2026-11-04</td><td>該 Hugging Face 倉庫頁；<strong>開課前先確認還在</strong>，下架時的替代配置見 <code>docs/MAINTENANCE.md</code></td></tr>
+    <tr><td>伺服器設定</td><td>上下文 <code>-c 262144</code>、<code>--fit off</code>、KV 快取 <code>q8_0</code>、<code>-b 4096 -ub 1024</code>、張量並行 <code>-sm tensor -ts 1,1</code>；推測解碼 <code>--spec-type ngram-mod,draft-mtp</code>、<code>--spec-draft-n-max 4</code>（設 8 伺服器會退出）；對外名稱 <code>--alias qwen3.8-27b</code></td><td>2026-11-04</td><td>重跑筆記本 Cell 4、5</td></tr>
+    <tr><td>實測速度</td><td>不開推測解碼約 15 tok/s；並用後寫新程式 35.0、改既有檔案 109.4 tok/s（暖機後三題中位數）；顯存 14765 / 13887 MiB。F.1 的單卡對照值（8.6 tok/s）量自同一組硬體上 2026-10 的配置，本次未重量</td><td>2026-11-04</td><td>重跑 Lab 15 的 Cell 5</td></tr>
     <tr><td>隧道</td><td>cloudflared 的 Quick Tunnel，免帳號、免設定。偶爾中斷時重跑 Cell 6 換新網址即可</td><td>2026-10-10</td><td>Cloudflare 文件的 TryCloudflare 頁</td></tr>
-    <tr><td>示範工具與欄位</td><td>Lab 15 以 <strong>Cline</strong>（VS Code 擴充）示範：API Provider 選 <strong>OpenAI Compatible</strong>；連線欄位 Base URL／API Key／Model ID；Context Window Size、Max Output Tokens、Supports Images 收在 Model Configuration 區。換別的工具，找到對應的這幾個欄位即可</td><td>2026-10-10</td><td>各工具的「OpenAI 相容」設定文件</td></tr>
-    <tr><td>配套筆記本</td><td>教材倉庫的 <code>notebooks/kaggle-dual-t4.ipynb</code>，七格可直接匯入執行；版本更新時只要改第一格與本表</td><td>2026-10-14</td><td>github.com/tw-ytp/vocabuddy</td></tr>
+    <tr><td>示範工具與欄位</td><td>Lab 15 以 <strong>Cline</strong>（VS Code 擴充）示範：API Provider 選 <strong>OpenAI Compatible</strong>；連線欄位 Base URL／API Key／Model ID（<code>qwen3.8-27b</code>）；Context Window Size（262144）、Max Output Tokens（8192）、Supports Images 收在 Model Configuration 區。換別的工具，找到對應的這幾個欄位即可</td><td>2026-11-04</td><td>各工具的「OpenAI 相容」設定文件</td></tr>
+    <tr><td>配套筆記本</td><td>教材倉庫的 <code>notebooks/kaggle-dual-t4.ipynb</code>，七格可直接匯入執行；版本釘在第一格，與本表同步</td><td>2026-11-04</td><td>github.com/tw-ytp/vocabuddy</td></tr>
+    <tr><td><strong>刻意留白：查不到或沒測的</strong></td><td>Kaggle 使用條款是否允許把筆記本當成對外的 API 服務；Kaggle 對未成年帳號的規定；Cline 以外的工具接這個後端是否可用；<strong>150K–200K token 的長提示</strong>（顯存只剩約 600 MB，未實測會不會撐住）。<strong>教材寧可留白也不猜</strong></td><td>2026-11-04</td><td>kaggle.com/terms；其餘需實測</td></tr>
   </table></div>
 
   <h2>第五篇・AI-Native 開發</h2>
@@ -2864,14 +2867,14 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>AGENTS.md</td><td>官網 agents.md，由 Linux Foundation 底下的 Agentic AI Foundation 託管；<strong>刻意沒有嚴格規格</strong>——就是標準 Markdown</td><td>2026-09</td><td>agents.md</td></tr>
     <tr><td>技能資料夾位置</td><td>各家不同（Codex 與 Antigravity 為 <code>.agents/skills</code>、GitHub Copilot 為 <code>.github/skills</code>）。<strong>最可靠的作法是直接問你的工具</strong>（Lab 13 步驟 1）</td><td>2026-09</td><td>各家官方文件的 Skills 頁</td></tr>
     <tr><td>子代理設定位置</td><td>Claude Code <code>.claude/agents/</code>、Codex <code>.codex/agents/</code>、Gemini CLI <code>.gemini/agents/</code>、Cursor <code>.cursor/agents/</code>；GitHub Copilot 稱「自訂代理」（<code>.github/agents/</code>），<strong>官方未使用 subagent 一詞</strong></td><td>2026-09</td><td>各家官方文件的 Subagents 頁</td></tr>
-    <tr><td>官方安裝／入門頁（Lab 11）</td><td>Claude Code：code.claude.com/docs｜Codex CLI：developers.openai.com/codex/cli/｜Antigravity：antigravity.google/docs/getting-started｜Cursor：cursor.com/docs/get-started/installation｜Copilot CLI：docs.github.com「Install Copilot CLI」｜Gemini CLI：github.com/google-gemini/gemini-cli</td><td>2026-09</td><td>同左各頁</td></tr>
-    <tr><td>帳號與費用</td><td>Claude Code 需 Claude 付費方案或 API 金鑰；Codex 需 ChatGPT 帳號登入；Antigravity 未訂閱亦有每週額度；Cursor 有 Hobby 免費方案；Copilot 有 Copilot Free；Gemini CLI 免費額度 60 次/分、1000 次/日。<strong>各家方案變動頻繁</strong></td><td>2026-09</td><td>各家官方定價頁</td></tr>
+    <tr><td>官方安裝／入門頁（Lab 11）</td><td>Claude Code：code.claude.com/docs｜Codex CLI：learn.chatgpt.com/docs/codex/cli（舊網址 developers.openai.com/codex/cli/ 會轉過去）｜Antigravity：antigravity.google/docs/getting-started｜Cursor：cursor.com/docs/get-started/quickstart（舊的 installation 頁會轉過去）｜Copilot CLI：docs.github.com「Install Copilot CLI」｜Gemini CLI：github.com/google-gemini/gemini-cli。六頁於 2026-11-04 全部重新點過</td><td>2026-11</td><td>同左各頁</td></tr>
+    <tr><td>帳號與費用</td><td>Claude Code 需 Claude 訂閱或 Console 帳號（終端機版另支援第三方供應商）；Codex 第一次執行選「Sign in with ChatGPT」，哪些方案可用文件未明寫；Antigravity 需 Google 帳號，分 Free／Pro／Ultra 方案，免費額度數字官方頁未載明；Cursor 免費方案的名稱與內容本次查證不到（見下列留白）；Copilot Free 含 Copilot CLI（每月 2,000 次補全，不含雲端 coding agent）；Gemini CLI 以個人 Google 帳號免費 60 次/分、1,000 次/日。<strong>各家方案變動頻繁</strong></td><td>2026-11</td><td>各家官方定價頁</td></tr>
     <tr><td>年齡與使用條款</td><td>部分 AI 服務要求使用者年滿 18 歲，或需家長／監護人協助開通；規定隨服務與地區而異。<strong>未成年請與家長一起確認後再申請</strong>。附錄 F 用到的 Kaggle 亦同，且需手機簡訊驗證才能開啟 GPU 與網路</td><td>2026-09</td><td>各服務的使用條款與說明中心</td></tr>
-    <tr><td><strong>刻意留白：查不到的項目</strong></td><td>Antigravity 的 IDE（非命令列版）是否自動讀 <code>AGENTS.md</code>；Cursor 與 Codex 免費方案的官方口徑不一致；各家免費層能否完成一次完整的代理式任務（需實測）。<strong>教材寧可留白也不猜</strong></td><td>2026-09</td><td>各家官方文件；免費層需實測</td></tr>
+    <tr><td><strong>刻意留白：查不到的項目</strong></td><td>Antigravity 的 IDE（非命令列版）是否自動讀 <code>AGENTS.md</code>，以及它免費方案的額度數字（官方方案頁 2026-11-04 無法讀取）；Cursor 免費方案的名稱與內容、Codex 哪些方案可用（官方頁未明寫）；各家免費層能否完成一次完整的代理式任務（需實測）。<strong>教材寧可留白也不猜</strong></td><td>2026-11</td><td>各家官方文件；免費層需實測</td></tr>
     <tr><td>本教材授權</td><td>內容採 CC BY-NC-SA 4.0；教材中的程式碼片段採 MIT</td><td>2026-09</td><td>教材倉庫的 <code>LICENSE</code></td></tr>
   </table></div>
   <div class="footer-note">
-    YTP VocaBuddy 開發者之路・教材版本 v2.3（新增附錄 F 特別篇「免費雲端伺服器：T4x2 ＋ Saluki-27B」；主線十三個 Lab 不變，選修特別篇兩篇共兩個 Lab。本地端 LLM 為附錄 E、免費雲端伺服器為附錄 F）・貫穿案例：VocaBuddy 背單字夥伴<br>
+    YTP VocaBuddy 開發者之路・教材版本 v2.4（附錄 F 改用內建 MTP 的模型與混合推測解碼、上下文 256K；勘誤 E-033～E-036；附錄 B 第五篇專區部分重查；主線十三個 Lab 不變，選修特別篇兩篇共兩個 Lab。本地端 LLM 為附錄 E、免費雲端伺服器為附錄 F）・貫穿案例：VocaBuddy 背單字夥伴<br>
     教材網址 <a href="https://tw-ytp.github.io/vocabuddy/">tw-ytp.github.io/vocabuddy</a>｜原始檔與改版歷史 <a href="https://github.com/tw-ytp/vocabuddy" target="_blank" rel="noopener">github.com/tw-ytp/vocabuddy</a><br>
     發現錯誤或有改善建議？歡迎直接<a href="https://github.com/tw-ytp/vocabuddy/issues" target="_blank" rel="noopener">開一個 issue</a>——這正是本教材教你的協作方式。內容採 CC BY-NC-SA 4.0 授權，程式碼片段採 MIT。<br>
     教學路線：主題分篇為骨、專案旅程為魂｜第一篇＝工作流程軸＋情境開場｜第二篇＝白盒優先｜第三篇＝功能衝刺（Sprint 1–4＝Lab 5–8）｜第四篇＝上線與發表（Lab 9–10）｜第五篇＝AI-Native 開發（工具中立＋Lab 11–14）｜特別篇＝附錄 E 本地端 LLM（Lab 4）、附錄 F 免費雲端伺服器（Lab 15），皆為選修｜適用對象：具競賽程式基礎的高中生
@@ -3712,7 +3715,7 @@ if __name__ == "__main__":
     <tr><td class="mono">ModuleNotFoundError: anthropic</td><td>裝錯環境。確認 <code>pip</code> 與 <code>python</code> 是同一套（可用 <code>python -m pip install anthropic</code>）。</td></tr>
     <tr><td class="mono">401 authentication_error</td><td>環境變數沒設好或終端機沒重開。<code>echo $ANTHROPIC_API_KEY</code>（Windows：<code>echo %ANTHROPIC_API_KEY%</code>）檢查。</td></tr>
     <tr><td class="mono">429 rate_limit_error</td><td>呼叫太快或額度用盡——免費方案都有速率限制（rate limit，見附錄 B）。等幾十秒重試；批次任務在迴圈裡加 <code>time.sleep</code>。</td></tr>
-    <tr><td>JSON 常常解析失敗</td><td>prompt 再強調「只輸出 JSON、不要 markdown 圍欄」；或把 temperature 調低。這是 AI 工程的日常，第三篇教更穩的 Structured Output。</td></tr>
+    <tr><td>JSON 常常解析失敗</td><td>prompt 再強調「只輸出 JSON、不要 markdown 圍欄」，並給一個完整的 JSON 範例讓它照抄。這是 AI 工程的日常，第三篇教更穩的 Structured Output。</td></tr>
     <tr><td>中文變成 \uXXXX</td><td>印出時用 <code>ensure_ascii=False</code>（v2 已含）。</td></tr>
     <tr><td class="mono">pip 裝到 0.x，或說找不到 1.x</td><td>Python 低於 3.10。升級 Python 後 <code>python -m pip install "anthropic&gt;=1,&lt;2"</code>。</td></tr>
     <tr><td class="mono">AttributeError: 'ThinkingBlock' object has no attribute 'text'</td><td>用了 <code>content[0].text</code>，而模型先回了 thinking 區塊。改用 <code>text_of()</code>（原理見 2.5）。</td></tr>
@@ -3749,7 +3752,7 @@ if __name__ == "__main__":
     </li>
     <li>
       <h4>用程式呼叫本地 API</h4>
-      <p>開分支 <code>feature/local-fallback</code>（issue #3）。Ollama 在本機開了 HTTP 服務，用 <code>requests</code> 就能打：</p>
+      <p>開分支 <code>feature/local-fallback</code>（先開一個 issue，記下它的編號 N）。Ollama 在本機開了 HTTP 服務，用 <code>requests</code> 就能打：</p>
       <div class="termwrap"><pre class="term"><span class="o">import requests
 
 LOCAL_MODEL = "模型名稱"   # 與 ollama pull 的一致；見附錄 B
@@ -4284,7 +4287,7 @@ async function aiExample(){
                c.zh, document.createElement("br"), "聯想：" + c.tip);
   }
 }</span></pre></div>
-      <p>對照第二篇：這 40 行裡有 Structured Output（system＋低溫＋parse＋驗證）、降階（catch 後給人話而非 traceback）、快取。Lab 3 學的每一招都上場了。</p>
+      <p>對照第二篇：這 40 行裡有 Structured Output（system 骨架＋parse＋驗證）、降階（catch 後給人話而非 traceback）、快取。Lab 3 學的每一招都上場了。</p>
     </li>
     <li>
       <h4>測試三連</h4>
@@ -5004,7 +5007,7 @@ jobs:
         <rect x="222" y="146" width="230" height="104" rx="8" fill="var(--term-bg)"/>
         <text x="238" y="172" class="mono" fill="#9DB4AC">checkout → setup-node</text>
         <text x="238" y="196" class="mono" fill="#D7E3DC">node test_srs.js</text>
-        <text x="360" y="196" class="mono" fill="#7CBF7E">4 passed ✓</text>
+        <text x="360" y="196" class="mono" fill="#7CBF7E">5 passed ✓</text>
         <text x="238" y="220" class="mono" fill="#D7E3DC">node check_words.js</text>
         <text x="380" y="220" class="mono" fill="#7CBF7E">18 字 ✓</text>
         <text x="238" y="242" class="mono" fill="#8FA69E">每一步都留下紀錄，人人可查</text>
@@ -5457,7 +5460,7 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
 <!-- ================= 附錄 F 導讀 ================= -->
 <section class="page" id="p-chF">
   <div class="eyebrow">附錄 F・特別篇（選修）</div>
-  <h1>免費雲端伺服器：T4x2 ＋ Saluki-27B</h1>
+  <h1>免費雲端伺服器：T4x2 ＋ Qwen3.8-27B</h1>
   <p class="lede">附錄 E 教你把模型裝進自己的電腦——但它的基準模型要 24 GB 以上記憶體，多數高中生的筆電跑不動。這一篇是那道門檻的替代路徑：<strong>跟雲端借兩張免費的 GPU</strong>，在上面架一個自己的推理伺服器，再把它接回你電腦上的代理式編碼工具。<strong>本篇為選修</strong>：跳過不影響任何主線章節與 Lab。</p>
 
   <div class="warnbox"><span class="lab">開始之前，兩件事</span>
@@ -5477,9 +5480,9 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
   <p><strong>前置</strong>：主線 2.1–2.5 與 Lab 3（與附錄 E 相同）。做過 Lab 4 的人可以多做一個延伸步驟，但不是必要前置。<strong>時間</strong>：閱讀約 40 分鐘，Lab 15 約 60–90 分鐘。<strong>每次開機重建約十分鐘</strong>——這不是一次裝好就一勞永逸的東西，下面會說為什麼。</p>
   <div class="tblwrap"><table>
     <tr><th>單元</th><th>內容</th></tr>
-    <tr><td><a href="#/F-1">F.1　雲端 GPU 上的推理伺服器</a></td><td>一個請求的完整旅程（圖 34）、隧道是什麼、三個讓速度差好幾倍的設定</td></tr>
+    <tr><td><a href="#/F-1">F.1　雲端 GPU 上的推理伺服器</a></td><td>一個請求的完整旅程（圖 34）、隧道是什麼、三個讓速度差好幾倍的設定（含兩種推測解碼）</td></tr>
     <tr><td><a href="#/F-2">F.2　三條路怎麼選</a></td><td>雲端 API／本地端／借來的 GPU 的取捨、額度的四個形狀、量化的代價</td></tr>
-    <tr><td><a href="#/lab15">Lab 15　在雲端架起自己的模型服務</a></td><td>七個步驟建起服務、五項驗收、接上代理式編碼工具，附特別篇自我檢測兩題</td></tr>
+    <tr><td><a href="#/lab15">Lab 15　在雲端架起自己的模型服務</a></td><td>七個步驟建起服務、五項驗收、接上代理式編碼工具、自己量一次四種推測解碼，附特別篇自我檢測兩題</td></tr>
   </table></div>
 
   <div class="keybox"><span class="lab">這一篇不在任何工作坊的進度裡</span>
@@ -5560,24 +5563,31 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
 
   <h2>三個讓速度差好幾倍的設定</h2>
 
-  <p><strong>① 張量並行，不是分層接力。</strong>給了兩張卡，預設不會比較快——預設模式是把<strong>不同的層</strong>放到不同的卡上，token 依序流過，同一時間<strong>只有一張卡在算</strong>，另一張在等。這麼做只合併了顯存，沒有合併算力。要兩張卡<strong>同時</strong>算，必須明確要求「把每一層拆成兩半分給兩張卡」——這就是張量並行（tensor parallelism）。實測：單卡 8.6 tok/s，張量並行 15.0 tok/s。</p>
+  <p><strong>① 張量並行，不是分層接力。</strong>給了兩張卡，預設不會比較快——預設模式是把<strong>不同的層</strong>放到不同的卡上，token 依序流過，同一時間<strong>只有一張卡在算</strong>，另一張在等。這麼做只合併了顯存，沒有合併算力。要兩張卡<strong>同時</strong>算，必須明確要求「把每一層拆成兩半分給兩張卡」——這就是張量並行（tensor parallelism）。同一組硬體實測：只用一張卡約 8.6 tok/s，張量並行約 15 tok/s——快 1.7 倍，不到兩倍，因為兩張卡每一層都要交換中間結果。</p>
 
-  <p><strong>② n-gram 推測解碼。</strong>模型一次只生一個 token，慢。推測解碼（speculative decoding）的想法是：<strong>先用便宜的方法猜一串 token，再讓模型一次驗證整串</strong>，猜對就一次前進好幾步，猜錯就退回照常生成——<strong>輸出內容完全不變，只是變快</strong>。n-gram 版本的「便宜方法」就是直接從上下文裡找重複出現的片段。所以它只在<strong>輸出與輸入高度重疊</strong>時有效：請模型<strong>改寫一個既有檔案</strong>，大部分內容原封不動，猜得準，快四到五倍；請它<strong>從零寫新程式</strong>，沒東西好猜，完全沒差。</p>
+  <p><strong>② 推測解碼：兩種猜法。</strong>模型一次只生一個 token，慢。推測解碼（speculative decoding）的想法是：<strong>先用便宜的方法猜一串 token，再讓模型一次驗證整串</strong>，猜對就一次前進好幾步，猜錯就退回照常生成——<strong>輸出內容完全不變，只是變快</strong>。差別在「便宜的方法」是什麼：</p>
+  <div class="tblwrap"><table>
+    <tr><th>猜法</th><th>猜的來源</th><th>什麼時候有效</th></tr>
+    <tr><td><strong>n-gram</strong></td><td>直接從上下文裡找重複出現的片段</td><td>只在<strong>輸出與輸入高度重疊</strong>時：改寫既有檔案猜得準；從零寫新程式沒東西好猜，接受率只有 2%</td></tr>
+    <tr><td><strong>MTP</strong>（multi-token prediction）</td><td>模型自帶的一個小「草稿頭」，每一步順便猜後面幾個 token</td><td>不靠上下文，<strong>寫新程式也有效</strong>；但一次猜太多，驗證成本反而吃掉收益</td></tr>
+  </table></div>
+  <p>兩種可以並用：<strong>有得抄就抄，沒得抄就自己猜</strong>。本篇的模型內建 MTP，所以 Lab 15 兩種都開。還有一個該調的參數是「一次猜幾個」：n-gram 預設一次猜 48 到 64 個，寫新程式時幾乎全錯，猜錯的那一串還是要花時間驗證，所以單開 n-gram 寫新程式反而比不開還慢一點；MTP 一次猜 4 個剛好，猜到 6 個寫新程式就慢下來，猜到 8 個伺服器直接退出。</p>
 
-  <p><strong>③ 上下文視窗吃顯存。</strong>5.2 說過上下文視窗是預算；在這裡它還有另一個成本——<strong>開得越大，佔掉的顯存越多</strong>。顯存不夠載不起來時，把上下文調小一半通常就過了。</p>
+  <p><strong>③ 上下文視窗吃顯存——但可以省。</strong>5.2 說過上下文視窗是預算；在這裡它還有另一個成本：模型算過的每個 token 都要把中間結果留在顯存裡（叫 KV 快取），<strong>上下文開得越大，佔掉的顯存越多</strong>。把 KV 快取也量化到 8 bit（原理同 2.6 的權重量化），就能在兩張 15 GB 的卡上把上下文開到 256K，而且實測生成速度沒有變。代價是顯存只剩約 600 MB 餘裕，真的塞進 15 萬 token 以上的提示會不會撐住，還沒有實測。</p>
 
   <h2>實測數據</h2>
   <div class="tblwrap"><table>
-    <tr><th>設定</th><th>從零寫新程式</th><th>修改既有檔案</th></tr>
-    <tr><td>單卡（預設的分層接力）</td><td>8.6 tok/s</td><td>—</td></tr>
-    <tr><td>張量並行</td><td>15.0 tok/s</td><td>15.4 tok/s</td></tr>
-    <tr><td><strong>張量並行＋n-gram 推測解碼</strong></td><td>15.1 tok/s</td><td><strong>72.3 tok/s</strong></td></tr>
+    <tr><th>推測解碼設定</th><th>從零寫新程式</th><th>修改既有檔案</th><th>說明</th></tr>
+    <tr><td>不開</td><td>15.2 tok/s</td><td>14.7 tok/s</td><td>基準</td></tr>
+    <tr><td>只開 MTP（一次猜 4 個）</td><td>33.6 tok/s</td><td>42.2 tok/s</td><td>兩邊都快一倍多</td></tr>
+    <tr><td>只開 n-gram</td><td>15.7 tok/s</td><td>75.1 tok/s</td><td>寫新程式時接受率 2%</td></tr>
+    <tr><td><strong>n-gram ＋ MTP（採用）</strong></td><td><strong>32.0 tok/s</strong></td><td><strong>105.3 tok/s</strong></td><td>兩邊兼顧</td></tr>
   </table></div>
-  <p class="small" style="color:var(--ink-2)">量測日期 2026-10-10，模型與引擎版本見<a href="#/fresh">附錄 B</a>。每組取 300–600 個輸出 token、溫度 0、關閉思考模式。完整的七組對照留在原始建置手冊裡。</p>
+  <p class="small" style="color:var(--ink-2)">量測日期 2026-11-04，模型與引擎版本見<a href="#/fresh">附錄 B</a>。張量並行、上下文 256K、KV 快取 8 bit 全程相同；每組先暖機，再各用三個不同題目取中位數，溫度 0、關閉思考模式。Lab 15 的正式驗收用同一套方法量到 35.0 與 109.4。</p>
 
   <div class="keybox"><span class="lab">核心觀念</span>
-    <p><strong>硬體一樣，設定不同，速度可以差好幾倍。</strong>上面三個設定沒有一個改動了模型本身，但合起來讓「改檔案」這件事快了八倍。拿到任何新硬體或新服務，先問一句「預設值是為誰調的」——預設值通常是為<strong>最不會出錯</strong>調的，不是為<strong>你的任務</strong>調的。<br>
-    還有一件更重要的事：<strong>測速要用接近實際用途的任務。</strong>第一次量這個設定時，用的是「同一個函式重複六百次」的提示，量到 45 tok/s，看起來很漂亮——換成真實檔案後，寫新程式是 15、改檔案是 72。<strong>那個 45 什麼也沒代表。</strong>benchmark 的第一個問題永遠是「它測的是不是我要做的事」。</p>
+    <p><strong>硬體一樣，設定不同，速度可以差好幾倍。</strong>上面三個設定沒有一個改動了模型本身，但合起來讓「改檔案」這件事快了七倍。拿到任何新硬體或新服務，先問一句「預設值是為誰調的」——預設值通常是為<strong>最不會出錯</strong>調的，不是為<strong>你的任務</strong>調的。<br>
+    還有一件更重要的事：<strong>測速本身會騙人，而且有三種騙法。</strong>第一，用不具代表性的任務：第一次量這套設定時，提示是「同一個函式重複六百次」，量到 45 tok/s，換成真實檔案後只剩 15。第二，同一題重複問：溫度 0 時輸出完全相同，n-gram 會直接抄上一次的答案，數字虛高。第三，只量一次：冷啟動的第一題一定最慢，同一組重跑也有約 8% 的差距。所以 Lab 15 的 Cell 5 先暖機、每題不同、三題取中位數——<strong>benchmark 的第一個問題永遠是「它測的是不是我要做的事」，第二個是「它量到的是不是運氣」。</strong></p>
   </div>
 
   <div class="pgnav"><a href="#/chF"><span class="dir">上一頁</span>附錄 F　導讀</a><a class="nx" href="#/F-2"><span class="dir">下一頁</span>F.2　三條路怎麼選</a></div>
@@ -5589,44 +5599,38 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
   <h1>三條路怎麼選</h1>
 
   <div class="scene"><span class="lab">情境</span>
-    <p>現在你手上有三個選項：付錢用雲端 API、在自己電腦跑模型、跟雲端借 GPU。<span class="q">隊友問你「那我們到底該用哪一個」——你需要的不是「哪個最好」，是「什麼情況下哪個合適」。</span></p>
+    <p>現在你手上有三個選項：付錢用雲端 API、在自己電腦跑模型、跟雲端借 GPU。<span class="q">隊友問「那我們到底該用哪一個」——你要回答的不是「哪個最好」，是「什麼情況下哪個合適」。</span></p>
   </div>
 
-  <p>2.7 比較過前兩條；把第三條加進來，決策表長這樣：</p>
+  <p>2.7 比較過前兩條；把第三條加進來：</p>
   <div class="tblwrap"><table>
     <tr><th>面向</th><th>雲端 API（主線）</th><th>本地端（附錄 E）</th><th>借來的 GPU（本篇）</th></tr>
     <tr><td>模型跑在哪</td><td>廠商的伺服器</td><td>你自己的電腦</td><td>平台免費提供的兩張卡</td></tr>
     <tr><td>門檻</td><td>金鑰與費用</td><td>夠大的記憶體（基準模型要 24 GB 以上）</td><td>帳號＋手機驗證；<strong>每次開機約十分鐘</strong></td></tr>
     <tr><td>資料離開你的電腦嗎</td><td>會</td><td><strong>不會</strong></td><td>會，而且多經過一層隧道服務</td></tr>
     <tr><td>斷網還能用嗎</td><td>不能</td><td><strong>能</strong></td><td>不能</td></tr>
-    <tr><td>模型能力</td><td>最強</td><td>看你的硬體</td><td>中間；但這裡用的是 2-bit 量化版，見下</td></tr>
+    <tr><td>模型能力</td><td>最強</td><td>看你的硬體</td><td>中間；Q2 量化、沒有公開評測，見下</td></tr>
     <tr><td>適合拿來做什麼</td><td>VocaBuddy 的 AI 層</td><td>AI 層的斷網備援</td><td><strong>練習用的程式助理</strong>；次要用途是 AI 層的第三個 provider</td></tr>
   </table></div>
-  <p>注意第三欄<strong>沒有繼承附錄 E 的兩個賣點</strong>：資料照樣出門、斷網照樣不能用。它換來的只有一件事——<strong>不必有好硬體，也不必付錢</strong>。認清這點，你才不會在該用本地端的場合誤用它。</p>
+  <p>第三欄<strong>沒有附錄 E 的兩個賣點</strong>：資料照樣出門、斷網照樣不能用。它換來的只有一件事——不必有好硬體，也不必付錢。</p>
 
   <h2>免費額度的四個形狀</h2>
-  <p>「免費」不是一個數字，是四個互相牽制的限制。四個都要記，因為它們會在不同時候咬你一口：</p>
+  <p>「免費」是四個互相牽制的限制，數值見<a href="#/fresh">附錄 B</a>：</p>
   <div class="tblwrap"><table>
     <tr><th>限制</th><th>它會怎麼咬你</th></tr>
-    <tr><td><strong>每週總時數</strong></td><td>用完要等重置。實際數值與重置時間見<a href="#/fresh">附錄 B</a>——這個數字平台會調整，別背</td></tr>
-    <tr><td><strong>單次工作階段上限</strong></td><td>時間到強制結束，不管你做到哪裡。<strong>這一條直接決定它不適合當競賽日主力</strong>：競賽從報到到收件的時間，跟單次上限幾乎一樣長，再加上每次開機要花的十分鐘，一定不夠</td></tr>
-    <tr><td><strong>閒置中斷</strong></td><td>一段時間沒有互動就被回收，你的伺服器與隧道一起消失。使用期間要固定回頁面點一下</td></tr>
-    <tr><td><strong>開著就計時</strong></td><td><strong>關掉瀏覽器分頁不會停止計時。</strong>不用了要明確按下停止，否則容器會空轉到被判定閒置為止，白白吃掉你的週額度</td></tr>
+    <tr><td><strong>每週總時數</strong></td><td>用完要等重置</td></tr>
+    <tr><td><strong>單次工作階段上限</strong></td><td>時間到強制結束。這一條決定它<strong>不適合當競賽日主力</strong>：競賽從報到到收件的時長跟單次上限幾乎一樣，再加每次開機十分鐘，一定不夠</td></tr>
+    <tr><td><strong>閒置中斷</strong></td><td>一段時間沒互動就被回收，伺服器與隧道一起消失。使用中要固定回頁面點一下</td></tr>
+    <tr><td><strong>開著就計時</strong></td><td><strong>關掉分頁不會停止計時。</strong>不用了要明確按停止</td></tr>
   </table></div>
-  <p class="small" style="color:var(--ink-2)">還有一件事：臨時隧道偶爾會中斷，重跑一格換個新網址就好。它適合練習與開發，不適合架需要長期穩定的服務。</p>
+  <p class="small" style="color:var(--ink-2)">臨時隧道偶爾會中斷，重跑一格換個新網址就好。它適合練習與開發，不適合架需要長期穩定的服務。</p>
 
   <h2>量化的代價</h2>
-  <p>為了把 27B 的模型塞進兩張卡，這裡用的是 <strong>2-bit 量化</strong>版本（量化的原理見附錄 E 的 2.6）。壓到這個程度，代價是看得見的。模型卡自己揭露的數字：</p>
-  <div class="tblwrap"><table>
-    <tr><th>測試</th><th>量化版</th><th>原版</th></tr>
-    <tr><td>SWE-bench Verified（50 題程式修復）</td><td>修好 30 題</td><td>修好 33 題</td></tr>
-    <tr><td>競賽數學</td><td colspan="2">只保留原版的約 82–85%</td></tr>
-  </table></div>
-  <p>這不是「爛掉」，是<strong>「少了一成」</strong>。日常改個函式、讀個錯誤訊息，你幾乎感覺不到差別；但<strong>需要多步推理的題目，它出錯的機率明顯比原版高</strong>。</p>
+  <p>本篇的模型是 Qwen3.8-27B 的 <strong>Q2 量化</strong>版（每個參數平均約 2 bit；原理見 2.6）——這才塞得進兩張 15 GB 的卡，連視覺檔共約 14 GB。壓到這個程度，能力一定會掉；掉多少，<strong>沒有公開評測可查</strong>：它是社群成員微調、合併後上傳的版本，不是原廠發布。我們知道的只有 Lab 15 Cell 5 量到的：會回話、看得懂截圖、寫新程式 35 tok/s、改檔案 109 tok/s。</p>
+  <p>所以把它當成「<strong>一定會錯，只是不知道錯在哪一題</strong>」的助手：改個函式、讀個錯誤訊息多半沒問題，需要多步推理的題目一定要自己驗。社群上傳的模型也可能下架或改名，照做前先對一次<a href="#/fresh">附錄 B</a>。</p>
 
   <div class="keybox"><span class="lab">核心觀念</span>
-    <p><strong>模型越小，驗收越重要。</strong>5.7 說「AI 寫的，你負責」——那句話在這裡要再加重一次。用最強的雲端模型時，你驗收是因為它偶爾會錯；用 2-bit 量化的小模型時，你驗收是因為<strong>它一定會錯，只是不知道錯在哪一題</strong>。<br>
-    好消息是：驗收的方法你早就有了。第三篇寫的 <code>test_srs.js</code> 與 <code>check_words.js</code>、第一篇的 <code>git diff</code>、5.7 的三階驗收——模型換了，這套工具一個都不用改。<strong>這正是為什麼教材要你先學會驗收，再學會放手。</strong></p>
+    <p><strong>模型越小，驗收越重要。</strong>用最強的雲端模型，你驗收是因為它偶爾會錯；用 Q2 量化的模型，你驗收是因為它一定會錯。好消息是驗收的方法你早就有：第三篇的 <code>test_srs.js</code> 與 <code>check_words.js</code>、第一篇的 <code>git diff</code>、5.7 的三階驗收——模型換了，這套工具一個都不用改。</p>
   </div>
 
   <div class="pgnav"><a href="#/F-1"><span class="dir">上一頁</span>F.1　雲端 GPU 上的推理伺服器</a><a class="nx" href="#/lab15"><span class="dir">下一頁</span>Lab 15　架起自己的模型服務</a></div>
@@ -5638,7 +5642,7 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
   <h1>Lab 15：在雲端架起自己的模型服務</h1>
   <div class="labmeta">
     <div class="m"><b>目標</b>用免費的兩張 GPU 跑起一個推理伺服器，接上你的代理式編碼工具，並親手驗收它</div>
-    <div class="m"><b>時間</b>約 60–90 分鐘（之後每次開機重建約十分鐘）</div>
+    <div class="m"><b>時間</b>約 60–90 分鐘（之後每次開機重建約十分鐘；延伸步驟另加約二十分鐘）</div>
     <div class="m"><b>前置</b>主線 2.1–2.5 與 Lab 3；平台帳號＋<strong>手機簡訊驗證</strong>（未驗證就開不了 GPU 與網路，未滿 18 歲請與家長一起處理）</div>
   </div>
 
@@ -5651,32 +5655,45 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
       <h4>事前準備</h4>
       <p>註冊帳號（一個 email 一個帳號）→ 完成<strong>手機簡訊驗證</strong>（在帳號設定裡）→ 新建一個筆記本 → 在右側設定把<strong>加速器選成兩張 T4</strong>、<strong>網路打開</strong>。這兩個開關沒設好，後面每一步都會失敗。平台名稱與選單位置見<a href="#/fresh">附錄 B</a>。</p>
       <p class="small" style="color:var(--ink-2)">倉庫裡附了一份現成的筆記本檔（路徑見<a href="#/fresh">附錄 B</a>），匯入就能跑，不必逐格複製。但<strong>第一次請自己打一遍</strong>——你要看懂的是每一格在做什麼，不是把它跑完。</p>
+      <div class="warnbox"><span class="lab">每次開機都從 Cell 1 重跑；分享前先 Restart &amp; Run All</span>
+        <p>平台不保留任何狀態，關機再開，引擎、模型、金鑰、網址全部歸零。另一個常見的坑是<strong>格子不按順序跑</strong>：少跑一格，後面每一格都會 <code>NameError</code>，而且你不一定看得出來是哪一格——格子左邊的執行編號不連續（例如從 8 跳到 10）就是第一個警訊。所以要分享或提交之前，先 <strong>Restart &amp; Run All</strong> 從頭跑一次。</p>
+      </div>
     </li>
     <li>
       <h4>Cell 1–3：確認硬體、裝引擎、下載模型</h4>
       <p>先確認平台真的給了你兩張卡：</p>
       <div class="termwrap"><pre class="term"><span class="o">!nvidia-smi --query-gpu=index,name,memory.total --format=csv</span></pre></div>
       <p>應該看到<strong>兩列</strong> <code>Tesla T4</code>，各 15360 MiB。只有一列或完全沒有，代表加速器沒選對，回上一步。</p>
-      <p>裝推理引擎（下載官方預編譯檔，不必自己編譯，約一分鐘）：</p>
+      <p>裝推理引擎（下載官方預編譯檔，不必自己編譯，約一分鐘）。這一格會先確認連得到 github.com——連不上幾乎都是網路沒開——同一個工作階段重跑時會跳過下載：</p>
       <div class="termwrap"><pre class="term"><span class="o">%%bash
 set -e
-TAG=b11435                      # 引擎版本：最新值見附錄 B，本 Lab 的數字都是用它量的
+TAG=b12063
 cd /kaggle/working &amp;&amp; mkdir -p llama
+
+# 同一個 session 重跑時，已下載過就跳過
+if find llama -name llama-server | grep -q .; then
+  echo &quot;已存在，略過下載&quot;; find llama -name llama-server; exit 0
+fi
+
+# 連不上 GitHub 通常是 Settings → Internet 沒開
+if ! curl -sSI --max-time 15 https://github.com &gt; /dev/null; then
+  echo &quot;❌ 連不上 github.com：請到右側 Settings 把 Internet 打開（需已完成手機驗證），再重跑本格&quot; &gt;&amp;2
+  exit 1
+fi
+
 for f in llama-$TAG-bin-ubuntu-cuda-12.8-x64.tar.gz cudart-llama-$TAG-bin-ubuntu-cuda-12.8-x64.tar.gz; do
-  wget -q https://github.com/ggml-org/llama.cpp/releases/download/$TAG/$f
+  curl -fsSL --retry 3 -o $f https://github.com/ggml-org/llama.cpp/releases/download/$TAG/$f   # 成功時不輸出，失敗才顯示原因
   tar -xzf $f -C llama &amp;&amp; rm $f
 done
 find llama -name llama-server</span></pre></div>
-      <p>最後一行印出 <code>llama-server</code> 的路徑就是成功。下載模型與視覺檔（約一到兩分鐘；出現「unauthenticated requests」的警告可以忽略，模型是公開的）：</p>
+      <p>最後一行印出 <code>llama-server</code> 的路徑就是成功。下載模型與視覺檔（兩檔約 14 GB，放在 <code>/tmp</code>，約五分鐘；出現「unauthenticated requests」的警告可以忽略，模型是公開的）：</p>
       <div class="termwrap"><pre class="term"><span class="o">from huggingface_hub import hf_hub_download
 
-REPO   = &quot;ConwayResearch/Underdog-Saluki-27B-1.0&quot;          # 模型：最新值見附錄 B
-MAIN   = &quot;Underdog-Saluki-27B-1.0-IQ2-mix.gguf&quot;            # 主模型，約 7.89 GB
-VISION = &quot;mmproj-Underdog-Saluki-27B-1.0-F16.gguf&quot;         # 視覺檔，約 928 MB
-
-MODEL  = hf_hub_download(REPO, MAIN,   local_dir=&quot;/kaggle/working/models&quot;)
-MMPROJ = hf_hub_download(REPO, VISION, local_dir=&quot;/kaggle/working/models&quot;)
-print(MODEL, MMPROJ, sep=&quot;\n&quot;)</span></pre></div>
+REPO2   = &quot;nerkyor/Qwen3.8-27B-Coder390-EfficientThink-Opus5.5-GPT6Astra-Grok4.7-DSV4Pro-K3-SFT-RLOO-MTP-DFlash2&quot;
+MODEL2  = hf_hub_download(REPO2, &quot;GGUF/Qwen3.8-27B-Coder390-EfficientThink-Q2LynnStyle-MTP.gguf&quot;, local_dir=&quot;/tmp/models&quot;)
+MMPROJ2 = hf_hub_download(REPO2, &quot;GGUF/mmproj-Qwen3.8-27B-Q8_0.gguf&quot;, local_dir=&quot;/tmp/models&quot;)
+print(MODEL2, MMPROJ2, sep=&quot;\n&quot;)</span></pre></div>
+      <p class="small" style="color:var(--ink-2)">主檔只懂文字，看圖能力來自視覺檔。模型倉庫名稱很長、也可能改名或下架，所以只寫在程式與附錄 B，正文一律稱「Qwen3.8-27B 的 Q2 量化版」。</p>
     </li>
     <li>
       <h4>Cell 4：啟動伺服器——F.1 的三個設定都在這裡</h4>
@@ -5684,20 +5701,21 @@ print(MODEL, MMPROJ, sep=&quot;\n&quot;)</span></pre></div>
 
 API_KEY = secrets.token_urlsafe(24)      # 服務要對外，所以一定要金鑰
 PORT = 8000
-LOG = &quot;/kaggle/working/server.log&quot;
+LOG = None                               # 由 start() 依設定決定，每種設定各自一個 log 檔
+DEFAULT = dict(spec=&quot;hybrid&quot;, draft_n=4) # 最終選定：ngram-mod + MTP
 
 srv = glob.glob(&quot;/kaggle/working/llama/**/llama-server&quot;, recursive=True)[0]
 libdirs = sorted({os.path.dirname(p) for p in
                   glob.glob(&quot;/kaggle/working/llama/**/*.so*&quot;, recursive=True)})
 env = dict(os.environ, LD_LIBRARY_PATH=&quot;:&quot;.join(
     libdirs + [os.environ.get(&quot;LD_LIBRARY_PATH&quot;, &quot;&quot;)]))
-server = None
+server = globals().get(&quot;server&quot;)         # 重跑本格時，才關得掉上一次的 server
 
 def wait_ready(proc, timeout=900):
     begin = time.time()
     while time.time() - begin &lt; timeout:
         if proc.poll() is not None:
-            raise RuntimeError(f&quot;伺服器已退出，請看 {LOG}&quot;)
+            raise RuntimeError(f&quot;伺服器已退出，log 尾端：\n{open(LOG).read()[-3000:]}&quot;)
         try:
             if requests.get(f&quot;http://127.0.0.1:{PORT}/health&quot;, timeout=3).status_code == 200:
                 print(&quot;服務就緒&quot;); return
@@ -5706,149 +5724,226 @@ def wait_ready(proc, timeout=900):
         time.sleep(5)
     raise TimeoutError(f&quot;逾時，請看 {LOG}&quot;)
 
-def start(ctx=131072):
-    global server
+def start(model, mmproj, spec=&quot;hybrid&quot;, ctx=262144, kv=&quot;q8_0&quot;, ub=1024, draft_n=4, extra=()):
+    global server, LOG
     if server is not None and server.poll() is None:
         server.terminate(); server.wait()
+    spec_type = {&quot;none&quot;:   None,
+                 &quot;mtp&quot;:    &quot;draft-mtp&quot;,
+                 &quot;ngram&quot;:  &quot;ngram-mod&quot;,
+                 &quot;hybrid&quot;: &quot;ngram-mod,draft-mtp&quot;}[spec]       # --spec-type 可用逗號同時列出多種
+    spec_args = [] if spec_type is None else [&quot;--spec-type&quot;, spec_type]
+    if spec_type and &quot;mtp&quot; in spec_type:                      # 只管 MTP；ngram-mod 用自己的 --spec-ngram-mod-n-*
+        spec_args += [&quot;--spec-draft-n-max&quot;, str(draft_n)]
+    name = f&quot;{spec}-n{draft_n}&quot; if spec_type and &quot;mtp&quot; in spec_type else spec
+    LOG = f&quot;/kaggle/working/server_{name}_{kv}_{ctx//1024}k_ub{ub}{&#x27;_extra&#x27; if extra else &#x27;&#x27;}.log&quot;
+    with open(LOG, &quot;a&quot;) as f:                                 # 附加模式：重啟多次，之前的錯誤也留得住
+        f.write(f&quot;\n===== {time.strftime(&#x27;%m-%d %H:%M:%S&#x27;)} start =====\n&quot;)
     server = subprocess.Popen([
-        srv, &quot;-m&quot;, MODEL, &quot;--mmproj&quot;, MMPROJ,
-        &quot;--alias&quot;, &quot;saluki-27b&quot;,          # 對外的模型名稱，等一下工具要填這個
-        &quot;--jinja&quot;, &quot;-ngl&quot;, &quot;99&quot;, &quot;-fa&quot;, &quot;on&quot;,
-        &quot;-sm&quot;, &quot;tensor&quot;, &quot;-ts&quot;, &quot;1,1&quot;,    # ← 張量並行（F.1 的第 ① 點）
-        &quot;--spec-type&quot;, &quot;ngram-mod&quot;,       # ← n-gram 推測解碼（第 ② 點）
-        &quot;-c&quot;, str(ctx), &quot;-np&quot;, &quot;1&quot;,       # ← 上下文大小（第 ③ 點）
-        &quot;--host&quot;, &quot;127.0.0.1&quot;,            # 只聽本機，對外一律走隧道
-        &quot;--port&quot;, str(PORT), &quot;--api-key&quot;, API_KEY,
-    ], stdout=open(LOG, &quot;w&quot;), stderr=subprocess.STDOUT, env=env,
-       start_new_session=True)           # 關鍵：讓伺服器獨立於這個 Cell 之外
+        srv, &quot;-m&quot;, model, &quot;--mmproj&quot;, mmproj, &quot;--alias&quot;, &quot;qwen3.8-27b&quot;,
+        &quot;--jinja&quot;, &quot;-ngl&quot;, &quot;999&quot;, &quot;-fa&quot;, &quot;on&quot;, &quot;-sm&quot;, &quot;tensor&quot;, &quot;-ts&quot;, &quot;1,1&quot;,
+        &quot;--fit&quot;, &quot;off&quot;,                                       # 不讓 llama.cpp 自動縮 ctx；放不下就直接報錯
+        &quot;-b&quot;, &quot;4096&quot;, &quot;-ub&quot;, str(ub),
+        &quot;--cache-type-k&quot;, kv, &quot;--cache-type-v&quot;, kv,           # 量化 V cache 需要 -fa on
+        *spec_args, *extra, &quot;-c&quot;, str(ctx), &quot;-np&quot;, &quot;1&quot;,
+        &quot;--host&quot;, &quot;127.0.0.1&quot;, &quot;--port&quot;, str(PORT), &quot;--api-key&quot;, API_KEY,
+    ], stdout=open(LOG, &quot;a&quot;), stderr=subprocess.STDOUT, env=env, start_new_session=True)
     wait_ready(server)
 
-start()
-!nvidia-smi --query-gpu=index,memory.used,memory.total --format=csv</span></pre></div>
-      <p>成功時印出「服務就緒」，兩張卡各佔約 8 到 9.5 GB。之後要重啟只要再呼叫一次 <code>start()</code>，<strong>金鑰不會變</strong>；顯存不足就改成 <code>start(ctx=65536)</code>，把上下文砍一半。</p>
+start(MODEL2, MMPROJ2, **DEFAULT)
+print(&quot;log:&quot;, LOG)
+!nvidia-smi --query-gpu=index,memory.used,memory.total --format=csv
+!grep -iE &quot;error|warn|ngram|mtp|draft&quot; {LOG} | tail -20</span></pre></div>
+      <p>成功時印出「服務就緒」，兩張卡各佔約 14 到 15 GB——幾乎填滿，這是刻意的（F.1 第 ③ 點）。對照 F.1：<code>-sm tensor -ts 1,1</code> 是張量並行（①）；<code>--spec-type</code> 設為 <code>ngram-mod,draft-mtp</code> 加上 <code>--spec-draft-n-max 4</code> 是兩種推測解碼並用（②）；<code>-c 262144</code>、KV 快取 <code>--cache-type-k</code> 與 <code>--cache-type-v</code> 設為 <code>q8_0</code>，以及 <code>--fit off</code>，是上下文與 KV 快取（③）——<code>--fit off</code> 的意思是「放不下就直接報錯」，不讓引擎暗中把上下文縮小。</p>
+      <p>之後要重啟只要再呼叫 <code>start(MODEL2, MMPROJ2, **DEFAULT)</code>，<strong>金鑰不會變</strong>（金鑰是這一格第一次執行時產生的；整格重跑才會換新）。顯存不足就改成 <code>start(MODEL2, MMPROJ2, ctx=131072)</code>，把上下文砍一半。<code>spec</code> 參數可以選 <code>none</code>、<code>mtp</code>、<code>ngram</code>、<code>hybrid</code>，延伸步驟會用到。</p>
       <div class="keybox"><span class="lab">注意 <code>start_new_session=True</code></span>
-        <p>它<strong>不是</strong>伺服器的參數，而是告訴作業系統「這個行程獨立於啟動它的 Cell」。少了它，你在筆記本按下任何一個 Cell 的「中斷」，中斷訊號會送給所有子行程，<strong>伺服器與隧道會一起安靜地死掉</strong>——而且是正常結束，log 裡看不出異狀，你只會在編輯器那端看到連線莫名其妙斷掉。這個坑在原始手冊裡潛伏了一整天才被發現。</p>
+        <p>它<strong>不是</strong>伺服器的參數，而是告訴作業系統「這個行程獨立於啟動它的 Cell」。少了它，你在筆記本按下任何一個 Cell 的「中斷」，中斷訊號會送給所有子行程，<strong>伺服器與隧道會一起安靜地死掉</strong>——而且是正常結束，log 裡看不出異狀，你只會在編輯器那端看到連線莫名其妙斷掉。這個坑在我們建置時潛伏了一整天才被發現。</p>
       </div>
     </li>
     <li>
       <h4>Cell 5：驗收——這一步是本 Lab 的重點</h4>
-      <p>一次檢查五件事：會不會回話、看不看得懂圖、兩種速度、兩張卡是不是都真的在用。約兩分鐘。</p>
-      <div class="termwrap"><pre class="term"><span class="o">import base64, io, inspect, textwrap
+      <p>一次檢查五件事：會不會回話、看不看得懂圖、兩種速度、兩張卡是不是都真的在用。約五分鐘。它先用兩個不計分的題目<strong>暖機</strong>，速度各用<strong>三個不同的題目取中位數</strong>，並印出推測解碼的接受率——理由在 F.1 的核心觀念框。</p>
+      <div class="termwrap"><pre class="term"><span class="o">import base64, io, inspect, re, statistics, textwrap, shlex, heapq, fnmatch
 from PIL import Image, ImageDraw, ImageFont
 
 def chat(content, n=400):
     r = requests.post(
         f&quot;http://127.0.0.1:{PORT}/v1/chat/completions&quot;,
         headers={&quot;Authorization&quot;: f&quot;Bearer {API_KEY}&quot;},
-        json={&quot;model&quot;: &quot;saluki-27b&quot;, &quot;max_tokens&quot;: n, &quot;temperature&quot;: 0,
+        json={&quot;model&quot;: &quot;qwen3.8-27b&quot;, &quot;max_tokens&quot;: n, &quot;temperature&quot;: 0,
               &quot;chat_template_kwargs&quot;: {&quot;enable_thinking&quot;: False},
               &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: content}]},
-        timeout=900).json()
-    return r[&quot;choices&quot;][0][&quot;message&quot;][&quot;content&quot;], r[&quot;timings&quot;][&quot;predicted_per_second&quot;]
+        timeout=900)
+    if not r.ok:                                     # 顯示真正的錯誤，而不是 KeyError
+        raise RuntimeError(f&quot;HTTP {r.status_code}: {r.text[:1000]}&quot;)
+    r = r.json()
+    return r[&quot;choices&quot;][0][&quot;message&quot;][&quot;content&quot;], r[&quot;timings&quot;]
 
-# ① 文字
+def timed(prompt, n=600):
+    &quot;&quot;&quot;回傳 (生成速度 tok/s, 推測解碼接受率)&quot;&quot;&quot;
+    _, t = chat(prompt, n)
+    acc = t.get(&quot;draft_n_accepted&quot;, 0) / t[&quot;draft_n&quot;] if t.get(&quot;draft_n&quot;) else float(&quot;nan&quot;)
+    return t[&quot;predicted_per_second&quot;], acc
+
+def speed(prompts, n=600):
+    &quot;&quot;&quot;每個 prompt 跑一次，回傳 (速度中位數, 接受率中位數, 每次的速度)&quot;&quot;&quot;
+    xs = [timed(p, n) for p in prompts]
+    return (statistics.median(x[0] for x in xs),
+            statistics.median(x[1] for x in xs),
+            [round(x[0], 1) for x in xs])
+
+def edit_prompt(module, target):
+    return (f&quot;```python\n{inspect.getsource(module)}\n```\n在 {target} 開頭加上一行 &quot;
+            &quot;logging.debug 記錄輸入參數，然後輸出修改後的完整檔案，不要省略任何部分。&quot;)
+
+def warmup():
+    &quot;&quot;&quot;短、長 prompt 各跑一次，不計分；用的題目不在正式題目裡，避免 ngram 先「看過答案」&quot;&quot;&quot;
+    timed(&quot;用 Python 寫一個二分搜尋函式並附上測試&quot;, 128)
+    timed(edit_prompt(fnmatch, &quot;fnmatch 函式&quot;), 128)
+
+# 每次換不同題目：同一題重複問、temperature=0 時輸出完全相同，ngram 會「抄上一次的答案」而虛高
+NEW_PROMPTS = [
+    &quot;用 Python 寫一個完整的 LRU cache 類別並附上測試&quot;,
+    &quot;用 Python 寫一個完整的 Trie（字首樹）類別，支援 insert、search、starts_with，並附上測試&quot;,
+    &quot;用 Python 寫一個支援多執行緒的 token bucket 限流器類別，並附上測試&quot;,
+]
+EDIT_PROMPTS = [                                 # 三個不同的標準函式庫檔案
+    edit_prompt(textwrap, &quot;TextWrapper.wrap 方法&quot;),
+    edit_prompt(shlex,    &quot;shlex.get_token 方法&quot;),
+    edit_prompt(heapq,    &quot;heappush 函式&quot;),
+]
+
+# 0 暖機
+warmup()
+
+# 1 文字
 text, _ = chat(&quot;用一句話自我介紹&quot;, 200)
 
-# ② 視覺：現場畫一張含錯誤訊息的圖，請它讀
+# 2 視覺：產生一張含錯誤訊息的圖片
 img = Image.new(&quot;RGB&quot;, (1000, 240), &quot;white&quot;)
 ImageDraw.Draw(img).text((20, 20),
     &#x27;Traceback (most recent call last):\n  File &quot;app.py&quot;, line 12, in &lt;module&gt;\n&#x27;
     &#x27;    total = price * qty\nTypeError: can\&#x27;t multiply sequence by non-int of type \&#x27;str\&#x27;&#x27;,
     fill=&quot;black&quot;, font=ImageFont.load_default(size=24))
 buf = io.BytesIO(); img.save(buf, format=&quot;PNG&quot;)
-url = &quot;data:image/png;base64,&quot; + base64.b64encode(buf.getvalue()).decode()
-seen, _ = chat([{&quot;type&quot;: &quot;image_url&quot;, &quot;image_url&quot;: {&quot;url&quot;: url}},
+img_url = &quot;data:image/png;base64,&quot; + base64.b64encode(buf.getvalue()).decode()
+seen, _ = chat([{&quot;type&quot;: &quot;image_url&quot;, &quot;image_url&quot;: {&quot;url&quot;: img_url}},
                 {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;這張截圖的錯誤是什麼？發生在哪個檔案的第幾行？怎麼修？&quot;}], 800)
 
-# ③ 從零寫新程式的速度
-_, new_tps = chat(&quot;用 Python 寫一個完整的 LRU cache 類別並附上測試&quot;, 600)
+# 3 從零寫新程式的速度（3 個不同題目取中位數）
+new_tps, new_acc, new_raw = speed(NEW_PROMPTS)
 
-# ④ 修改既有檔案的速度
-SRC = inspect.getsource(textwrap)
-_, edit_tps = chat(f&quot;```python\n{SRC}\n```\n把 TextWrapper.wrap 方法開頭加上一行 &quot;
-                   &quot;logging.debug 記錄輸入長度，然後輸出修改後的完整檔案，不要省略任何部分。&quot;, 600)
+# 4 修改既有檔案的速度（3 個不同檔案取中位數；600 token 只夠輸出檔案前段，此題只量速度）
+edit_tps, edit_acc, edit_raw = speed(EDIT_PROMPTS)
 
-# ⑤ 兩張卡的顯存
+# 5 兩張卡的顯存
 mem = [int(x) for x in subprocess.run(
     [&quot;nvidia-smi&quot;, &quot;--query-gpu=memory.used&quot;, &quot;--format=csv,noheader,nounits&quot;],
     capture_output=True, text=True).stdout.split()]
 
-found = [k for k in (&quot;TypeError&quot;, &quot;app.py&quot;, &quot;12&quot;) if k in seen]
+# 行號要完整比對，避免「120」「2012」也被當成 12
+patterns = {&quot;TypeError&quot;: r&quot;TypeError&quot;, &quot;app.py&quot;: r&quot;app\.py&quot;,
+            &quot;12&quot;: r&quot;(?:第\s*12\s*行|line\s*12\b|(?&lt;!\d)12\s*行)&quot;}
+found = [k for k, p in patterns.items() if re.search(p, seen, re.I)]
 checks = [
-    (&quot;文字回應&quot;,                 bool(text.strip()),         f&quot;{len(text)} 字&quot;),
-    (&quot;看圖讀出錯誤、檔名與行號&quot;, len(found) == 3,            f&quot;找到 {found}&quot;),
-    (&quot;寫新程式 &gt;= 12 tok/s&quot;,     new_tps &gt;= 12,              f&quot;{new_tps:.1f}&quot;),
-    (&quot;改既有檔案 &gt;= 40 tok/s&quot;,   edit_tps &gt;= 40,             f&quot;{edit_tps:.1f}&quot;),
-    (&quot;兩張卡都載入 &gt; 6 GB&quot;,      all(m &gt; 6000 for m in mem), f&quot;{mem} MiB&quot;),
+    (&quot;文字回應&quot;,                    bool(text.strip()),         f&quot;{len(text)} 字&quot;),
+    (&quot;看圖讀出錯誤、檔名與行號&quot;,    len(found) == 3,            f&quot;找到 {found}&quot;),
+    (&quot;寫新程式 ≥ 12 tok/s&quot;,         new_tps &gt;= 12,              f&quot;{new_tps:.1f}（{new_raw}，接受率 {new_acc:.0%}）&quot;),
+    (&quot;改既有檔案 ≥ 40 tok/s&quot;,       edit_tps &gt;= 40,             f&quot;{edit_tps:.1f}（{edit_raw}，接受率 {edit_acc:.0%}）&quot;),
+    (&quot;兩張卡都載入 &gt; 6 GB&quot;,         len(mem) &gt;= 2 and all(m &gt; 6000 for m in mem), f&quot;{mem} MiB&quot;),
 ]
 for name, ok, detail in checks:
     print(&quot;通過&quot; if ok else &quot;失敗&quot;, &quot;|&quot;, name, &quot;|&quot;, detail)
 
-print(&quot;\n===== 第 ② 題的完整回答 =====\n&quot; + seen)</span></pre></div>
-      <p><strong>五項都印「通過」才往下做。</strong>另外請<strong>親自讀一遍第 ② 題的完整回答</strong>，確認它真的說出了錯誤類型、<code>app.py</code> 第 12 行與修法——<span class="q">自動檢查只看關鍵字有沒有出現，看得懂與否只有你能判斷。</span>這正是 5.7 說的事。</p>
-      <p>參考值（2026-10-10 實測）：寫新程式 15.0–16.2 tok/s、改既有檔案 71.2–72.3 tok/s、兩張卡各約 8.2–9.6 GB。程式裡的門檻（12 與 40）是刻意抓寬的下限。</p>
+print(&quot;\n===== 第 1 題完整回答 =====\n&quot; + text)
+print(&quot;\n===== 第 2 題完整回答 =====\n&quot; + seen)</span></pre></div>
+      <p><strong>五項都印「通過」才往下做。</strong>另外請<strong>親自讀一遍第 2 題的完整回答</strong>，確認它真的說出了錯誤類型、<code>app.py</code> 第 12 行與修法——<span class="q">自動檢查只看關鍵字有沒有出現，看得懂與否只有你能判斷。</span>這正是 5.7 說的事。順帶一提，行號的檢查用的是正規表達式而不是 <code>"12" in seen</code>：後者遇到「120」「2012」也會算通過，這種「看起來有驗、其實沒驗」的檢查比沒有檢查更危險。</p>
+      <p>參考值（2026-11-04 實測）：寫新程式 35.0 tok/s（三題 35.0 / 35.0 / 31.3，接受率 74%）、改既有檔案 109.4 tok/s（109.4 / 115.0 / 95.0，接受率 87%）、兩張卡 14765 / 13887 MiB。程式裡的門檻（12 與 40）是刻意抓寬的下限。</p>
     </li>
     <li>
       <h4>Cell 6：開隧道，拿到網址與金鑰</h4>
       <div class="termwrap"><pre class="term"><span class="o">!wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O /kaggle/working/cloudflared
-!chmod +x /kaggle/working/cloudflared &amp;&amp; /kaggle/working/cloudflared --version</span></pre></div>
-      <div class="termwrap"><pre class="term"><span class="o">import re
+!chmod +x /kaggle/working/cloudflared &amp;&amp; /kaggle/working/cloudflared --version
+
+import re
 
 CF_LOG = &quot;/kaggle/working/cloudflared.log&quot;
 tunnel = subprocess.Popen(
     [&quot;/kaggle/working/cloudflared&quot;, &quot;tunnel&quot;, &quot;--no-autoupdate&quot;,
      &quot;--url&quot;, f&quot;http://127.0.0.1:{PORT}&quot;],
     stdout=open(CF_LOG, &quot;w&quot;), stderr=subprocess.STDOUT,
-    start_new_session=True)          # 同樣要獨立，理由見 Cell 4
+    start_new_session=True)
 
-url = None
+public_url = None
 for _ in range(30):
     m = re.search(r&quot;https://[-a-z0-9]+\.trycloudflare\.com&quot;, open(CF_LOG).read())
     if m:
-        url = m.group(0); break
+        public_url = m.group(0)
+        break
     time.sleep(2)
 
-print(&quot;Base URL:&quot;, url + &quot;/v1&quot; if url else f&quot;尚未取得，請看 {CF_LOG}&quot;)
+print(&quot;Base URL:&quot;, public_url + &quot;/v1&quot; if public_url else f&quot;尚未取得，請看 {CF_LOG}&quot;)
+# ⚠ 公開網址：notebook 分享或設為 public 前，請清除這一格的輸出
 print(&quot;API Key :&quot;, API_KEY)</span></pre></div>
       <p>把印出來的 <strong>Base URL</strong> 與 <strong>API Key</strong> 複製下來，下一步要用。<strong>這兩個值每次開機都不一樣。</strong></p>
     </li>
     <li>
       <h4>Cell 7：保活（最後才執行）</h4>
-      <div class="termwrap"><pre class="term"><span class="o">while True:
-    print(time.strftime(&quot;%H:%M&quot;), &quot;server&quot;, server.poll(), &quot;tunnel&quot;, tunnel.poll(), flush=True)
-    time.sleep(300)</span></pre></div>
-      <p>每五分鐘印一行，兩個值都是 <code>None</code> 代表伺服器與隧道都還活著。要在筆記本做別的事就先中斷它，做完再重新執行——因為 Cell 4 與 Cell 6 加了 <code>start_new_session=True</code>，中斷這一格<strong>不會</strong>影響伺服器與隧道。</p>
+      <div class="termwrap"><pre class="term"><span class="o">try:
+    while True:
+        s, t = server.poll(), tunnel.poll()
+        print(time.strftime(&quot;%H:%M&quot;), &quot;server&quot;, &quot;running&quot; if s is None else f&quot;exited({s})&quot;,
+              &quot;| tunnel&quot;, &quot;running&quot; if t is None else f&quot;exited({t})&quot;, flush=True)
+        if s is not None:
+            print(open(LOG).read()[-2000:]); break
+        time.sleep(300)
+except KeyboardInterrupt:
+    print(&quot;停止監控（server 與 tunnel 仍在背景執行）&quot;)</span></pre></div>
+      <p>每五分鐘印一行，兩個都是 <code>running</code> 代表伺服器與隧道都還活著；伺服器若退出，會直接印出 log 的最後一段。要在筆記本做別的事就先按 ■ 停止它，做完再重新執行——因為 Cell 4 與 Cell 6 加了 <code>start_new_session=True</code>，停止這一格<strong>不會</strong>影響伺服器與隧道。</p>
     </li>
     <li>
       <h4>接上你的代理式編碼工具</h4>
       <p><strong>先用 <code>curl</code> 在自己電腦驗證一次，再去填設定。</strong>先驗證再填，出錯時才分得出是隧道的問題還是工具的問題：</p>
       <div class="termwrap"><pre class="term"><span class="p">$</span> curl https://你拿到的網址.trycloudflare.com/v1/models -H &quot;Authorization: Bearer 你的金鑰&quot;</pre></div>
       <p class="small" style="color:var(--ink-2)">Windows 的 PowerShell 請把 <code>curl</code> 寫成 <code>curl.exe</code>。</p>
-      <p>回應是一段 JSON，而且裡面找得到模型名稱 <code>saluki-27b</code>，才往下做。接著在工具的設定裡填<strong>三個連線欄位</strong>——各家工具欄位名稱略有不同，但都是這三件事：</p>
+      <p>回應是一段 JSON，而且裡面找得到模型名稱 <code>qwen3.8-27b</code>，才往下做。接著在工具的設定裡填<strong>三個連線欄位</strong>——各家工具欄位名稱略有不同，但都是這三件事：</p>
       <div class="tblwrap"><table>
         <tr><th>要填的</th><th>填什麼</th><th>最常見的錯</th></tr>
         <tr><td>服務位址（Base URL）</td><td>Cell 6 印出的網址，<strong>結尾是 <code>/v1</code></strong></td><td>漏掉 <code>/v1</code>；多貼了 <code>/chat/completions</code>；結尾多一個斜線或空白</td></tr>
         <tr><td>金鑰（API Key）</td><td>Cell 6 印出的那一串<strong>本身</strong></td><td>前面多打了 <code>Bearer</code>；複製時帶到換行；用到上一次開機的舊金鑰</td></tr>
-        <tr><td>模型名稱（Model ID）</td><td><code>saluki-27b</code></td><td>填成 GGUF 檔名或模型倉庫名稱</td></tr>
+        <tr><td>模型名稱（Model ID）</td><td><code>qwen3.8-27b</code></td><td>填成 GGUF 檔名或模型倉庫名稱</td></tr>
       </table></div>
-      <p>另外三個要檢查的：<strong>供應商類型選「OpenAI 相容」</strong>（不要選 OpenAI，也不要選 Ollama）；<strong>上下文大小填成與 Cell 4 的 <code>-c</code> 相同</strong>；<strong>如果要貼截圖，把「支援圖片」打開</strong>。這些選項常被收在「進階」或「模型設定」區，容易漏掉。示範工具與各欄位的確切名稱見<a href="#/fresh">附錄 B</a>。</p>
+      <p>另外三個要檢查的：<strong>供應商類型選「OpenAI 相容」</strong>（不要選 OpenAI，也不要選 Ollama）；<strong>上下文大小填成與 Cell 4 的 <code>-c</code> 相同</strong>（262144），單次輸出上限不要跟著填那麼大（8192 夠用，理由見 5.2：上下文是提示與輸出共用的預算）；<strong>如果要貼截圖，把「支援圖片」打開</strong>。這些選項常被收在「進階」或「模型設定」區，容易漏掉。示範工具與各欄位的確切名稱見<a href="#/fresh">附錄 B</a>。</p>
       <p>最後送一個測試任務：用編輯器開一個資料夾（工具需要工作區才能讀寫檔案），請它「建立 <code>hello.py</code>，內容是印出 Hello」。第一次回應前會停大約半分鐘，那是在讀工具自己的系統提示。<strong>它提出要建立檔案並請你核准，就代表整條路都通了。</strong></p>
     </li>
     <li>
-      <h4>延伸（做過 Lab 4 的人）：把它接成第三個 provider</h4>
+      <h4>延伸一：自己量一次四種推測解碼</h4>
+      <p>F.1 那張數據表是我們量的；你可以用同一套方法自己量一次，約二十分鐘，也就是多花二十分鐘的 GPU 額度。先按 ■ 停止 Cell 7，然後在一個新格子執行（<code>warmup()</code>、<code>speed()</code> 與題目都在 Cell 5 定義過了，隧道與金鑰都不會變）：</p>
+      <div class="termwrap"><pre class="term"><span class="o">for spec in [&quot;none&quot;, &quot;mtp&quot;, &quot;ngram&quot;, &quot;hybrid&quot;]:
+    start(MODEL2, MMPROJ2, spec=spec, draft_n=4)   # 每種設定重啟一次伺服器，約一分鐘
+    warmup()
+    n_tps, n_acc, n_raw = speed(NEW_PROMPTS)
+    e_tps, e_acc, e_raw = speed(EDIT_PROMPTS)
+    print(f&quot;{spec:7s} | 新程式 {n_tps:5.1f} tok/s {n_raw}（接受率 {n_acc:.0%}）&quot;
+          f&quot; | 改檔案 {e_tps:5.1f} tok/s {e_raw}（接受率 {e_acc:.0%}）&quot;, flush=True)
+
+start(MODEL2, MMPROJ2, **DEFAULT)                  # 量完換回正式設定，再重跑 Cell 7</span></pre></div>
+      <p>看三件事：<strong>① 接受率</strong>——<code>ngram</code> 在新程式那一欄應該很低、在改檔案那一欄很高，這就是「有沒有東西可抄」的差別；<strong>② 四組的排序</strong>跟 F.1 的表一不一樣；<strong>③ 同一組三題的差距</strong>有多大——這是「只量一次」會騙你的幅度。想再進一步，把 <code>draft_n</code> 改成 6 看看新程式會不會變慢（改成 8 伺服器會退出，退出時 Cell 7 會印出 log 尾段，不用慌）。</p>
+    </li>
+    <li>
+      <h4>延伸二（做過 Lab 4 的人）：把它接成第三個 provider</h4>
       <p>Lab 4 的降階鏈是<strong>雲端 → 本地 → 罐頭</strong>。你現在多了一個來源，把它插進去：</p>
       <div class="termwrap"><pre class="term"><span class="o">def ask_kaggle(word, base_url, api_key):
     &quot;&quot;&quot;第三個 provider：介面與 Lab 4 的 ask_local()／ask_cloud() 完全同形。&quot;&quot;&quot;
     r = requests.post(base_url + &quot;/chat/completions&quot;,
         headers={&quot;Authorization&quot;: &quot;Bearer &quot; + api_key},
-        json={&quot;model&quot;: &quot;saluki-27b&quot;, &quot;max_tokens&quot;: 1024,
+        json={&quot;model&quot;: &quot;qwen3.8-27b&quot;, &quot;max_tokens&quot;: 1024,
+              &quot;chat_template_kwargs&quot;: {&quot;enable_thinking&quot;: False},   # 造句不必先「思考」，快很多
               &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: PROMPT.format(word=word)}]},
         timeout=120)
     r.raise_for_status()
-    data = r.json()
-    return &quot;&quot;.join(b.get(&quot;text&quot;, &quot;&quot;) for b in [data[&quot;choices&quot;][0][&quot;message&quot;]]
-                   if isinstance(b, dict)) or data[&quot;choices&quot;][0][&quot;message&quot;][&quot;content&quot;]</span></pre></div>
-      <p>注意它的<strong>介面與另外兩個完全同形</strong>——這就是 Lab 4 那句「介面同形，降階才接得起來」的意思。鏈子變成<strong>雲端 → 借來的 GPU → 本地 → 罐頭</strong>，而 <code>generate()</code> 一行都不用改。</p>
+    return r.json()[&quot;choices&quot;][0][&quot;message&quot;][&quot;content&quot;]</span></pre></div>
+      <p>注意它的<strong>介面與另外兩個完全同形</strong>——這就是 Lab 4 那句「介面同形，降階才接得起來」的意思。鏈子變成<strong>雲端 → 借來的 GPU → 本地 → 罐頭</strong>，而 <code>generate()</code> 一行都不用改。想一題再動手：借來的 GPU 斷網時也會失敗，放在本地之前，斷網時就要多等一次逾時——它該排在哪裡？沒有標準答案，但你要說得出自己的取捨。</p>
     </li>
     <li>
       <h4>結束使用、收尾</h4>
@@ -5865,10 +5960,10 @@ print(&quot;API Key :&quot;, API_KEY)</span></pre></div>
 
   <h2>驗收清單</h2>
   <ul class="check">
-    <li><label><input type="checkbox" data-ck="l15-1">Cell 5 的五項全部印「通過」，而且你<strong>親自讀過</strong>第 ② 題的回答，確認它真的看懂了那張圖</label></li>
-    <li><label><input type="checkbox" data-ck="l15-2"><code>curl</code> 的回應裡找得到模型名稱 <code>saluki-27b</code></label></li>
+    <li><label><input type="checkbox" data-ck="l15-1">Cell 5 的五項全部印「通過」，而且你<strong>親自讀過</strong>第 2 題的回答，確認它真的看懂了那張圖</label></li>
+    <li><label><input type="checkbox" data-ck="l15-2"><code>curl</code> 的回應裡找得到模型名稱 <code>qwen3.8-27b</code></label></li>
     <li><label><input type="checkbox" data-ck="l15-3">代理式編碼工具完成了一次測試任務（提出要建立檔案並等你核准）</label></li>
-    <li><label><input type="checkbox" data-ck="l15-4">你記下了自己量到的<strong>兩種速度</strong>（寫新程式／改既有檔案），並說得出為什麼差這麼多</label></li>
+    <li><label><input type="checkbox" data-ck="l15-4">你記下了自己量到的<strong>兩種速度</strong>（寫新程式／改既有檔案）與接受率，並說得出為什麼差這麼多</label></li>
     <li><label><input type="checkbox" data-ck="l15-5">用完<strong>按了停止工作階段</strong>，不是只關分頁</label></li>
     <li><label><input type="checkbox" data-ck="l15-6">你能不看圖 34，自己畫出從編輯器到兩張 GPU 的完整路徑</label></li>
   </ul>
@@ -5877,15 +5972,17 @@ print(&quot;API Key :&quot;, API_KEY)</span></pre></div>
   <div class="tblwrap"><table>
     <tr><th>症狀</th><th>原因與解法</th></tr>
     <tr><td><code>nvidia-smi</code> 只印一列，或說找不到指令</td><td>加速器沒選成兩張 T4。回設定改好，然後<strong>重啟工作階段</strong>才會生效。</td></tr>
-    <tr><td>下載模型卡住或失敗</td><td>容器的網路沒打開（設定裡的 Internet）。手機驗證沒完成的話，這個開關會是鎖住的。</td></tr>
-    <tr><td class="mono">No space left on device</td><td>工作目錄放不下太多大檔——主模型加視覺檔已接近 9 GB。要再下載別的模型請放到 <code>/tmp</code>。</td></tr>
-    <tr><td>Cell 4 卡在等待，或說伺服器已退出</td><td>打開 <code>server.log</code> 看最後幾行。最常見是顯存不足，改用 <code>start(ctx=65536)</code>。</td></tr>
-    <tr><td class="mono">401 / Invalid API Key</td><td>金鑰不符。重新複製 Cell 6 印出的那一串，確認沒有多打 <code>Bearer</code>、沒有夾帶空白或換行。</td></tr>
+    <tr><td>Cell 2 說連不上 github.com；下載模型卡住或失敗</td><td>容器的網路沒打開（設定裡的 Internet）。手機驗證沒完成的話，這個開關會是鎖住的。</td></tr>
+    <tr><td>某一格 <code>NameError</code>，說 <code>PORT</code>、<code>server</code> 或 <code>MODEL2</code> 沒定義</td><td>前面有一格沒跑到（或工作階段重啟過，記憶體清空了）。看執行編號是否連續；從 Cell 1 重跑最省事。</td></tr>
+    <tr><td class="mono">No space left on device</td><td>模型已經放在 <code>/tmp</code>；要再下載其他大檔也請放 <code>/tmp</code>，不要放工作目錄。</td></tr>
+    <tr><td>Cell 4 卡在等待，或說伺服器已退出</td><td>它會直接印出 log 的最後一段，看那裡。最常見是顯存不足，改用 <code>start(MODEL2, MMPROJ2, ctx=131072)</code>。</td></tr>
+    <tr><td>改了 <code>draft_n</code> 之後伺服器退出</td><td>MTP 一次猜太多（8 個就會）。改回 4。</td></tr>
+    <tr><td class="mono">401 / Invalid API Key</td><td>金鑰不符。重新複製 Cell 6 印出的那一串，確認沒有多打 <code>Bearer</code>、沒有夾帶空白或換行。整格重跑過 Cell 4 的話金鑰會換新，在任一格執行 <code>print(API_KEY)</code> 拿新的。</td></tr>
     <tr><td class="mono">404</td><td>位址路徑不對。結尾必須是 <code>/v1</code>，後面不要再接東西。</td></tr>
     <tr><td class="mono">530 或 Error 1033</td><td>隧道已中斷，或你用的是上次開機的舊網址。回去重跑 Cell 6，換新的 Base URL。</td></tr>
-    <tr><td class="mono">502</td><td>隧道還在，但伺服器沒在跑。中斷 Cell 7 → 執行 <code>start()</code> → 重跑 Cell 7。</td></tr>
-    <tr><td class="mono">Model not found</td><td>模型名稱打錯，應該是 <code>saluki-27b</code>（就是 Cell 4 的 <code>--alias</code>）。</td></tr>
-    <tr><td>一直轉圈沒有輸出</td><td>正在讀長提示（讀完 13 萬 token 的視窗要五分多鐘），或工作階段已被閒置回收。先等一分鐘；仍無反應就回頁面確認工作階段還活著。</td></tr>
+    <tr><td class="mono">502</td><td>隧道還在，但伺服器沒在跑。停止 Cell 7 → 執行 <code>start(MODEL2, MMPROJ2, **DEFAULT)</code> → 重跑 Cell 7。</td></tr>
+    <tr><td class="mono">Model not found</td><td>模型名稱打錯，應該是 <code>qwen3.8-27b</code>（就是 Cell 4 的 <code>--alias</code>）。</td></tr>
+    <tr><td>一直轉圈沒有輸出</td><td>正在讀長提示（上下文開到 26 萬 token，讀一份很長的提示可能要好幾分鐘），或工作階段已被閒置回收。先等一分鐘；仍無反應就回頁面確認工作階段還活著。</td></tr>
     <tr><td><code>curl</code> 成功，但工具失敗</td><td>有些工具的設定分成「計畫」與「執行」兩個分頁，<strong>兩邊都要填</strong>。另外確認供應商類型選的是「OpenAI 相容」。</td></tr>
     <tr><td>貼了截圖它說看不到</td><td>工具的「支援圖片」沒開啟，在模型設定區。</td></tr>
   </table></div>
@@ -5896,14 +5993,14 @@ print(&quot;API Key :&quot;, API_KEY)</span></pre></div>
     <label class="opt"><input type="radio" name="q28" value="a">因為兩張卡的型號必須完全相同才會加速</label>
     <label class="opt"><input type="radio" name="q28" value="b">預設是把不同的層分到不同的卡上依序流過，同一時間只有一張在算——只合併了顯存，沒有合併算力</label>
     <label class="opt"><input type="radio" name="q28" value="c">因為免費方案刻意限制了第二張卡的效能</label>
-    <div class="exp"><b>B。</b>預設的分層接力只是讓你「裝得下」更大的模型，不是「算得快」。要兩張卡同時算同一層，必須明確指定張量並行（<code>-sm tensor</code>）。實測 8.6 → 15.0 tok/s。<br>順帶一提：這也是為什麼拿到任何新硬體都要先問「預設值是為誰調的」——預設值通常是為最不會出錯調的。</div>
+    <div class="exp"><b>B。</b>預設的分層接力只是讓你「裝得下」更大的模型，不是「算得快」。要兩張卡同時算同一層，必須明確指定張量並行（<code>-sm tensor</code>）。實測單卡 8.6 → 張量並行 15 tok/s。<br>順帶一提：這也是為什麼拿到任何新硬體都要先問「預設值是為誰調的」——預設值通常是為最不會出錯調的。</div>
   </div>
   <div class="quiz" data-q="29" data-ans="c">
-    <div class="qt">2．n-gram 推測解碼讓「改既有檔案」快了四倍多，卻對「從零寫新程式」幾乎沒有幫助。為什麼？（對應 F.1）</div>
+    <div class="qt">2．n-gram 推測解碼讓「改既有檔案」快了好幾倍，卻對「從零寫新程式」幾乎沒有幫助。為什麼？（對應 F.1）</div>
     <label class="opt"><input type="radio" name="q29" value="a">因為新程式比較長，token 數多</label>
     <label class="opt"><input type="radio" name="q29" value="b">因為它會跳過驗證，所以改檔案時輸出品質較低</label>
     <label class="opt"><input type="radio" name="q29" value="c">因為它是從上下文裡找重複片段來猜下一串 token——改檔案時輸出與輸入高度重疊，猜得準；從零寫時沒有東西好猜</label>
-    <div class="exp"><b>C。</b>推測解碼是「先猜一串、再由模型一次驗證」，<strong>猜對就一次前進多步，猜錯就退回照常生成，輸出內容完全不變</strong>——所以 B 的「品質較低」是錯的。n-gram 的猜測來源就是上下文本身，因此效果完全取決於輸出與輸入重疊多少。<br>這也解釋了為什麼「先產生骨架，再逐步修改」會比「一次要求寫完整個大檔」快。</div>
+    <div class="exp"><b>C。</b>推測解碼是「先猜一串、再由模型一次驗證」，<strong>猜對就一次前進多步，猜錯就退回照常生成，輸出內容完全不變</strong>——所以 B 的「品質較低」是錯的。n-gram 的猜測來源就是上下文本身，因此效果完全取決於輸出與輸入重疊多少。這也是為什麼要再加上 MTP：它不靠上下文，寫新程式也猜得到。<br>另一個推論：「先產生骨架，再逐步修改」會比「一次要求寫完整個大檔」快。</div>
   </div>
 
   <div class="pgnav"><a href="#/F-2"><span class="dir">上一頁</span>F.2　三條路怎麼選</a><a class="nx" href="#/5-8"><span class="dir">回主線</span>5.8　綜合驗收：讓 Repo 說話</a></div>
@@ -6066,7 +6163,9 @@ print(&quot;API Key :&quot;, API_KEY)</span></pre></div>
     <tr><td class="mono">GPU</td><td>Graphics Processing Unit</td><td>圖形處理器</td><td>擅長大量平行計算的晶片；模型推理的主力</td></tr>
     <tr><td class="mono">VRAM</td><td>Video RAM</td><td>顯存</td><td>顯示卡上的記憶體；模型權重與上下文都要放得進去</td></tr>
     <tr><td class="mono">tensor parallelism</td><td>—</td><td>張量並行</td><td>把同一層拆給多張卡<strong>同時</strong>算；對比「分層接力」只是合併顯存</td></tr>
-    <tr><td class="mono">speculative decoding</td><td>—</td><td>推測解碼</td><td>先猜一串 token 再由模型一次驗證；猜對就一次前進多步，<strong>輸出不變</strong></td></tr>
+    <tr><td class="mono">speculative decoding</td><td>—</td><td>推測解碼</td><td>先猜一串 token 再由模型一次驗證；猜對就一次前進多步，<strong>輸出不變</strong>。猜的來源可以是上下文的重複片段（n-gram）或模型自帶的草稿頭（MTP）</td></tr>
+    <tr><td class="mono">MTP</td><td>multi-token prediction</td><td>多 token 預測</td><td>模型自帶的小草稿頭，每一步順便猜後面幾個 token，供推測解碼驗證；不靠上下文，寫新內容也有效</td></tr>
+    <tr><td class="mono">KV cache</td><td>key-value cache</td><td>KV 快取</td><td>上下文中每個 token 的中間結果，留在顯存裡免得重算；上下文越大它越大，量化它就能開更大的上下文</td></tr>
     <tr><td class="mono">tunnel</td><td>—</td><td>隧道</td><td>由內部主動對外建立通道，讓沒有公開位址的機器也能被連到</td></tr>
     <tr><td class="mono">llama.cpp</td><td>—</td><td>—</td><td>可在一般顯卡上跑開源模型的推理引擎，附帶 OpenAI 相容的伺服器</td></tr>
     <tr><td class="mono">GGUF</td><td>—</td><td>—</td><td>llama.cpp 使用的模型檔格式，量化後的權重都包在裡面</td></tr>
