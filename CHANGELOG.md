@@ -4,6 +4,59 @@
 
 ---
 
+## v2.5 — 2026-11-05
+
+**附錄 F 重排：先配置、再 Lab 15、原理與比較殿後；依模型卡補入模型規格**
+
+主線五篇、十三個主線 Lab、頁面數與圖數不變；頁面 id 不變，站內既有連結不受影響。
+
+- **章節順序**：F.0（側欄標籤「推薦配置：硬體、軟體、模型」）改為直接給配置——五層配置表（Kaggle T4x2／llama.cpp／模型與視覺檔／cloudflared／Cline）、各層特性一句話版、做完會有什麼、三項提醒——讀者先照 Lab 15 一口氣架起來；原理（F.1，標題改為「它為什麼這樣設定」）與方案比較、誰該用、不在工作坊進度（F.2）移到 Lab 15 之後。側欄與前後頁導覽同步為 F.0 → Lab 15 → F.1 → F.2。
+- **模型規格更正**：量化規格改為 GGUF Q2 LynnStyle 混合精度（最低 2 bit，平均約 3.9 bit，主檔 13.3 GB）＋內建 Q4 MTP 草稿頭，視覺檔 `mmproj-Qwen3.8-27B-Q8_0.gguf`（629 MB）；v2.4 寫的「每個參數平均約 2 bit」有誤。
+- **模型介紹**：F.0 說明來歷（以 Qwen3.8-27B 為底的社群再訓練版；Coder／390／EfficientThink 的意思）；F.2「量化的代價」改用作者自報評測表（Q2：GPQA 177/198、MMLU 433/500、LiveCodeBench 90/100，對照 BF16 與原廠 FP8）並說明自報、題數少、量測條件與 Lab 15 不同三點。
+- **新增提醒**：模型標示為未加內容過濾、無原廠背書（F.0 第三項；附錄 B 模型列同步註明授權 Apache-2.0 與自報評測）。
+
+### 全站校對（2026-11-05，逐頁通讀後修正）
+
+**會影響操作的**
+- Lab 4：`ASK` 表引用的 `ask_claude()` 從未定義（Lab 3 的函式是 `ask(client, word)`）——補上與 `ask_local()` 同形的 `ask_claude(prompt, system)` 定義；Lab 15 延伸二的 `ask_kaggle()` 改為同形簽章（網址與金鑰讀環境變數），並加進 `ASK`／`CHAIN`。
+- Lab 14 依賴 `lab12-done`、`lab13-done` 兩個 tag，但 Lab 12、13 從未要學生打——兩個 Lab 收尾各補一句打 tag；Lab 14 步驟 5 改為把修正與子代理設定檔用 PR 提交後再合併（原本「由你按下 merge」與前置「PR 已合併」矛盾）。
+- Lab 3 急救表的 Windows 寫法 `echo %VAR%` 是 cmd 語法，與步驟 1 的 PowerShell 不符——改 `$env:`；「永久設定見附錄 B」改為直接寫在 Lab 3。
+- 2.4 補一個提醒框：Claude API 新一代模型不開放 `temperature`，本節原理仍適用但 Lab 3 不要加（原本只在 Sprint 2 與附錄 B 提到）。
+- Sprint 2 的 system prompt 補上「不要 markdown 圍欄」（正文說是兩件事之一，程式卻沒放）；圖 19 動圖說明與詞彙表「Structured Output」殘留的「temperature 調低／低溫」拿掉。
+- Lab 9 前置註明：沒做 Sprint 3、4 的人要先刪 CI 劇本的兩行，否則 CI 必紅。
+- Lab 11 工具表的安裝頁與費用欄與附錄 B 2026-11 重查同步（Codex、Cursor 網址已轉址）。
+- Lab 15：特別篇自我檢測兩題移到 F.2 頁末（題目對應 F.1，重排後讀者做 Lab 15 時還沒讀到）；驗收清單第 6 項改寫、新增第 7 項（清輸出、筆記、tag）；程式變數 `MODEL2`／`MMPROJ2`／`REPO2` 改回 `MODEL`／`MMPROJ`／`REPO`（筆記本同步）；收尾改為先 Clear Outputs 再 commit。
+
+**前後不一**
+- quiz4 結語：旅程停在 `v1.1`（不是 v1.0）；數量陳述改為「含附錄 E、F 兩篇選修特別篇則二十六節、十一個 Lab、二十四道題」；lede 改「前四篇」。
+- E.0：本地模型是 4.5 保命三招第 ② 招裡多出的一層，不是「第四道保險」。4.5 第 ② 招改「快取與友善的降階訊息」（網頁版沒有實作罐頭例句）。
+- 4.1「從 Sprint 2 起用相對路徑」→ Sprint 3；4.2「加兩個小檔案」→ 加一張圖示；Lab 9「前八個 Lab」→「前面的 Lab 多半」；Lab 10 備援影片改為另剪 90 秒精華版；第四篇篇首 Lab 9＋10 時間改 2.5–3 小時。
+- 3.2「這 40 行」→「這段程式」；「語意跟 Python 的 requests 一模一樣」→ 改引 Lab 3 的 SDK（主線沒用 requests）；3.4 `callClaude()` 的替換說明改為實際引數。
+- 圖 18 的「排行榜」改「統計頁」（畢業挑戰候選沒有排行榜）；圖 20 說明與 SVG 文字改為「新卡當天就作答」「間隔 2→4→8→16」（與 App 實作一致）；quiz3 第 3 題錯誤選項改為「今天排隊尾重考」。
+- 5.1「五個都碰一下」→ 六個；5.5 子代理位置補 GitHub Copilot；Lab 12 步驟 4「中文註解」→「`// 用途：` 註解」；Lab 14 子代理提示刪去「沿用本專案 1.7」；quiz5 第 3 題解析改寫；Lab 11「本篇的 Lab 一樣做得完」收斂為「觀念一樣練得到（附錄 F 以 Cline 示範，其他工具未實測）」。
+- 附錄 D：建置範圍 Lab 1 → 14、模型約 14 GB、實測日 2026-11-04、範例 repo 加 `.claude/skills/`、路徑對照改引 5.5 與附錄 B、「卡住了？六條」改為通稱。
+- F.0：「390」改為「以全精度版三項評測達 90 命名」；F.1 核心觀念的 45 tok/s 軼事註明是「只開 n-gram、寫新程式」那一格；單卡 8.6 tok/s 註明量自較早的一組模型配置；F.2 評測條件統一為「思考模式開啟、上下文 100K」；「5.7 的三階驗收」→「三個驗證動作」。
+- 附錄 B 第五篇專區開頭的「正文只寫原理」宣稱改為「以原理為主、示範以 Claude Code 為準」；README 末行、`docs/MAINTENANCE.md` 版本字樣、`glossary.md` 附錄 F 章節名、CHANGELOG v2.4「六組」→「四組」。
+
+**用語與詞彙**
+- 「上下文窗口」→「上下文視窗」（2.4 與詞彙表）；「智能行為」→「智慧行為」；「公網」→「對外位址／公開網址」；「降級」統一為「降階」；動圖「結束符號」→「停止符號」；「historical 的內容」→「歷史裡的內容」；錯字「搬進進版控」、重複的「符號連結（symbolic link，符號連結）」、Lab 14 頁尾 5.6 標題。
+- 術語首次出現補全名：DAG（第一篇篇首）、API（導讀）、CI（Lab 1、3.4）、HTTPS 與 JSON（2.5）、CLI（Lab 3）、MoE（2.6）、SHA-1（1.2）、SRS（3.3）、SM-2、CORS、YAML、BYOK、重構、IDE、linter、GPU（E.0）、MTP 與 KV（附錄 F）、BF16／FP8（F.2）、SFT／RLOO 與 LiveCodeBench（附錄 B）。
+- 附錄 C 與 `glossary.md` 新增 16 條（cherry-pick、upstream、environment variable、sampling、greedy、provider、refactoring、fallback content、CSV、AI-Native、IDE、linter、n-gram、acceptance rate、layer split、mmproj），共 141 條。
+- 簡體字：以 OpenCC 全文比對，無簡體字元；大陸慣用語（軟件、視頻、信息、默認、優化、調用、字符串、網絡、服務器、用戶）未發現。
+
+**第二輪裁示後補修（同日）**
+- 檢查點一致化：Lab 1、2、3、11、14 原本沒有要學生打 `labN-done` tag，但 Lab 4 起的「切入點」與附錄 D 的 tag 表都假設它存在——五個 Lab 收尾各補一句 `git tag labN-done && git push --tags`，驗收清單各加一項；Lab 12、13 的驗收清單同樣補上 tag 項（收尾句上一輪已加）。現在 Lab 1–15 的檢查點規則一致：每個 Lab 結束打一個同名 tag。
+- Lab 13 步驟 6 的 `git add .` 改為只加技能資料夾 `git add .claude/skills/add-words/`，註明這是 Claude Code 的位置、要換成步驟 1 問到的路徑——避免把正面測試時 AI 改過的其他檔案一起帶進 PR。
+- Sprint 2、Sprint 4 的 `catch` 原本把所有錯誤收成同一句「AI 暫時不可用」，連程式自己丟出的「API key 不正確，已清除」也被吞掉——改為 API key 錯誤直接顯示原訊息（並提示重新整理會再問一次），其餘維持原句；急救表兩列同步改寫。
+- 1.3／1.4／圖 3／quiz1 第 2 題的示範檔名 `words.json` 改為 `index.html`——Lab 1 的單字表寫在 `index.html` 的 `WORDS` 陣列裡，`words.js` 要到 Sprint 4 才出現，第一篇讀者倉庫裡並沒有 `words.json`（SVG 三處文字、動圖說明與指令一併改）。
+- 「顯存」（大陸慣用）全站統一為「顯示記憶體」：index.html 23 處（含附錄 B、F.0–F.2、Lab 15 程式註解、圖 34 SVG、動圖說明）、`glossary.md`、筆記本 Cell 5 註解；詞彙表 VRAM 條目保留「口語常稱顯存」一語供對照。2.4 圖示 aria-label 的「窗口」→「視窗」。
+- `glossary.md` 與附錄 C 逐條比對，補齊上一輪只改了正文的三處（智慧行為、上下文視窗、結構化輸出定義），兩份 141 條現已逐字一致。
+- 目錄：第三篇四個 Sprint 的側欄項目改為「Lab 5：Sprint 1・MVP」等，編號欄 S1–S4 改 L5–L8，讓 Lab 編號在目錄裡看得到；四頁標題與上下頁連結改為「Sprint 1（Lab 5）：…」。
+
+統計：驗收框 97 → 105；頁面、圖、題數不變。
+
+---
+
 ## v2.4 — 2026-11-04
 
 **附錄 F 改用內建 MTP 的模型與混合推測解碼、上下文 256K；勘誤 E-033～E-036；附錄 B 第五篇專區部分重查**
@@ -41,7 +94,7 @@
 
 ### 驗證
 
-`tools/check.py` 全數通過；筆記本每一個 Python cell 通過語法編譯；附錄 F 四頁於亮色、暗色、手機寬度檢視。實測數字來自 2026-11-04 在 Kaggle 雙 T4 上的單一帳號實測，六組推測解碼對照見 F.1。
+`tools/check.py` 全數通過；筆記本每一個 Python cell 通過語法編譯；附錄 F 四頁於亮色、暗色、手機寬度檢視。實測數字來自 2026-11-04 在 Kaggle 雙 T4 上的單一帳號實測，四組推測解碼對照見 F.1。
 
 ### 已知限制
 
