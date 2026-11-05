@@ -390,7 +390,7 @@ img{max-width:100%}
 <aside class="sidebar" id="sidebar">
   <div class="side-brand">
     <div class="t">YTP VocaBuddy<br>開發者之路</div>
-    <div class="s">GitHub 與 AI 應用程式開發<br>線上自學教材・v2.5</div>
+    <div class="s">GitHub 與 AI 應用程式開發<br>線上自學教材・v2.5.1</div>
   </div>
   <nav class="nav" id="nav">
     <a href="#/home"><span class="no">◈</span>導讀：這份教材怎麼用</a>
@@ -459,10 +459,10 @@ img{max-width:100%}
     <a href="#/2-7"><span class="no">2.7</span>雲端 vs 本地</a>
     <a href="#/lab4"><span class="no">L4</span>Lab 4：本地模型與切換</a>
     <div class="grp">附錄 F・特別篇（選修）</div>
-    <a href="#/chF"><span class="no">F.0</span>推薦配置：硬體、軟體、模型</a>
-    <a href="#/lab15"><span class="no">L15</span>Lab 15：架起模型服務</a>
-    <a href="#/F-1"><span class="no">F.1</span>它為什麼這樣設定</a>
-    <a href="#/F-2"><span class="no">F.2</span>三條路怎麼選、誰該用</a>
+    <a href="#/chF"><span class="no">F.0</span>篇首：免費雲端伺服器及推薦配置</a>
+    <a href="#/lab15"><span class="no">L15</span>Lab 15：在 Kaggle 架起自己的模型服務</a>
+    <a href="#/F-1"><span class="no">F.1</span>效能調校：三個加速設定與實測數據</a>
+    <a href="#/F-2"><span class="no">F.2</span>方案考量：免費額度、量化代價、誰該用</a>
   </nav>
 </aside>
 <main class="main">
@@ -2892,7 +2892,7 @@ description: 新增或修改 words.js 的單字時使用。包含格式規範、
     <tr><td>本教材授權</td><td>內容採 CC BY-NC-SA 4.0；教材中的程式碼片段採 MIT</td><td>2026-09</td><td>教材倉庫的 <code>LICENSE</code></td></tr>
   </table></div>
   <div class="footer-note">
-    YTP VocaBuddy 開發者之路・教材版本 v2.5（附錄 F 重排為「配置 → Lab 15 → 原理 → 比較」，並依模型卡補入模型規格與自報評測；主線十三個 Lab 不變，選修特別篇兩篇共兩個 Lab。本地端 LLM 為附錄 E、免費雲端伺服器為附錄 F）・貫穿案例：VocaBuddy 背單字夥伴<br>
+    YTP VocaBuddy 開發者之路・教材版本 v2.5.1（附錄 F 四頁改題名、篇首改寫；v2.5 將附錄 F 重排為「配置 → Lab 15 → 原理 → 比較」，並依模型卡補入模型規格與自報評測；主線十三個 Lab 不變，選修特別篇兩篇共兩個 Lab。本地端 LLM 為附錄 E、免費雲端伺服器為附錄 F）・貫穿案例：VocaBuddy 背單字夥伴<br>
     教材網址 <a href="https://tw-ytp.github.io/vocabuddy/">tw-ytp.github.io/vocabuddy</a>｜原始檔與改版歷史 <a href="https://github.com/tw-ytp/vocabuddy" target="_blank" rel="noopener">github.com/tw-ytp/vocabuddy</a><br>
     發現錯誤或有改善建議？歡迎直接<a href="https://github.com/tw-ytp/vocabuddy/issues" target="_blank" rel="noopener">開一個 issue</a>——這正是本教材教你的協作方式。內容採 CC BY-NC-SA 4.0 授權，程式碼片段採 MIT。<br>
     教學路線：主題分篇為骨、專案旅程為魂｜第一篇＝工作流程軸＋情境開場｜第二篇＝白盒優先｜第三篇＝功能衝刺（Sprint 1–4＝Lab 5–8）｜第四篇＝上線與發表（Lab 9–10）｜第五篇＝AI-Native 開發（工具中立＋Lab 11–14）｜特別篇＝附錄 E 本地端 LLM（Lab 4）、附錄 F 免費雲端伺服器（Lab 15），皆為選修｜適用對象：具競賽程式基礎的高中生
@@ -5494,9 +5494,9 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
 
 <!-- ================= 附錄 F 導讀 ================= -->
 <section class="page" id="p-chF">
-  <div class="eyebrow">附錄 F・特別篇（選修）／F.0 推薦配置</div>
-  <h1>免費雲端伺服器：T4x2 ＋ Qwen3.8-27B</h1>
-  <p class="lede">跟雲端借兩張免費的 GPU，在上面架一個自己的推理伺服器——會看圖、上下文 256K 的 27B 程式助理——再接回你電腦上的代理式編碼工具。這一頁先把<strong>推薦配置</strong>講清楚，下一頁的 <a href="#/lab15">Lab 15</a> 就照著一口氣架起來；為什麼這樣設定、跟其他方案怎麼比，留到 F.1 與 F.2。<strong>本篇為選修</strong>：跳過不影響任何主線章節與 Lab。</p>
+  <div class="eyebrow">附錄 F・特別篇（選修）／F.0 篇首</div>
+  <h1>免費雲端伺服器及推薦配置</h1>
+  <p class="lede"><strong>不用花錢、不用好電腦，就能有一個專屬於你的程式助理</strong>——如果這是你翻到本篇的第一個念頭，這個念頭是對的。Kaggle 免費借你兩張 GPU，你在上面架一個自己的推理伺服器——會看圖、上下文 256K 的 27B 模型——再接回你電腦上的代理式編碼工具：不必申請金鑰、不計費、也沒有人跟你共用。但「免費」有它的形狀：每週有時數上限、單次有時限、閒置會被回收、每次開機都要重建約十分鐘。所以它<strong>適合練習與開發，不適合架需要長期穩定的服務</strong>（限制的細節在 F.2）。這一頁先把<strong>推薦配置</strong>講清楚，下一頁的 <a href="#/lab15">Lab 15</a> 就照著一口氣架起來；為什麼這樣設定在 F.1，跟其他方案怎麼比在 F.2。<strong>本篇為選修</strong>：跳過不影響任何主線章節與 Lab。</p>
 
   <h2>推薦配置</h2>
   <div class="tblwrap"><table>
@@ -5531,13 +5531,13 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
 
   <p><strong>前置</strong>：主線 2.1–2.5 與 Lab 3。<strong>時間</strong>：Lab 15 約 60–90 分鐘，之後閱讀 F.1、F.2 約 30 分鐘。</p>
 
-  <div class="pgnav"><a href="#/lab4"><span class="dir">上一頁</span>Lab 4　本地模型與切換</a><a class="nx" href="#/lab15"><span class="dir">下一頁</span>Lab 15　架起自己的模型服務</a></div>
+  <div class="pgnav"><a href="#/lab4"><span class="dir">上一頁</span>Lab 4　本地模型與切換</a><a class="nx" href="#/lab15"><span class="dir">下一頁</span>Lab 15　在 Kaggle 架起自己的模型服務</a></div>
 </section>
 
 <!-- ================= F.1 ================= -->
 <section class="page" id="p-F-1">
-  <div class="eyebrow">附錄 F・特別篇／F.1</div>
-  <h1>它為什麼這樣設定：雲端 GPU 上的推理伺服器</h1>
+  <div class="eyebrow">附錄 F・特別篇／F.1 效能調校</div>
+  <h1>效能調校：三個加速設定與實測數據</h1>
 
   <div class="scene"><span class="lab">情境</span>
     <p>Lab 15 做完，服務已經在跑了。但 Cell 4 那一串參數你是照抄的，隧道為什麼連得進一個沒有網址的容器也沒想過。<span class="q">現在回頭看懂它——下次換平台、換模型、換引擎，你才知道哪些要跟著改。</span></p>
@@ -5632,13 +5632,13 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
     還有一件更重要的事：<strong>測速本身會騙人，而且有三種騙法。</strong>第一，用不具代表性的任務：第一次量 n-gram 時，提示是「同一個函式重複六百次」，量到 45 tok/s；換成真實的「寫新程式」題目，只剩 15.7（就是上表那一格）。第二，同一題重複問：溫度 0 時輸出完全相同，n-gram 會直接抄上一次的答案，數字虛高。第三，只量一次：冷啟動的第一題一定最慢，同一組重跑也有約 8% 的差距。所以 Lab 15 的 Cell 5 先暖機、每題不同、三題取中位數——<strong>benchmark 的第一個問題永遠是「它測的是不是我要做的事」，第二個是「它量到的是不是運氣」。</strong></p>
   </div>
 
-  <div class="pgnav"><a href="#/lab15"><span class="dir">上一頁</span>Lab 15　架起自己的模型服務</a><a class="nx" href="#/F-2"><span class="dir">下一頁</span>F.2　三條路怎麼選</a></div>
+  <div class="pgnav"><a href="#/lab15"><span class="dir">上一頁</span>Lab 15　在 Kaggle 架起自己的模型服務</a><a class="nx" href="#/F-2"><span class="dir">下一頁</span>F.2　方案考量</a></div>
 </section>
 
 <!-- ================= F.2 ================= -->
 <section class="page" id="p-F-2">
-  <div class="eyebrow">附錄 F・特別篇／F.2</div>
-  <h1>三條路怎麼選</h1>
+  <div class="eyebrow">附錄 F・特別篇／F.2 方案考量</div>
+  <h1>方案考量：免費額度、量化代價、誰該用</h1>
 
   <div class="scene"><span class="lab">情境</span>
     <p>現在你手上有三個選項：付錢用雲端 API、在自己電腦跑模型、跟雲端借 GPU。<span class="q">隊友問「那我們到底該用哪一個」——你要回答的不是「哪個最好」，是「什麼情況下哪個合適」。</span></p>
@@ -5711,13 +5711,13 @@ if ("serviceWorker" in navigator &amp;&amp; location.protocol.startsWith("http")
     <div class="exp"><b>C。</b>推測解碼是「先猜一串、再由模型一次驗證」，<strong>猜對就一次前進多步，猜錯就退回照常生成，輸出內容完全不變</strong>——所以 B 的「品質較低」是錯的。n-gram 的猜測來源就是上下文本身，因此效果完全取決於輸出與輸入重疊多少。這也是為什麼要再加上 MTP：它不靠上下文，寫新程式也猜得到。<br>另一個推論：「先產生骨架，再逐步修改」會比「一次要求寫完整個大檔」快。</div>
   </div>
 
-  <div class="pgnav"><a href="#/F-1"><span class="dir">上一頁</span>F.1　它為什麼這樣設定</a><a class="nx" href="#/5-8"><span class="dir">回主線</span>5.8　綜合驗收：讓 Repo 說話</a></div>
+  <div class="pgnav"><a href="#/F-1"><span class="dir">上一頁</span>F.1　效能調校</a><a class="nx" href="#/5-8"><span class="dir">回主線</span>5.8　綜合驗收：讓 Repo 說話</a></div>
 </section>
 
 <!-- ================= Lab 15 ================= -->
 <section class="page" id="p-lab15">
   <div class="eyebrow">附錄 F・特別篇／LAB 15（選修）</div>
-  <h1>Lab 15：在雲端架起自己的模型服務</h1>
+  <h1>Lab 15：在 Kaggle 架起自己的模型服務</h1>
   <div class="labmeta">
     <div class="m"><b>目標</b>用免費的兩張 GPU 跑起一個推理伺服器，接上你的代理式編碼工具，並親手驗收它</div>
     <div class="m"><b>時間</b>約 60–90 分鐘（之後每次開機重建約十分鐘；延伸步驟另加約二十分鐘）</div>
@@ -6075,7 +6075,7 @@ CHAIN[&quot;auto&quot;] = [&quot;claude&quot;, &quot;kaggle&quot;, &quot;local&q
     <tr><td>貼了截圖它說看不到</td><td>工具的「支援圖片」沒開啟，在模型設定區。</td></tr>
   </table></div>
 
-  <div class="pgnav"><a href="#/chF"><span class="dir">上一頁</span>F.0　推薦配置</a><a class="nx" href="#/F-1"><span class="dir">下一頁</span>F.1　它為什麼這樣設定</a></div>
+  <div class="pgnav"><a href="#/chF"><span class="dir">上一頁</span>F.0　篇首</a><a class="nx" href="#/F-1"><span class="dir">下一頁</span>F.1　效能調校</a></div>
 </section>
 
 <!-- ================= 附錄 C 詞彙表 ================= -->
