@@ -28,7 +28,7 @@
 ## 教材特色
 
 - **單一自包含 HTML**：零依賴、可離線、可放任何靜態主機。外部連線只有 Google Fonts。
-- **33 幅可步進的 SVG 動圖**，其中 4 幅可互動（token 機率分布、temperature 滑桿、SRS 遺忘曲線模擬、指示檔作用範圍）。
+- **34 幅 SVG 圖**（29 幅可步進），其中 4 幅可互動（token 機率分布、temperature 滑桿、SRS 遺忘曲線模擬、指示檔作用範圍）。
 - **13 個主線 Lab**，每個都附完整程式碼、驗收清單與自助排錯——**假設你沒有助教**，一個人也走得完。
 - **會過期的東西全部集中在附錄 B**（時效資訊表），正文只寫長期不變的原理。改版時改那一頁就好。
 - **工具中立**：第五篇的觀念適用於任何代理式編碼工具（Claude Code、OpenAI Codex、Google Antigravity、Cursor、GitHub Copilot、Gemini CLI……）。示範統一用一種工具，每處標明換工具要改哪裡。
@@ -80,4 +80,4 @@ python3 -m http.server 8000
 
 ---
 
-*教材版本 v2.3（2026-10-14）・貫穿案例：VocaBuddy 背單字夥伴・版本沿革見 [`CHANGELOG.md`](CHANGELOG.md)*
+*教材版本 v2.5（2026-11-05）・貫穿案例：VocaBuddy 背單字夥伴・版本沿革見 [`CHANGELOG.md`](CHANGELOG.md)*

@@ -37,12 +37,15 @@
 | git reset | — | — | 把分支指標整個拉回某節點（--hard 連工作區一起重置；僅限未 push 的本地歷史） |
 | Markdown | — | — | 輕量標記語言：用純文字符號（#、-、```）表達格式，README 的標準寫法 |
 | Git Bash | — | — | Windows 版 Git 附帶的終端機，指令與 macOS／Linux 相同 |
+| cherry-pick | — | 挑揀提交 | 把另一條分支上的某一個 commit 複製到目前分支 |
+| upstream | — | 上游分支 | 本地分支對應的遠端分支；push -u 就是在設定它 |
+| environment variable | — | 環境變數 | 作業系統層級的變數，程式啟動時讀取；放金鑰的正確位置 |
 
 ## 第二篇・AI 與 LLM
 
 | 術語 | 全名 | 中文 | 一句話解釋 |
 |---|---|---|---|
-| AI | Artificial Intelligence | 人工智慧 | 讓機器展現智能行為的技術總稱 |
+| AI | Artificial Intelligence | 人工智慧 | 讓機器展現智慧行為的技術總稱 |
 | LLM | Large Language Model | 大型語言模型 | 預測「下一個 token 機率分布」的超大神經網路 |
 | token | — | — | 模型處理文字的最小單位；常見字整顆、少見字拆片 |
 | embedding | — | 詞嵌入 | token → 高維向量的映射；意義相近則向量相近 |
@@ -51,7 +54,7 @@
 | softmax | — | — | 把一組分數轉成總和為 1 的機率分布 |
 | temperature | — | 溫度 | 取樣的銳化旋鈕：低→穩定保守，高→多樣狂野 |
 | top-p | nucleus sampling | — | 只在累積機率前 p 的候選中取樣，砍掉怪尾巴 |
-| context window | — | 上下文窗口 | 模型一次能看見的 token 上限，prompt＋歷史＋回答全算 |
+| context window | — | 上下文視窗 | 模型一次能看見的 token 上限，prompt＋歷史＋回答全算 |
 | hallucination | — | 幻覺 | 模型輸出流暢但不真實的內容——機率模型的天性 |
 | prompt | — | 提示 | 你給模型的輸入文字；品質決定輸出品質 |
 | system prompt | — | 系統提示 | 對話的人設與規則，優先權高於一般訊息 |
@@ -80,6 +83,9 @@
 | closest pair | closest pair of points | 最近點對問題 | 在一組點中找出彼此距離最近的一對；經典分治題，O(n log n)——與最近鄰搜尋是不同問題設定 |
 | localhost | — | 本機位址 | 指向「這台電腦自己」的網路位址，外部連不進來 |
 | port | — | 埠 | 同一台電腦上區分不同網路服務的編號（如 Ollama 的 11434） |
+| sampling | — | 取樣 | 依機率分布隨機挑下一個 token，而不是永遠選最高分 |
+| greedy | — | 貪婪解碼 | 永遠選機率最高的 token；同輸入幾乎同輸出 |
+| provider | — | 供應商／來源 | 程式裡「模型從哪裡來」的那個參數：雲端、本地、借來的 GPU |
 
 ## 第三篇・開發實戰
 
@@ -88,7 +94,7 @@
 | user story | — | 使用者故事 | 需求格式：「身為…我想要…以便…」，逼你想清楚誰要什麼 |
 | localStorage | — | — | 瀏覽器內建的小倉庫，資料留在這台裝置；讀寫要包 try/catch |
 | fetch / async・await | — | — | JavaScript 發 HTTP 請求與等待回應的語法 |
-| Structured Output | — | 結構化輸出 | 用 JSON 骨架＋低溫＋程式驗證，讓 AI 回固定形狀的資料 |
+| Structured Output | — | 結構化輸出 | 用 JSON 骨架範例＋程式端驗證，讓 AI 回固定形狀的資料 |
 | cache | — | 快取 | 算過的結果存起來重用：省錢、變快、離線可用 |
 | CORS | Cross-Origin Resource Sharing | 跨來源資源共享 | 瀏覽器對跨網域請求的安全規範 |
 | forgetting curve | — | 遺忘曲線 | 記憶隨時間指數衰減；成功回想後重置且衰減變慢 |
@@ -98,6 +104,9 @@
 | unit test | — | 單元測試 | 用程式驗證函式行為的測資；改壞立刻被抓到 |
 | retrieval | — | 檢索 | 從一堆資料中挑出此刻最相關的幾筆——RAG 的 R |
 | migration | data migration | 資料遷移 | 資料格式改版時，讓舊資料自動升級的邏輯 |
+| refactoring | — | 重構 | 行為不變、結構變好：抽共用函式、消重複 |
+| fallback content | — | 罐頭內容 | 所有路徑都失敗時端出的預設內容，讓使用者永遠看得到東西 |
+| CSV | Comma-Separated Values | 逗號分隔值 | 用逗號分欄的純文字表格格式，試算表都能開 |
 
 ## 第四篇・上線與發表
 
@@ -138,6 +147,9 @@
 | subagent | — | 子代理 | 在獨立上下文裡辦事、只回報結論的助手；保護你的主上下文 |
 | MCP | Model Context Protocol | 模型上下文協定 | 讓代理連接外部工具與資料源的開放協定；六家主流工具皆支援 |
 | symbolic link | — | 符號連結 | 讓兩個檔名指向同一份內容；用來橋接各家不同的指示檔檔名 |
+| AI-Native | — | AI 原生 | 把 AI 當成工作流裡的一個角色來設計流程，而不是偶爾問一下的工具 |
+| IDE | Integrated Development Environment | 整合開發環境 | 編輯、執行、除錯合在一起的程式開發軟體，如 VS Code |
+| linter | — | 程式碼檢查工具 | 自動檢查程式風格與常見錯誤的工具 |
 
 ## 跨篇・專案與產品
 
@@ -150,21 +162,25 @@
 | Sprint | — | 衝刺 | 一段短而完整的開發循環：目標→開發→交付 |
 | CI | Continuous Integration | 持續整合 | 每次 push 自動執行測試／部署（第四篇） |
 
-## 附錄 F・借來的雲端 GPU
+## 附錄 F・免費雲端伺服器
 
 | 術語 | 全名 | 中文 | 一句話解釋 |
 |---|---|---|---|
 | GPU | Graphics Processing Unit | 圖形處理器 | 擅長大量平行計算的晶片；模型推理的主力 |
-| VRAM | Video RAM | 顯存 | 顯示卡上的記憶體；模型權重與上下文都要放得進去 |
-| tensor parallelism | — | 張量並行 | 把同一層拆給多張卡**同時**算；對比「分層接力」只是合併顯存 |
+| VRAM | Video RAM | 顯示記憶體 | 顯示卡上的記憶體（口語常稱顯存）；模型權重與上下文都要放得進去 |
+| tensor parallelism | — | 張量並行 | 把同一層拆給多張卡**同時**算；對比「分層接力」只是合併顯示記憶體 |
 | speculative decoding | — | 推測解碼 | 先猜一串 token 再由模型一次驗證；猜對就一次前進多步，**輸出不變**。猜的來源可以是上下文的重複片段（n-gram）或模型自帶的草稿頭（MTP） |
 | MTP | multi-token prediction | 多 token 預測 | 模型自帶的小草稿頭，每一步順便猜後面幾個 token，供推測解碼驗證；不靠上下文，寫新內容也有效 |
-| KV cache | key-value cache | KV 快取 | 上下文中每個 token 的中間結果，留在顯存裡免得重算；上下文越大它越大，量化它就能開更大的上下文 |
+| KV cache | key-value cache | KV 快取 | 上下文中每個 token 的中間結果，留在顯示記憶體裡免得重算；上下文越大它越大，量化它就能開更大的上下文 |
 | tunnel | — | 隧道 | 由內部主動對外建立通道，讓沒有公開位址的機器也能被連到 |
 | llama.cpp | — | — | 可在一般顯卡上跑開源模型的推理引擎，附帶 OpenAI 相容的伺服器 |
 | GGUF | — | — | llama.cpp 使用的模型檔格式，量化後的權重都包在裡面 |
 | OpenAI 相容 API | — | — | 沿用同一套請求格式的介面約定；換後端不必改程式，只改位址與金鑰 |
+| n-gram | — | n 元語法 | 連續 n 個 token 的片段；n-gram 推測解碼就是從上下文找重複片段來猜 |
+| acceptance rate | — | 接受率 | 推測解碼猜出的 token 被模型驗證採用的比例；越高加速越多 |
+| layer split | — | 分層接力 | 把不同的層放到不同的 GPU，同一時間只有一張在算；只合併顯示記憶體 |
+| mmproj | multimodal projector | 視覺檔 | 讓文字模型看得懂圖片的投影檔，llama.cpp 用 --mmproj 載入 |
 
 ---
 
-教材版本 v2.4（2026-11-04）・共 125 條・授權 CC BY-NC-SA 4.0
+教材版本 v2.5（2026-11-05）・共 141 條・授權 CC BY-NC-SA 4.0
